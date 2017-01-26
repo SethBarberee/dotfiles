@@ -218,7 +218,6 @@
      appname = Spotify
      format = "<b>Now Playing:</b>\n%s\n%b"
      new_icon = spotify
-     timeout = 10
 
 
 #[espeak]
