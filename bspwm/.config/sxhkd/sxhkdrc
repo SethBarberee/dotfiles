@@ -9,9 +9,6 @@ alt + shift + Return
 # program launcher
 alt + space
 	rofi -show run
-# program switcher
-alt + tab
-	rofi -show window
 
 # make sxhkd reload its configuration files:
 alt + Escape
@@ -65,7 +62,7 @@ alt + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node
-alt + {_,shift + }c
+alt + {_,shift + }Tab
 	bspc node -f {next,prev}
 
 # focus the next/previous desktop
@@ -135,5 +132,7 @@ XF86AudioNext
 	playerctl next
 Xf86AudioPrev
 	playerctl previous
-XF86AudioPause
+XF86AudioPlay
 	playerctl play-pause
+XF86AudioStop
+	playerctl stop

@@ -1,5 +1,5 @@
 [global]
-    font = SAO UI 13
+    font = Overpass 13
     
     # Allow a small subset of html markup:
     #   <b>bold</b>

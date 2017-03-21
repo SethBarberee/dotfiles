@@ -1,5 +1,5 @@
 syntax on
-set mouse=a
+set mouse=c
 set number
 set nocompatible              " be iMproved, required
 filetype off                  " required

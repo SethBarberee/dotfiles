@@ -21,7 +21,7 @@ set $menu dmenu_run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg ~/wallpapers/eventhorizon.jpg fill
+#output * bg ~/wallpapers/eventhorizon.jpg fill
 #
 # Example configuration:
 #

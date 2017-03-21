@@ -2,6 +2,7 @@
 
 sxhkd &
 nitrogen --restore &
+redshift-gtk &
 polybar example &
 
 bspc monitor -d main web video IV V VI VII VIII IX X
