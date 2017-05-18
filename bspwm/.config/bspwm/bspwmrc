@@ -3,6 +3,7 @@
 sxhkd &
 nitrogen --restore &
 redshift-gtk &
+radeon-profile &
 polybar example &
 
 bspc monitor -d main web video IV V VI VII VIII IX X
@@ -25,5 +26,6 @@ bspc subscribe node_manage | while read event monitor desktop nodeid ipid; do
 	esac
 done &
 
-bspc rule -a Chromium desktop=^2
-bspc rule -a mpv desktop=^3
+bspc rule -a urxvt -o desktop=^1
+bspc rule -a chromium -o desktop=^2
+bspc rule -a mpv -o desktop=^3
