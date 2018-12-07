@@ -4,24 +4,27 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+hide_edge_borders smart
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term urxvt
+set $term st
 # Your preferred application launcher
 set $menu dmenu_run
+set $menu2 rofi -show run
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-#output * bg ~/wallpapers/eventhorizon.jpg fill
+output * bg /home/seth/wallpapers/iceburg.jpg fill
 #
 # Example configuration:
 #
@@ -41,7 +44,6 @@ set $menu dmenu_run
 #   }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
-# The escape symbol "\" has to be removed.
 # Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
@@ -49,13 +51,14 @@ set $menu dmenu_run
 # Basics:
 #
     # start a terminal
-    bindsym $mod+Shift+Return exec $term
+    bindsym $mod+Return exec $term
 
     # kill focused window
-    bindsym $mod+Shift+c kill
+    bindsym $mod+Shift+q kill
 
     # start your launcher
     bindsym $mod+p exec $menu
+    bindsym $mod+Shift+p exec $menu2
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -65,10 +68,10 @@ set $menu dmenu_run
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+Shift+r reload
+    bindsym $mod+Shift+c reload
 
     # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+q exit
+    bindsym $mod+Shift+e exit
 #
 # Moving around:
 #
@@ -179,24 +182,68 @@ mode "resize" {
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym p mode "resize/precise"
 }
 bindsym $mod+r mode "resize"
+
+mode "resize/precise" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 1 px or 1 ppt
+    bindsym $down resize grow height 1 px or 1 ppt
+    bindsym $up resize shrink height 1 px or 1 ppt
+    bindsym $right resize grow width 1 px or 1 ppt
+
+    # ditto, with arrow keys
+    bindsym Left resize shrink width 1 px or 1 ppt
+    bindsym Down resize grow height 1 px or 1 ppt
+    bindsym Up resize shrink height 1 px or 1 ppt
+    bindsym Right resize grow width 1 px or 1 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym p mode "resize"
+}
+
+# For my Dell Precision 5510 Laptop
+input 1739:31251:DLL06E5:01_06CB:7A13_Touchpad {
+    dwt enabled
+    natural_scroll enabled
+    tap enabled
+}
 
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #323232 #323232 #5c5c5c
-    }
+    #position top
+    #colors {
+    #    statusline #c0c5ce
+    #    background #2b303b
+    #    inactive_workspace #a3be8c #a3be8c #c0c5ce
+    #    focused_workspace #8fa1b3 #8fa1b3 #c0c5ce
+    #}
+    swaybar_command waybar
 }
 
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym $mod+Print exec swaylock -i /home/seth/wallpapers/iceburg.jpg
+
+for_window [class="Spotify"] move window to workspace 4
 
 exec pulseaudio --start
+exec mako
 exec xrdb -merge ~/.Xresources
 
 include /etc/sway/config.d/*
