@@ -11,6 +11,7 @@ set expandtab
 set autoindent
 set ignorecase
 set smartcase
+set noswapfile
 set hidden " allow buffer switching without saving
 set mouse=a
 set encoding=UTF-8
@@ -21,7 +22,12 @@ syntax on               " turn on syntax
 set clipboard+=unnamedplus " set clipboard
 set splitbelow
 set splitright
+set lazyredraw
+set spell "enable spellchecking
 set shortmess=FaWc " see :help shortmess
+set foldmethod=syntax " set fold by syntax
+set foldlevel=1
+set foldclose=all
 
 " VimPlug plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -40,7 +46,6 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/defx.nvim'
-Plug 'mhartington/defx-devicons' " devicon support for Defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'neomake/neomake'
@@ -210,6 +215,7 @@ function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
 
+" Add a devicon with the filetype
 function! MyFiletype()
      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
 endfunction
