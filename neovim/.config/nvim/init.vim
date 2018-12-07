@@ -331,5 +331,5 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
        \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc',
  \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
 
-nnoremap <space>s :Denite file<cr>
+nnoremap <space>s :Denite file -auto-preview<cr>
 nnoremap <space>l :Denite line -auto-preview<cr>
