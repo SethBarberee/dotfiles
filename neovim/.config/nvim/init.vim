@@ -23,7 +23,6 @@ set clipboard+=unnamedplus " set clipboard
 set splitbelow
 set splitright
 set lazyredraw
-set spell "enable spellchecking
 set shortmess=FaWc " see :help shortmess
 set foldmethod=syntax " set fold by syntax
 set foldlevel=1
