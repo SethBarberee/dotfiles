@@ -36,6 +36,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'taohexxx/lightline-buffer'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
@@ -45,6 +46,8 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/defx.nvim'
+Plug 'kristijanhusak/defx-git' " git icons for defx
+Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'neomake/neomake'
@@ -99,6 +102,7 @@ colorscheme challenger_deep
 
 let mapleader = ","  " Change leader to comma which is easier to reach
 map <C-T> :TagbarOpenAutoClose <Enter>
+map <C-D> :Defx -columns=git:icons:filename:type <Enter>
 
 " Use System clipboard
 noremap yy "+yy
