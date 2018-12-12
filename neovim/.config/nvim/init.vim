@@ -41,7 +41,7 @@ Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
 Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp', 'arduino']} " completion for c/c++/arduino
+Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/denite.nvim'
@@ -143,10 +143,11 @@ inoremap { {}<Esc>i
 " Deoplete Settings
 
 let g:deoplete#enable_at_startup = 1
-" C/C++ Deoplete and Arduino
-call deoplete#custom#source('clang', 'fileytpes', ['c', 'cpp', 'arduino'])
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
+call deoplete#custom#option('sources', {
+		\ '_': ['buffer', 'tag'],
+		\ 'cpp': ['buffer', 'tag'],
+        \ 'disabled_syntaxes': ['Comment', 'String']
+		\})
 " Rust Deoplete
 let g:deoplete#sources#rust#racer_binary = '/usr/bin/racer'
 let g:deoplete#sources#rust#rust_source_path= '/usr/lib/rustlib/src/rust/src'
