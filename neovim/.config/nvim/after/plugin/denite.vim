@@ -1,3 +1,7 @@
+if !exists(':Denite')
+    finish
+endif
+
 " Denite config
 " I should explain some of this stuff
 " Custom prompt of >

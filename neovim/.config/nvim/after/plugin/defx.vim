@@ -1,3 +1,7 @@
+if !exists(':Defx')
+    finish
+endif
+
 map <C-D> :Defx -columns=git:icons:filename:type <Enter>
 
 " Defx config
