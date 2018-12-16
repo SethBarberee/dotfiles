@@ -31,9 +31,6 @@ set splitbelow
 set splitright
 set lazyredraw
 set shortmess=FaWc " see :help shortmess
-set foldmethod=syntax " set fold by syntax
-set foldlevel=1
-set foldclose=all
 
 " VimPlug plugins
 call plug#begin('~/.local/share/nvim/plugged')
