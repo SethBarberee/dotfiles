@@ -1,3 +1,10 @@
+"
+"            _           
+" _ ____   _(_)_ __ ___  
+"| '_ \ \ / / | '_ ` _ \ 
+"| | | \ V /| | | | | | |
+"|_| |_|\_/ |_|_| |_| |_|
+                        
 set ruler              " show the cursor position all the time
 set title
 set showcmd            " display incomplete commands
