@@ -31,7 +31,15 @@ set splitbelow
 set splitright
 set lazyredraw
 set shortmess=FaWc " see :help shortmess
-set guioptions=M "diable GUI menus... I don't need them
+
+if has('gui_running')
+    set guioptions=M "diable GUI menus... I don't need them
+endif
+
+if has('nvim')
+    let g:python_host_prog = '/usr/bin/python2'
+    let g:python3_host_prog = '/usr/bin/python3'
+endif
 
 " Check if VimPlug exists. If not, download it
 if empty("~/.local/share/nvim/plugged")
@@ -51,6 +59,7 @@ Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
 Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
 Plug 'Shougo/neco-syntax'
@@ -157,6 +166,7 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('sources', {
 		\ '_': ['buffer', 'tag'],
 		\ 'cpp': ['buffer', 'tag'],
+        \ 'python': ['buffer', 'tag', 'jedi'],
         \ 'disabled_syntaxes': ['Comment', 'String']
 		\})
 " Rust Deoplete
