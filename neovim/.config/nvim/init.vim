@@ -174,8 +174,6 @@ call deoplete#custom#option('sources', {
 " Rust Deoplete
 let g:deoplete#sources#rust#racer_binary = '/usr/bin/racer'
 let g:deoplete#sources#rust#rust_source_path= '/usr/lib/rustlib/src/rust/src'
-call neomake#configure#automake('nw', 750)
-let g:neomake_open_list = 2 " automatically open neomake list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -233,6 +231,7 @@ function! LightlineMode()
             \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
             \ &filetype ==# 'defx' ? 'Defx' :
             \ lightline#mode()
+    endif
 endfunction
 
 let g:lightline#bufferline#unnamed = '[No Name]'
