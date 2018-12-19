@@ -57,6 +57,7 @@ Plug 'taohexxx/lightline-buffer'
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive', {'on': []}
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
@@ -71,6 +72,7 @@ Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'neomake/neomake'
+Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
