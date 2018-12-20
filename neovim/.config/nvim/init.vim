@@ -42,7 +42,7 @@ if has('nvim')
 endif
 
 " Check if VimPlug exists. If not, download it
-if empty("~/.local/share/nvim/plugged")
+if empty('~/.local/share/nvim/plugged')
      silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
@@ -106,7 +106,7 @@ augroup END
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
                  \ | wincmd p | diffthis
 endif
@@ -122,7 +122,7 @@ colorscheme challenger_deep
 
 " Mappings
 
-let mapleader = ","  " Change leader to comma which is easier to reach
+let mapleader = ','  " Change leader to comma which is easier to reach
 map <C-T> :TagbarOpenAutoClose <Enter>
 "map <C-D> :Defx -columns=git:icons:filename:type <Enter>
 
@@ -222,8 +222,8 @@ let g:lightline = {
 
 function! LightlineMode()
     let fname = expand('%:t')
-    if &ft == 'denite'
-        let mode_str = substitute(denite#get_status_mode(), "-\\| ", "", "g")
+    if &filetype == 'denite'
+        let mode_str = substitute(denite#get_status_mode(), '-\\| ', '', 'g')
         call lightline#link(tolower(mode_str[0]))
         return mode_str
     else
