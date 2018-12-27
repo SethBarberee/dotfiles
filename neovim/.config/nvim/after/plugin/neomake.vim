@@ -1,4 +1,4 @@
-if !has(':Neomake')
+if !exists(':Neomake')
     finish
 endif
 

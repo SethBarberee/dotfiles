@@ -1,3 +1,7 @@
+if !exists(':Tagbar')
+    finish
+endif
+
 " Tagbar config
 let g:tagbar_autoclose = 1
 let g:tagbar_expand = 1 " what does this do?
