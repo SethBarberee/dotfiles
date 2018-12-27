@@ -1,3 +1,7 @@
+if !has(':Neomake')
+    finish
+endif
+
 " Neomake plugin settings
 
 call neomake#configure#automake('nw', 750)

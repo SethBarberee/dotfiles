@@ -6,6 +6,7 @@
 "|_| |_|\_/ |_|_| |_| |_|
                         
 set ruler              " show the cursor position all the time
+set cursorline         " indicate which line the curosr is on
 set title
 set showcmd            " display incomplete commands
 set number relativenumber " uses the numbertoggle plugin
@@ -80,9 +81,6 @@ call plug#end()
 augroup vimrcEx
   autocmd!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   autocmd BufReadPost *
@@ -103,6 +101,12 @@ augroup numbertoggle
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
+
+" Better diff (https://vimways.org/2018/the-power-of-diff)
+if has('patch-8.1.0360')
+    set diffopt+=algorithm:patience
+endif
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -111,10 +115,14 @@ if !exists(':DiffOrig')
                  \ | wincmd p | diffthis
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colorscheme
+
 " Enable true colors if available
 if has('termguicolors')
     set termguicolors
 endif
+
 " Set colorscheme
 colorscheme challenger_deep
 
@@ -123,8 +131,6 @@ colorscheme challenger_deep
 " Mappings
 
 let mapleader = ','  " Change leader to comma which is easier to reach
-map <C-T> :TagbarOpenAutoClose <Enter>
-"map <C-D> :Defx -columns=git:icons:filename:type <Enter>
 
 " Use System clipboard
 noremap yy "+yy
@@ -160,128 +166,7 @@ nmap <leader>bl :ls<CR>
 inoremap ( ()<Esc>i
 inoremap { {}<Esc>i
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Deoplete Settings
-
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('sources', {
-		\ '_': ['buffer', 'tag'],
-		\ 'cpp': ['buffer', 'tag'],
-        \ 'python': ['buffer', 'tag', 'jedi'],
-        \ 'disabled_syntaxes': ['Comment', 'String']
-		\})
-" Rust Deoplete
-let g:deoplete#sources#rust#racer_binary = '/usr/bin/racer'
-let g:deoplete#sources#rust#rust_source_path= '/usr/lib/rustlib/src/rust/src'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Lightline
-
-let g:lightline = {
-    \ 'colorscheme': 'challenger_deep',
-    \ 'active': {
-    \   'left': [['mode', 'paste'],
-    \            ['gitbranch', 'readonly', 'filename', 'modified' ] ],
-    \   'right': [ ['lineinfo'],
-    \           ['percent'],
-    \           ['tagbar', 'fileencoding', 'filetype']],
-    \ },
-    \ 'inactive' : {
-    \   'left': [['filename']],
-    \   'right': [[ 'lineinfo'], [ 'percent']]
-    \ },
-    \ 'tabline': {
-    \   'left': [['bufferinfo'],
-    \             [ 'separator' ],
-    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-    \ },
-    \ 'component': {
-    \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
-    \   'separator': '',
-    \ },
-    \ 'component_function': {
-    \   'mode': 'LightlineMode',
-    \   'gitbranch': 'gitbranch#name',
-    \   'readonly': 'LightlineReadonly',
-    \   'filetype': 'MyFiletype',
-    \   'bufferinfo': 'lightline#buffer#bufferinfo',
-    \ },
-    \ 'component_expand': {
-    \   'buffercurrent': 'lightline#buffer#buffercurrent',
-    \   'bufferbefore': 'lightline#buffer#bufferbefore',
-    \   'bufferafter': 'lightline#buffer#bufferafter',
-    \ },
-    \ 'component_type': {
-    \   'buffercurrent': 'tabsel',
-    \   'bufferbefore': 'raw',
-    \   'bufferafter': 'raw',
-    \ }
-    \ }
-
-function! LightlineMode()
-    let fname = expand('%:t')
-    if &filetype == 'denite'
-        let mode_str = substitute(denite#get_status_mode(), '-\\| ', '', 'g')
-        call lightline#link(tolower(mode_str[0]))
-        return mode_str
-    else
-        return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
-            \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
-            \ &filetype ==# 'defx' ? 'Defx' :
-            \ lightline#mode()
-    endif
-endfunction
-
-let g:lightline#bufferline#unnamed = '[No Name]'
-
-" Get rid of RO when looking at help pages
-function! LightlineReadonly()
-  return &readonly && &filetype !=# 'help' ? 'RO' : ''
-endfunction
-
-" Add a devicon with the filetype
-function! MyFiletype()
-     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
-endfunction
-
-" whether to show the buffer number of not
-let g:lightline_buffer_show_bufnr = 0
-
-" :help filename-modifiers
-let g:lightline_buffer_fname_mod = ':t'
-
-" hide buffer list
-let g:lightline_buffer_excludes = ['vimfiler']
-
-" max file name length
-let g:lightline_buffer_maxflen = 30
-
-" max file extension length
-let g:lightline_buffer_maxfextlen = 3
-
-" min file name length
-let g:lightline_buffer_minflen = 16
-
-" min file extension length
-let g:lightline_buffer_minfextlen = 3
-
-" reserve length for other component (e.g. info, close)
-let g:lightline_buffer_reservelen = 20
-
-" enable devicons in lightline buffer
-let g:lightline_buffer_enable_devicons = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar config
-let g:tagbar_autoclose = 1
-let g:tagbar_expand = 1 " what does this do?
-let g:tagbar_status_func = 'TagbarStatusFunc'
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-		  return lightline#statusline(0)
-endfunction
-
 " Devicon config
 let g:webdevicons_enable_denite = 1
 
