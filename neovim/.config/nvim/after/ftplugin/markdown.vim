@@ -3,6 +3,11 @@ if &filetype !=# 'markdown' || v:version < 700
   finish
 endif
 
+augroup textwidth
+    setlocal textwidth=78
+    let b:undo_ftplugin .='|setlocal textwidth<'
+augroup END
+
 " Spellchecking features
 if has('spell')
 

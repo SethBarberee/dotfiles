@@ -1,18 +1,20 @@
 " Deoplete Settings
 
-let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 
 call deoplete#custom#option('sources', {
 		\ '_': ['buffer', 'tag'],
-		\ 'cpp': ['buffer', 'tag'],
+		\ 'cpp': ['buffer', 'tag', 'clangx'],
         \ 'python': ['buffer', 'tag', 'jedi'],
         \ 'disabled_syntaxes': ['Comment', 'String']
 		\})
-call deoplete#custom#option('omni_patterns', {
-        \ 'complete_method': 'omnifunc',
-        \ 'terraform': '[^ *\t"{=$]\w*',
-        \})
+
+" Deoplete is off initially so start it when entering insert mode
+augroup DeopleteToggle 
+    autocmd InsertEnter * call deoplete#enable()
+    autocmd InsertLeave * call deoplete#disable()
+augroup END
+
 
 " Rust Deoplete
 let g:deoplete#sources#rust#racer_binary = '/usr/bin/racer'
