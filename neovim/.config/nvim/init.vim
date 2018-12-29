@@ -33,6 +33,10 @@ set splitright
 set lazyredraw
 set shortmess=FaWc " see :help shortmess
 
+set foldmethod=syntax "syntax folds
+set foldcolumn=1 " define 1 col at window left to indicate folding
+set foldlevelstart=99 "start with all folds opened
+
 if has('gui_running')
     set guioptions=M "diable GUI menus... I don't need them
 endif
@@ -50,6 +54,12 @@ endif
 
 " VimPlug plugins
 call plug#begin('~/.local/share/nvim/plugged')
+
+" Check if we have plugins installed and install if we don't
+if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+    autocmd VimEnter * PlugInstall | q
+endif
+
 Plug 'dylanaraps/wal.vim'
 Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
 Plug 'itchyny/lightline.vim'
