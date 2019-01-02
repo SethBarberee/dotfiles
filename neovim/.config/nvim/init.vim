@@ -113,9 +113,8 @@ augroup END
 
 
 " Better diff (https://vimways.org/2018/the-power-of-diff)
-if has('patch-8.1.0360')
-    set diffopt+=algorithm:patience
-endif
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
