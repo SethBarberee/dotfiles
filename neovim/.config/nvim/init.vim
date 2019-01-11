@@ -71,6 +71,10 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive', {'on': []}
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Deoplete and sources
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
 Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
@@ -82,9 +86,9 @@ Plug 'kristijanhusak/defx-git' " git icons for defx
 Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
-Plug 'neomake/neomake'
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'ryanoasis/vim-devicons'
+Plug 'neomake/neomake'
 call plug#end()
 
 " Put these in an autocmd group, so that we can delete them easily.
