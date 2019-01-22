@@ -1,3 +1,8 @@
+" Load guard the file just in case
+if !exists(':UltiSnipsEdit')
+    finish
+endif
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsSnippetsDir = '~/.local/share/nvim/plugged/vim-snippets/UltiSnips'
 let g:UltiSnipsExpandTrigger= '<tab>'

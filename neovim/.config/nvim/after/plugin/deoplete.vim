@@ -4,8 +4,8 @@ let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 
 call deoplete#custom#option('sources', {
 		\ '_': ['ultisnips','buffer', 'tag'],
-		\ 'cpp': ['buffer', 'tag', 'clangx, ultisnips'],
-        \ 'python': ['buffer', 'tag', 'jedi, ultisnips'],
+		\ 'cpp': ['ultisnips', 'tag', 'clangx, buffer'],
+        \ 'python': ['ultisnips', 'tag', 'jedi, buffer'],
         \ 'disabled_syntaxes': ['Comment', 'String']
 		\})
 
