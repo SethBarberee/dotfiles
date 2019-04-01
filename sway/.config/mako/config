@@ -1,0 +1,8 @@
+## TODO Greenify this
+background-color=#73C6AF
+text-color=#ffffff
+border-color=#73C6AF
+default-timeout=4000
+# Enable pango markup
+markup=1
+

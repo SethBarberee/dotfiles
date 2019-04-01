@@ -11,6 +11,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+include "$HOME/.cache/wal/colors-sway"
+
 hide_edge_borders smart
 
 ### Variables
@@ -23,7 +25,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term st
+set $term termite
 # Your preferred application launcher
 set $menu dmenu_run
 set $menu2 rofi -show run
@@ -31,7 +33,8 @@ set $menu2 rofi -show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg /home/seth/wallpapers/iceburg.jpg fill
+output * bg $wallpaper fill
+output eDP-1 scale 1.1
 #
 # Example configuration:
 #
@@ -237,6 +240,7 @@ bar {
     swaybar_command waybar
 }
 
+# Personal hotkeys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
 bindsym XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle 
@@ -245,12 +249,21 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym $mod+Print exec swaylock -i /home/seth/wallpapers/iceburg.jpg
+bindsym $mod+Print exec swaylock -i $wallpaper
 
 for_window [class="Spotify"] move window to workspace 4
+for_window [class="Firefox"] move window to workspace 2
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+exec ~/.config/sway/swayidle-user.sh
 
 exec pulseaudio --start
 exec mako
-exec xrdb -merge ~/.Xresources
+exec wal -i $wallpaper
 
-include /etc/sway/config.d/*
+##### Colors
+client.focused $color1 $color1 $foreground #2e9ef4 $color1
+
+#include /etc/sway/config.d/*

@@ -1,0 +1,76 @@
+@import "/home/seth/.cache/wal/colors-waybar.css";
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Knack Nerd Font Mono", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    color: @foreground;
+    background: rgba(35, 31, 32, 0.85);
+}
+
+#window {
+    padding: 0 10px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: rgba(217, 216, 216, 1);
+}
+
+#workspaces button.visible {
+    color: rgba(217, 216, 216, 1);
+}
+
+#workspaces button.focused {
+    color: @foreground;
+    border-bottom: 3px solid @color15;
+}
+
+#clock, #backlight, #battery, #network, #pulseaudio, #custom-spotify, #idle_inhibitor {
+    padding: 0 5px;
+    margin: 0 5px;
+    color: @foreground;
+}
+
+#clock {
+    font-family: bold;
+}
+
+#mode {
+    background: transparent;
+    border-bottom: 3px solid @color15;
+    padding: 0 10px;
+}
+
+#battery.charging {
+    color: white;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging){
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#pulseaudio.muted {
+    color: #2a5c45;
+}
+
+#tray {
+    background: transparent;
+}
