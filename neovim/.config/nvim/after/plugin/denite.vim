@@ -15,10 +15,11 @@ call denite#custom#option('default', {
             \ 'highlight_mode_insert': 'WildMenu',
             \ })
 
-" " Change ignore_globs
+" Ignoring a lot of pointless stuff that ends up in my directories
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
        \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc',
- \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
+       \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.o', 'tags',
+       \ '*.png'])
 
 nnoremap <space>s :Denite file -auto-preview<cr>
 nnoremap <space>l :Denite line -auto-preview<cr>

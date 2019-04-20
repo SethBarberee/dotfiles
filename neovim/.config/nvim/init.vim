@@ -9,16 +9,21 @@ set ruler              " show the cursor position all the time
 set cursorline         " indicate which line the curosr is on
 set title
 set showcmd            " display incomplete commands
-set number relativenumber " uses the numbertoggle plugin
+set number
 set confirm            " add a confirmation
+set ignorecase
+set smartcase
 set hlsearch	       " switch on highlighting the last used search pattern
 set noshowmode         " get rid of the -- INSERT -- at the bottom
+
+"""""""""""""""""""
+" Indent Settings "
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set ignorecase
-set smartcase
+
+"""""""""""""""""""
 set noswapfile
 set hidden " allow buffer switching without saving
 set mouse=a
@@ -33,9 +38,12 @@ set splitright
 set lazyredraw
 set shortmess=FaWc " see :help shortmess
 
+""""""""""""""""""""""
+" Fold Settings "
 set foldmethod=syntax "syntax folds
 set foldcolumn=1 " define 1 col at window left to indicate folding
 set foldlevelstart=99 "start with all folds opened
+"""""""""""""""""""""""
 
 if has('gui_running')
     set guioptions=M "diable GUI menus... I don't need them
@@ -46,6 +54,8 @@ if has('nvim')
     let g:python3_host_prog = '/usr/bin/python3'
 endif
 
+"""""""""""""""""""""""""""""""""""
+" Vim Plug Settings
 " Check if VimPlug exists. If not, download it
 if empty('~/.local/share/nvim/plugged')
      silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -65,6 +75,7 @@ Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'taohexxx/lightline-buffer'
+Plug 'thaerkh/vim-indentguides'
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'majutsushi/tagbar'
@@ -77,7 +88,7 @@ Plug 'honza/vim-snippets'
 " Deoplete and sources
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
+Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', {'for': 'vim'}
 Plug 'Shougo/denite.nvim'
@@ -90,6 +101,7 @@ Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
 call plug#end()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
@@ -112,7 +124,7 @@ augroup END
 augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
 augroup END
 
 

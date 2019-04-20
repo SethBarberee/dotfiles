@@ -3,8 +3,8 @@ let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
 
 call deoplete#custom#option('sources', {
-		\ '_': ['ultisnips','buffer', 'tag'],
-		\ 'cpp': ['ultisnips', 'tag', 'clangx, buffer'],
+		\ '_': ['ultisnips', 'tag'],
+		\ 'cpp': ['ultisnips', 'tag', 'clang, buffer'],
         \ 'python': ['ultisnips', 'tag', 'jedi, buffer'],
         \ 'disabled_syntaxes': ['Comment', 'String']
 		\})
@@ -15,6 +15,9 @@ augroup DeopleteToggle
     autocmd InsertLeave * call deoplete#disable()
 augroup END
 
+" Clang Deoplete
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 
 " Rust Deoplete
 let g:deoplete#sources#rust#racer_binary = '/usr/bin/racer'
