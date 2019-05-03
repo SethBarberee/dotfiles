@@ -100,6 +100,8 @@ Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
+" Markdown Rendering
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 
