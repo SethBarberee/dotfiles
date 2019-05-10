@@ -98,6 +98,7 @@ Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
+Plug 'RRethy/vim-hexokinase'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
 " Markdown Rendering
@@ -198,3 +199,7 @@ inoremap { {}<Esc>i
 let g:webdevicons_enable_denite = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:Hexokinase_ftAutoload = ['*']
+
+let g:Hexokinase_highlighters = ['sign_column']
