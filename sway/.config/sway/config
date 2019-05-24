@@ -251,15 +251,17 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym $mod+Print exec swaylock -i $wallpaper
 
-for_window [class="Spotify"] move window to workspace 4
 for_window [class="Firefox"] move window to workspace 2
+for_window [class="Spotify"] move window to workspace 4
+for_window [class="Discord"] move window to workspace 5
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec ~/.config/sway/swayidle-user.sh
 
-exec pulseaudio --start
+exec --no-startup-id libinput-gestures-setup start
+
 # TODO find way to reload mako without config file
 exec mako --background-color=$color1 --border-color=$color1 --text-color=#ffffff --default-timeout=4000
 

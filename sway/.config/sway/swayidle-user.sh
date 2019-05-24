@@ -1,11 +1,11 @@
 #! /bin/bash
 
-. "$HOME/.cache/wal/colors.sh"
+. "/home/seth/.cache/wal/colors.sh"
 
 # TODO test if swayidle and swaylock exits
 
 swayidle -w \
-    timeout 300 'swaylock -f -i $wallapaper' \
+    timeout 300 'swaylock -i /home/seth/wallpapers/iceburg.jpg' \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f -i $wallpaper'
+    before-sleep 'swaylock -i /home/seth/wallpapers/iceburg.jpg'

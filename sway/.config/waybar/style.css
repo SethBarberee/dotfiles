@@ -3,7 +3,7 @@
     border: none;
     border-radius: 0;
     font-family: "Knack Nerd Font Mono", "Noto Sans", Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 window#waybar {
@@ -29,6 +29,10 @@ window#waybar {
     border-bottom: 3px solid @color15;
 }
 
+#workspaces button.urgent {
+    background: #ff0000
+}
+
 #clock, #backlight, #battery, #network, #pulseaudio, #custom-spotify, #idle_inhibitor {
     padding: 0 5px;
     margin: 0 5px;
@@ -46,8 +50,7 @@ window#waybar {
 }
 
 #battery.charging {
-    color: white;
-    background-color: #26A65B;
+    color: rgba(0, 255, 0, 1);
 }
 
 @keyframes blink {

@@ -64,9 +64,13 @@
         "format-disconnected": "Disconnected ⚠"
     },
     "pulseaudio": {
+        "scroll-step": 1,
         "format": "{volume}% {icon}",
         "format-muted": "",
-        "format-icons": ["", ""],
+        "format-icons": {
+            "headphones": "",
+            "default": ["", ""]
+        },
         "on-click": "pavucontrol"
     },
     "custom/spotify": {
