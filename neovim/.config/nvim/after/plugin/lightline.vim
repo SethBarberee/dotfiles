@@ -17,6 +17,7 @@ let g:lightline = {
     \   'left': [['bufferinfo'],
     \             [ 'separator' ],
     \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+    \   'right': [['time']],
     \ },
     \ 'component': {
     \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
@@ -24,6 +25,7 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'mode': 'LightlineMode',
+    \   'time': 'LightlineTime',
     \   'gitbranch': 'gitbranch#name',
     \   'readonly': 'LightlineReadonly',
     \   'filetype': 'MyFiletype',
@@ -44,14 +46,24 @@ let g:lightline = {
 function! LightlineMode()
     let fname = expand('%:t')
     if &filetype == 'denite'
-        let mode_str = substitute(denite#get_status_mode(), '-\\| ', '', 'g')
-        call lightline#link(tolower(mode_str[0]))
-        return mode_str
+        " TODO fix what ever denite is doing wrong
+        return lightline#mode()
+        "return 'denite'
+    elseif &filetype == 'netrw'
+        return 'netrw'
     else
         return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
             \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
             \ &filetype ==# 'defx' ? 'Defx' :
             \ lightline#mode()
+    endif
+endfunction
+
+function! LightlineTime()
+    if has('win64')
+        return system('time /t')[:-2]
+    else
+        return system('date +"%H:%M"')[:-2]
     endif
 endfunction
 
