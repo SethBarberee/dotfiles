@@ -4,7 +4,7 @@ let g:lightline = {
     \ 'colorscheme': 'challenger_deep',
     \ 'active': {
     \   'left': [['mode', 'paste'],
-    \            ['gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \            ['gitinfo', 'readonly', 'filename', 'modified' ] ],
     \   'right': [ ['lineinfo'],
     \           ['percent'],
     \           ['tagbar', 'fileencoding', 'filetype']],
@@ -26,7 +26,7 @@ let g:lightline = {
     \ 'component_function': {
     \   'mode': 'LightlineMode',
     \   'time': 'LightlineTime',
-    \   'gitbranch': 'gitbranch#name',
+    \   'gitinfo': 'GitInfo',
     \   'readonly': 'LightlineReadonly',
     \   'filetype': 'MyFiletype',
     \   'bufferinfo': 'lightline#buffer#bufferinfo',
@@ -66,6 +66,20 @@ function! LightlineTime()
         return system('date +"%H:%M"')[:-2]
     endif
 endfunction
+
+fun! GitInfo()
+   let branch = gitbranch#name()
+   let l:hunks = GitGutterGetHunkSummary()
+   let l:line = branch
+   " If we have any hunks, display the number
+   " Stolen from vimways article
+   if l:hunks[0] || l:hunks[1] || l:hunks[2]
+       let l:line .= ' +' . l:hunks[0] .
+                  \ ' ~' . l:hunks[1] .
+                  \ ' -' . l:hunks[2]
+   endif
+    return l:line
+endf
 
 let g:lightline#bufferline#unnamed = '[No Name]'
 
