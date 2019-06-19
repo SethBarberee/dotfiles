@@ -74,7 +74,6 @@ endif
 Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
-"Plug 'taohexxx/lightline-buffer'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'thaerkh/vim-indentguides'
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
