@@ -18,7 +18,8 @@ set noshowmode         " get rid of the -- INSERT -- at the bottom
 
 """""""""""""""""""
 " Indent Settings "
-set tabstop=4
+set tabstop=8
+set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
@@ -58,8 +59,8 @@ endif
 " Vim Plug Settings
 " Check if VimPlug exists. If not, download it
 if empty('~/.local/share/nvim/plugged')
-     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 " VimPlug plugins
@@ -70,16 +71,16 @@ if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
     autocmd VimEnter * PlugInstall | q
 endif
 
-Plug 'dylanaraps/wal.vim'
 Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'taohexxx/lightline-buffer'
+"Plug 'taohexxx/lightline-buffer'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'thaerkh/vim-indentguides'
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-fugitive', {'on': []}
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'
 " Snippets
@@ -100,7 +101,7 @@ Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'RRethy/vim-hexokinase'
 Plug 'ryanoasis/vim-devicons'
-Plug 'neomake/neomake'
+Plug 'neomake/neomake', {'on': []} " just disable neomake for now
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
@@ -108,18 +109,18 @@ call plug#end()
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  autocmd!
+    autocmd!
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  autocmd BufReadPost *
-    \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-    \   execute "normal! g`\"" |
-    \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    autocmd BufReadPost *
+                \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+                \   execute "normal! g`\"" |
+                \ endif
 
-  " Close any automatically opened scratch-buffers 
-  " " once completion popup the is closed
-  autocmd CompleteDone * pclose
+    " Close any automatically opened scratch-buffers 
+    " " once completion popup the is closed
+    autocmd CompleteDone * pclose
 
 augroup END
 
@@ -139,8 +140,8 @@ set diffopt+=indent-heuristic
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(':DiffOrig')
-  command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
-                 \ | wincmd p | diffthis
+    command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
+                \ | wincmd p | diffthis
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,7 +200,13 @@ inoremap { {}<Esc>i
 let g:webdevicons_enable_denite = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
+" Hexokinase settings since a seperate file doesn't work
 let g:Hexokinase_ftAutoload = ['*']
 
-let g:Hexokinase_highlighters = ['sign_column']
+let g:Hexokinase_highlighters = ['virtual']
+
+let g:lightline#bufferline#unnamed = '[No Name]'
+let g:lightline#bufferline#show_number=2
+let g:lightline#bufferline#enable_devicons=0 " until i'm using a decent font
+let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+
