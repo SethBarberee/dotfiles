@@ -14,9 +14,7 @@ let g:lightline = {
     \   'right': [[ 'lineinfo'], [ 'percent']]
     \ },
     \ 'tabline': {
-    \   'left': [['bufferinfo'],
-    \             [ 'separator' ],
-    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+    \   'left': [['buffers']],
     \   'right': [['time']],
     \ },
     \ 'component': {
@@ -29,21 +27,16 @@ let g:lightline = {
     \   'gitinfo': 'GitInfo',
     \   'readonly': 'LightlineReadonly',
     \   'filetype': 'MyFiletype',
-    \   'bufferinfo': 'lightline#buffer#bufferinfo',
     \ },
     \ 'component_expand': {
-    \   'buffercurrent': 'lightline#buffer#buffercurrent',
-    \   'bufferbefore': 'lightline#buffer#bufferbefore',
-    \   'bufferafter': 'lightline#buffer#bufferafter',
+    \   'buffers': 'lightline#bufferline#buffers',
     \ },
     \ 'component_type': {
-    \   'buffercurrent': 'tabsel',
-    \   'bufferbefore': 'raw',
-    \   'bufferafter': 'raw',
+    \   'buffers': 'tabsel',
     \ }
     \ }
 
-function! LightlineMode()
+function! LightlineMode() abort
     let fname = expand('%:t')
     if &filetype == 'denite'
         " TODO fix what ever denite is doing wrong
@@ -59,7 +52,7 @@ function! LightlineMode()
     endif
 endfunction
 
-function! LightlineTime()
+function! LightlineTime() abort
     if has('win64')
         return system('time /t')[:-2]
     else
@@ -67,7 +60,7 @@ function! LightlineTime()
     endif
 endfunction
 
-fun! GitInfo()
+fun! GitInfo() abort
    let branch = gitbranch#name()
    let l:hunks = GitGutterGetHunkSummary()
    let l:line = branch
@@ -81,8 +74,6 @@ fun! GitInfo()
     return l:line
 endf
 
-let g:lightline#bufferline#unnamed = '[No Name]'
-
 " Get rid of RO when looking at help pages
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
@@ -92,31 +83,3 @@ endfunction
 function! MyFiletype()
      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
 endfunction
-
-" whether to show the buffer number of not
-let g:lightline_buffer_show_bufnr = 0
-
-" :help filename-modifiers
-let g:lightline_buffer_fname_mod = ':t'
-
-" hide buffer list
-let g:lightline_buffer_excludes = ['vimfiler']
-
-" max file name length
-let g:lightline_buffer_maxflen = 30
-
-" max file extension length
-let g:lightline_buffer_maxfextlen = 3
-
-" min file name length
-let g:lightline_buffer_minflen = 16
-
-" min file extension length
-let g:lightline_buffer_minfextlen = 3
-
-" reserve length for other component (e.g. info, close)
-let g:lightline_buffer_reservelen = 20
-
-" enable devicons in lightline buffer
-let g:lightline_buffer_enable_devicons = 1
-
