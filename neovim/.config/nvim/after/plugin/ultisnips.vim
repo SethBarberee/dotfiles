@@ -4,10 +4,11 @@ if !exists(':UltiSnipsEdit')
 endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsSnippetsDir = '~/.local/share/nvim/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetsDir = "~/.config/nvim/my_snippets"
+let g:UltiSnipsSnippetDirectories=["my_snippets", "Ultisnips"]
 let g:UltiSnipsExpandTrigger= '<tab>'
-let g:UltiSnipsJumpForwardTrigger= '<c-b>'
-let g:UltiSnipsJumpBackwardTrigger= '<c-z>'
+let g:UltiSnipsJumpForwardTrigger= '<tab>'
+let g:UltiSnipsJumpBackwardTrigger= '<s-tab>'
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit= 'vertical'
