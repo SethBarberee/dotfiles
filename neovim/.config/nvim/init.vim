@@ -78,7 +78,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'thaerkh/vim-indentguides'
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Plug 'ludovicchabant/vim-gutentags' "tag management
-Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/vim-gitbranch'

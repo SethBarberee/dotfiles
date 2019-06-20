@@ -7,7 +7,7 @@ let g:lightline = {
     \            ['gitinfo', 'readonly', 'filename', 'modified' ] ],
     \   'right': [ ['lineinfo'],
     \           ['percent'],
-    \           ['tagbar', 'fileencoding', 'filetype']],
+    \           ['tag', 'fileencoding', 'filetype']],
     \ },
     \ 'inactive' : {
     \   'left': [['filename']],
@@ -18,7 +18,6 @@ let g:lightline = {
     \   'right': [['time']],
     \ },
     \ 'component': {
-    \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
     \   'separator': '',
     \ },
     \ 'component_function': {
@@ -27,6 +26,8 @@ let g:lightline = {
     \   'gitinfo': 'GitInfo',
     \   'readonly': 'LightlineReadonly',
     \   'filetype': 'MyFiletype',
+    \   'tag':  'LightlineTag',
+    \   'filename': 'LightlineFilename',
     \ },
     \ 'component_expand': {
     \   'buffers': 'lightline#bufferline#buffers',
@@ -36,17 +37,28 @@ let g:lightline = {
     \ }
     \ }
 
+fun! LightlineTag() abort
+    return get(b:, 'vista_nearest_method_or_function', '')
+endf
+
+fun! LightlineFilename() abort
+    let fname = expand('%:t')
+    if fname ==# '__vista__'
+        " Get rid of name
+        return "Tags"
+    else
+        return fname
+    endif
+endf
+
 function! LightlineMode() abort
     let fname = expand('%:t')
-    if &filetype == 'denite'
-        " TODO fix what ever denite is doing wrong
-        return lightline#mode()
-        "return 'denite'
-    elseif &filetype == 'netrw'
+    if &filetype == 'netrw'
         return 'netrw'
     else
-        return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
-            \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
+        return fname  ==# '__Tagbar__' ? 'Tagbar':
+            \ fname ==# '__vista__' ? 'Vista':
+            \ fname ==# 'ControlP' ? 'CtrlP':
             \ &filetype ==# 'defx' ? 'Defx' :
             \ lightline#mode()
     endif
@@ -74,9 +86,10 @@ fun! GitInfo() abort
     return l:line
 endf
 
-" Get rid of RO when looking at help pages
+" Get rid of RO when looking at help pages and in Vista
 function! LightlineReadonly()
-  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+    let fname = expand('%:t')
+    return &readonly && &filetype !=# 'help'  &&  fname !=# '__vista__' ? 'RO' : ''
 endfunction
 
 " Add a devicon with the filetype
