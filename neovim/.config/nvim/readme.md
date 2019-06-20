@@ -34,4 +34,4 @@ Plug 'neomake/neomake', {'on': []} " just disable neomake for now
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 ```
 
-* Did this with a simple `read | grep "Plug '*'" init.vim
+* Did this with a simple `read | grep "Plug '*'" init.vim`
