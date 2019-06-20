@@ -20,7 +20,7 @@ if has('spell')
   " Tolerate leading lowercase letters in README.md files, for things like
   " headings being filenames
   if expand('%:t') ==# 'README.md'
-    setlocal spellcapcheck=
+    setlocal spellcapcheck
     let b:undo_ftplugin .= '|setlocal spellcapcheck<'
   endif
 
