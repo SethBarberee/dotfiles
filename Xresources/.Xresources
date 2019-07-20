@@ -1,1 +1,2 @@
-/home/seth/.Xresources
+! load from wal
+#include "~/.cache/wal/colors.Xresources"

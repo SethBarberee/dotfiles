@@ -260,7 +260,7 @@ for_window [class="Discord"] move window to workspace 5
 # resumed. It will also lock your screen before your computer goes to sleep.
 exec ~/.config/sway/swayidle-user.sh
 
-exec --no-startup-id libinput-gestures-setup start
+#exec --no-startup-id libinput-gestures-setup start
 
 # TODO find way to reload mako without config file
 exec mako --background-color=$color1 --border-color=$color1 --text-color=#ffffff --default-timeout=4000

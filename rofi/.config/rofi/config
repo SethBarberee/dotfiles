@@ -1,0 +1,7 @@
+# Dark theme.
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
+rofi.modi: combi,drun,run,window,ssh
+rofi.fullscreen: false
+rofi.hide-scrollbar: true
+#rofi.lines: 5
+rofi.padding: 400
