@@ -209,3 +209,9 @@ let g:lightline#bufferline#show_number=2
 let g:lightline#bufferline#enable_devicons=0 " until i'm using a decent font
 let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
 
+
+augroup rasi_css
+    " set rasi filetypes to css
+    autocmd BufRead,BufNewFile /*.rasi setf css
+augroup end
+
