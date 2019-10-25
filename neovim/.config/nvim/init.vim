@@ -98,7 +98,7 @@ Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
-Plug 'RRethy/vim-hexokinase'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake', {'on': []} " just disable neomake for now
 " Markdown Rendering
@@ -169,7 +169,7 @@ noremap <C-c> "+yy
 vnoremap <C-c> "+y
 noremap <C-x> "+dd
 vnoremap <C-x> "+d
-map <C-v> "+gP
+"map <C-v> "+gP
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
@@ -202,7 +202,7 @@ let g:webdevicons_enable_denite = 1
 " Hexokinase settings since a seperate file doesn't work
 let g:Hexokinase_ftAutoload = ['*']
 
-let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 let g:lightline#bufferline#unnamed = '[No Name]'
 let g:lightline#bufferline#show_number=2

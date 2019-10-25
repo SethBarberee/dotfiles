@@ -225,6 +225,13 @@ input 1739:31251:DLL06E5:01_06CB:7A13_Touchpad {
     tap enabled
 }
 
+# For my Dell XPS 15 2-in-1 Laptop
+input 1739:31251:DLL080D:01_06CB:7A13_Touchpad {
+    dwt enabled
+    natural_scroll enabled
+    tap enabled
+}
+
 #
 # Status Bar:
 #

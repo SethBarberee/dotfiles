@@ -1,0 +1,21 @@
+{
+  "segments": [
+    "virtual_env",
+    "username",
+    "hostname",
+    "ssh",
+    "cwd",
+    "read_only",
+    "git",
+    "git_stash",
+    "jobs",
+    "root"
+  ],
+  "theme": "solarized_dark",
+  "hostname": {
+    "colorize": true
+  },
+  "cwd": {
+    "max_depth": 2
+  }
+}
