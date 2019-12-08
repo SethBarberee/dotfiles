@@ -98,9 +98,9 @@ Plug 'kristijanhusak/defx-icons' " file icons for defx
 Plug 'Shougo/neoinclude.vim' " completion for include files
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 Plug 'ryanoasis/vim-devicons'
-Plug 'neomake/neomake', {'on': []} " just disable neomake for now
+Plug 'neomake/neomake'
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
@@ -153,6 +153,13 @@ endif
 
 " Set colorscheme
 colorscheme challenger_deep
+if g:colors_name ==# 'challenger_deep'
+    " These overrides were taken from https://github.com/skbolton/titan/blob/master/states/nvim/nvim/plugin/themes.vim
+    hi DiffAdd guibg=#62d196 guifg=black
+    hi DiffDelete guibg=#ff5458 guifg=black
+    hi DiffChange guibg=#ffb378 guifg=black
+    hi DiffText guibg=#ffe9aa guifg=black
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 
