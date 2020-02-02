@@ -1,5 +1,6 @@
 " Lightline
 
+
 let g:lightline = {
     \ 'colorscheme': 'challenger_deep',
     \ 'active': {
@@ -40,6 +41,9 @@ let g:lightline = {
 fun! LightlineTag() abort
     return get(b:, 'vista_nearest_method_or_function', '')
 endf
+
+" Update Function 
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 fun! LightlineFilename() abort
     let fname = expand('%:t')

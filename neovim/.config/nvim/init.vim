@@ -85,24 +85,30 @@ Plug 'itchyny/vim-gitbranch'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Deoplete and sources
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim', {'for': 'vim'}
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/defx.nvim', {'on': 'Defx'}
-Plug 'kristijanhusak/defx-git' " git icons for defx
-Plug 'kristijanhusak/defx-icons' " file icons for defx
-Plug 'Shougo/neoinclude.vim' " completion for include files
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'peterhoeg/vim-qml'
+
+if has('nvim')
+    Plug 'Shougo/denite.nvim' " maybe replace with vim-clap
+    Plug 'Shougo/defx.nvim', {'on': 'Defx'}
+    " Depends of Defx
+    Plug 'kristijanhusak/defx-git' " git icons for defx
+    Plug 'kristijanhusak/defx-icons' " file icons for defx
+    " Deoplete and sources
+    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
+    Plug 'Shougo/neoinclude.vim' " completion for include files
+    Plug 'zchee/deoplete-jedi', {'for': 'python'}
+    Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
+    Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
+    Plug 'Shougo/neco-syntax'
+    Plug 'Shougo/neco-vim', {'for': 'vim'}
+end
+
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 
@@ -159,6 +165,7 @@ if g:colors_name ==# 'challenger_deep'
     hi DiffDelete guibg=#ff5458 guifg=black
     hi DiffChange guibg=#ffb378 guifg=black
     hi DiffText guibg=#ffe9aa guifg=black
+    let g:challenger_deep_terminal_italics = 1
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
