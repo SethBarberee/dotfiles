@@ -17,7 +17,10 @@ else
 endif
 let g:neomake_open_list = 2 " automatically open neomake list
 
+let g:neomake_c_enabled_makers = ['gcc']
 
-let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_enabled_makers = ['gcc']
 
 let g:neomake_vim_enabled_makers = ['vint']
+
+let g:neomake_lua_enabled_makers = ['luac']

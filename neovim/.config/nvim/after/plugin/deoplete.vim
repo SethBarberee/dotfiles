@@ -1,6 +1,6 @@
 " Deoplete Settings
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
+
+call deoplete#custom#option('min_patern_length', 1)
 
 call deoplete#custom#option('sources', {
 		\ '_': ['ultisnips', 'tag'],

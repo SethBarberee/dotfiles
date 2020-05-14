@@ -90,15 +90,14 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-
 Plug 'ryanoasis/vim-devicons'
 Plug 'neomake/neomake'
 " Markdown Rendering
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'peterhoeg/vim-qml'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
 
 if has('nvim')
     Plug 'Shougo/denite.nvim' " maybe replace with vim-clap
     Plug 'Shougo/defx.nvim', {'on': 'Defx'}
     " Depends of Defx
-    Plug 'kristijanhusak/defx-git' " git icons for defx
-    Plug 'kristijanhusak/defx-icons' " file icons for defx
+    Plug 'kristijanhusak/defx-git', {'on': 'Defx'} " git icons for defx
+    Plug 'kristijanhusak/defx-icons', {'on': 'Defx'} " file icons for defx
     " Deoplete and sources
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
     Plug 'Shougo/neoinclude.vim' " completion for include files
