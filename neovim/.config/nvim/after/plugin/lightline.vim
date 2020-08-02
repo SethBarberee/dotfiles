@@ -29,6 +29,7 @@ let g:lightline = {
     \   'filetype': 'MyFiletype',
     \   'tag':  'LightlineTag',
     \   'filename': 'LightlineFilename',
+    \   'fileencoding': 'LightlineFileencoding',
     \ },
     \ 'component_expand': {
     \   'buffers': 'lightline#bufferline#buffers',
@@ -43,27 +44,32 @@ fun! LightlineTag() abort
 endf
 
 " Update Function 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+augroup lightline_startup
+    autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+augroup end
 
 fun! LightlineFilename() abort
     let fname = expand('%:t')
     if fname ==# '__vista__'
         " Get rid of name
-        return "Tags"
-    else
-        return fname
+        return 'Tags'
     endif
+    if fname ==# 'NetrwTreeListing'
+        return 'Netrw'
+    "else
+    endif
+    return fname
 endf
 
 function! LightlineMode() abort
     let fname = expand('%:t')
     if &filetype == 'netrw'
-        return 'netrw'
+        return ''
     else
         return fname  ==# '__Tagbar__' ? 'Tagbar':
             \ fname ==# '__vista__' ? 'Vista':
             \ fname ==# 'ControlP' ? 'CtrlP':
-            \ &filetype ==# 'defx' ? 'Defx' :
+            \ &filetype ==# 'chadtree' ? 'CHADTree' :
             \ lightline#mode()
     endif
 endfunction
@@ -77,26 +83,44 @@ function! LightlineTime() abort
 endfunction
 
 fun! GitInfo() abort
-   let branch = gitbranch#name()
-   let l:hunks = GitGutterGetHunkSummary()
-   let l:line = branch
-   " If we have any hunks, display the number
-   " Stolen from vimways article
-   if l:hunks[0] || l:hunks[1] || l:hunks[2]
-       let l:line .= ' +' . l:hunks[0] .
-                  \ ' ~' . l:hunks[1] .
-                  \ ' -' . l:hunks[2]
-   endif
+    if &filetype == 'netrw'
+        return ''
+    endif
+    let branch = gitbranch#name()
+    let l:hunks = GitGutterGetHunkSummary()
+    let l:line = branch
+    " If we have any hunks, display the number
+    " Stolen from vimways article
+    if l:hunks[0] || l:hunks[1] || l:hunks[2]
+        let l:line .= ' +' . l:hunks[0] .
+                    \ ' ~' . l:hunks[1] .
+                    \ ' -' . l:hunks[2]
+    endif
     return l:line
 endf
 
 " Get rid of RO when looking at help pages and in Vista
 function! LightlineReadonly()
     let fname = expand('%:t')
-    return &readonly && &filetype !=# 'help'  &&  fname !=# '__vista__' ? 'RO' : ''
+    return &readonly && &filetype !~# '\v(help|vista|chadtree|netrw)'  ? 'RO' : ''
 endfunction
 
 " Add a devicon with the filetype
 function! MyFiletype()
      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
 endfunction
+
+function! LightlineFileencoding()
+    return winwidth(0) > 70 ? &fileencoding : ''
+endfunction
+
+nmap 1 <Plug>lightline#bufferline#go(1)
+nmap 2 <Plug>lightline#bufferline#go(2)
+nmap 3 <Plug>lightline#bufferline#go(3)
+nmap 4 <Plug>lightline#bufferline#go(4)
+nmap 5 <Plug>lightline#bufferline#go(5)
+nmap 6 <Plug>lightline#bufferline#go(6)
+nmap 7 <Plug>lightline#bufferline#go(7)
+nmap 8 <Plug>lightline#bufferline#go(8)
+nmap 9 <Plug>lightline#bufferline#go(9)
+nmap 0 <Plug>lightline#bufferline#go(10)

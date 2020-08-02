@@ -94,10 +94,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'ma
 
 if has('nvim')
     Plug 'Shougo/denite.nvim' " maybe replace with vim-clap
-    Plug 'Shougo/defx.nvim', {'on': 'Defx'}
-    " Depends of Defx
-    Plug 'kristijanhusak/defx-git', {'on': 'Defx'} " git icons for defx
-    Plug 'kristijanhusak/defx-icons', {'on': 'Defx'} " file icons for defx
     " Deoplete and sources
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
     Plug 'Shougo/neoinclude.vim' " completion for include files
@@ -219,12 +215,15 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 
 let g:lightline#bufferline#unnamed = '[No Name]'
 let g:lightline#bufferline#show_number=2
-let g:lightline#bufferline#enable_devicons=0 " until i'm using a decent font
+let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
 let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
-
 
 augroup rasi_css
     " set rasi filetypes to css
     autocmd BufRead,BufNewFile /*.rasi setf css
 augroup end
 
+augroup startup
+    " start netrw on startup
+    autocmd VimEnter * :Vexplore
+augroup end
