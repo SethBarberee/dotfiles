@@ -12,7 +12,7 @@
         "file_format": "{anime_title}/{anime_title}_{ep_no}",
         "force_download": false,
         "player": "mpv",
-        "provider": "kissanime",
+        "provider": "9anime",
         "quality": "720p",
         "selescrape_browser": "firefox",
         "selescrape_browser_executable_path": null,
@@ -221,7 +221,7 @@
             "360p"
         ],
         "log_level": "INFO",
-        "provider": "kissanime",
+        "provider": "9anime",
         "quality": "720p"
     }
 }
