@@ -56,22 +56,6 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Kate">
-    <action name="Execute">
-      <command>kate</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Kwrite">
-    <action name="Execute">
-      <command>kwrite</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
 </menu>
 
 <menu id="apps-term-menu" label="Terminals">
@@ -96,16 +80,16 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Konsole">
+  <item label="Xterm">
+    <action name="Execute"><command>xterm</command></action>
+  </item>
+  <item label="Kitty">
     <action name="Execute">
-      <command>konsole</command>
+      <command>kitty</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
     </action>
-  </item>
-  <item label="Xterm">
-    <action name="Execute"><command>xterm</command></action>
   </item>
 </menu>
 
@@ -119,91 +103,37 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Opera">
-    <action name="Execute">
-      <command>opera</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-        <wmclass>Opera</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Konqueror">
-    <action name="Execute">
-      <command>konqueror</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Epiphany">
-    <action name="Execute">
-      <command>epiphany</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Pidgin Instant Messenger">
-    <action name="Execute">
-      <command>pidgin</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Kopete Instant Messenger">
-    <action name="Execute">
-      <command>kopete</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="XChat">
-    <action name="Execute">
-      <command>xchat</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
 </menu>
 
 <menu id="apps-office-menu" label="Office">
-  <item label="OpenOffice Base">
+  <item label="LibreOffice Base">
     <action name="Execute">
-      <command>ooffice -base</command>
+      <command>libreoffice --base</command>
     </action>
   </item>
-  <item label="OpenOffice Calc">
+  <item label="Libreoffice Calc">
     <action name="Execute">
-      <command>ooffice -calc</command>
+      <command>libreoffice --calc</command>
     </action>
   </item>
-  <item label="OpenOffice Draw">
+  <item label="Libreoffice Draw">
     <action name="Execute">
-      <command>ooffice -draw</command>
+      <command>libreoffice --draw</command>
     </action>
   </item>
-  <item label="OpenOffice Impress">
+  <item label="Libreoffice Impress">
     <action name="Execute">
-      <command>ooffice -impress</command>
+      <command>libreoffice --impress</command>
     </action>
   </item>
-  <item label="OpenOffice Math">
+  <item label="Libreoffice Math">
     <action name="Execute">
-      <command>ooffice -math</command>
+      <command>libreoffice --math</command>
     </action>
   </item>
-  <item label="OpenOffice Printer Administration">
+  <item label="Libreoffice Writer">
     <action name="Execute">
-      <command>ooffice-printeradmin</command>
-    </action>
-  </item>
-  <item label="OpenOffice Writer">
-    <action name="Execute">
-      <command>ooffice -writer</command>
+      <command>libreoffice --writer</command>
     </action>
   </item>
 </menu>
@@ -305,25 +235,9 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Gwenview">
+  <item label="Pinta">
     <action name="Execute">
-      <command>gwenview</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Dia Diagram Editor">
-    <action name="Execute">
-      <command>dia</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Inkscape">
-    <action name="Execute">
-      <command>inkscape</command>
+      <command>pinta</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -335,18 +249,6 @@
   <item label="Openbox Configuration Manager">
     <action name="Execute">
       <command>obconf</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
-    </action>
-  </item>
-  <item label="Gnome Control Center">
-    <action name="Execute">
-      <command>gnome-control-center</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
-    </action>
-  </item>
-  <item label="KDE Control Center">
-    <action name="Execute">
-      <command>kcontrol</command>
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
   </item>

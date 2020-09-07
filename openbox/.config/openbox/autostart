@@ -15,3 +15,12 @@
 # If you want to use XFCE config tools...
 #
 #xfce-mcs-manager &
+
+nitrogen --restore &
+dunst &
+blueman-manager &
+picom --experimental-backends &
+light-locker &
+libinput-gestures-setup start &
+onboard &
+cairo-dock &
