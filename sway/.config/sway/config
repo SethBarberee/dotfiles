@@ -25,7 +25,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term termite
+set $term kitty
 # Your preferred application launcher
 set $menu dmenu_run
 set $menu2 rofi -show run
@@ -248,19 +248,21 @@ bar {
 }
 
 # Personal hotkeys
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
-bindsym XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle 
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym $mod+Print exec swaylock -i $wallpaper
 
-for_window [class="Firefox"] move window to workspace 2
+# TODO figure out how to ignore case for firefox
+for_window [class="firefox"] move window to workspace 2
 for_window [class="Spotify"] move window to workspace 4
 for_window [class="Discord"] move window to workspace 5
+for_window [class="Onboard"] floating enable
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when

@@ -1,5 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
+    "gtk-layer-shell": true,
     // "position": "bottom", // Waybar at the bottom of your screen
     // "height": 30, // Waybar height
     // "width": 1280, // Waybar width
