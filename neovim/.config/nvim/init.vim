@@ -71,23 +71,30 @@ if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
     autocmd VimEnter * PlugInstall | q
 endif
 
+" Looks/UI
 Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'thaerkh/vim-indentguides'
+
 Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
+
+" Tags
 Plug 'ludovicchabant/vim-gutentags' "tag management
 Plug 'liuchengxu/vista.vim'
+
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/vim-gitbranch'
+
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 Plug 'ryanoasis/vim-devicons'
+
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
 
@@ -104,13 +111,6 @@ if has('nvim')
 end
 
 call plug#end()
-
-function! PlugLoaded(name)
-    return (
-        \ has_key(g:plugs, a:name) &&
-        \ isdirectory(g:plugs[a:name].dir) &&
-        \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
-endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 

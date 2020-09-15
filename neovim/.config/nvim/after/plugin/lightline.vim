@@ -74,6 +74,7 @@ function! LightlineMode() abort
     endif
 endfunction
 
+" Get the time
 function! LightlineTime() abort
     if has('win64')
         return system('time /t')[:-2]
@@ -83,10 +84,11 @@ function! LightlineTime() abort
 endfunction
 
 fun! GitInfo() abort
-    if &filetype == 'netrw'
+    " Don't show GitInfo on netrw or help
+    if &filetype == 'netrw' || &filetype == 'help'
         return ''
     endif
-    let branch = gitbranch#name()
+    let branch = FugitiveHead()
     let l:hunks = GitGutterGetHunkSummary()
     let l:line = branch
     " If we have any hunks, display the number
@@ -110,15 +112,12 @@ function! MyFiletype()
      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
 endfunction
 
+" Return the encodings
 function! LightlineFileencoding()
     return winwidth(0) > 70 ? &fileencoding : ''
 endfunction
 
-let g:lightline#bufferline#unnamed = '[No Name]'
-let g:lightline#bufferline#show_number=2
-let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
-let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
-
+" Simple mappings to switch buffers
 nmap 1 <Plug>lightline#bufferline#go(1)
 nmap 2 <Plug>lightline#bufferline#go(2)
 nmap 3 <Plug>lightline#bufferline#go(3)
