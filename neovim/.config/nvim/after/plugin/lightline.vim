@@ -114,6 +114,11 @@ function! LightlineFileencoding()
     return winwidth(0) > 70 ? &fileencoding : ''
 endfunction
 
+let g:lightline#bufferline#unnamed = '[No Name]'
+let g:lightline#bufferline#show_number=2
+let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
+let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+
 nmap 1 <Plug>lightline#bufferline#go(1)
 nmap 2 <Plug>lightline#bufferline#go(2)
 nmap 3 <Plug>lightline#bufferline#go(3)

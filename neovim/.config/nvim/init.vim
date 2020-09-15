@@ -88,7 +88,6 @@ Plug 'honza/vim-snippets'
 Plug 'sgur/vim-editorconfig' " to honor editorconfig
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 Plug 'ryanoasis/vim-devicons'
-Plug 'neomake/neomake'
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
 
@@ -105,6 +104,14 @@ if has('nvim')
 end
 
 call plug#end()
+
+function! PlugLoaded(name)
+    return (
+        \ has_key(g:plugs, a:name) &&
+        \ isdirectory(g:plugs[a:name].dir) &&
+        \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 
 " Put these in an autocmd group, so that we can delete them easily.
@@ -205,18 +212,25 @@ inoremap { {}<Esc>i
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Devicon config
-let g:webdevicons_enable_denite = 1
+if has_key(plugs, "vim-devicons") && has_key(plugs, "denite.nvim")
+    let g:webdevicons_enable_denite = 1
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Hexokinase settings since a seperate file doesn't work
-let g:Hexokinase_ftAutoload = ['*']
+if has_key(plugs, "vim-hexokinase")
+    let g:Hexokinase_ftAutoload = ['*']
+    let g:Hexokinase_highlighters = ['backgroundfull']
+endif
 
-let g:Hexokinase_highlighters = ['backgroundfull']
-
-let g:lightline#bufferline#unnamed = '[No Name]'
-let g:lightline#bufferline#show_number=2
-let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
-let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" These lightline settings can't be moved...
+if has_key(plugs, "lightline.vim")
+    let g:lightline#bufferline#unnamed = '[No Name]'
+    let g:lightline#bufferline#show_number=2
+    let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
+    let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+endif
 
 augroup rasi_css
     " set rasi filetypes to css
