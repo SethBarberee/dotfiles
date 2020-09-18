@@ -56,7 +56,6 @@ fun! LightlineFilename() abort
     endif
     if fname ==# 'NetrwTreeListing'
         return 'Netrw'
-    "else
     endif
     return fname
 endf
@@ -65,6 +64,8 @@ function! LightlineMode() abort
     let fname = expand('%:t')
     if &filetype == 'netrw'
         return ''
+    elseif &filetype == 'help'
+        return 'HELP'
     else
         return fname  ==# '__Tagbar__' ? 'Tagbar':
             \ fname ==# '__vista__' ? 'Vista':
@@ -84,8 +85,8 @@ function! LightlineTime() abort
 endfunction
 
 fun! GitInfo() abort
-    " Don't show GitInfo on netrw or help
-    if &filetype == 'netrw' || &filetype == 'help'
+    " Don't show GitInfo on netrw/help/denite
+    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' 
         return ''
     endif
     let branch = FugitiveHead()
@@ -109,11 +110,17 @@ endfunction
 
 " Add a devicon with the filetype
 function! MyFiletype()
-     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
+    if &filetype == 'denite' || &filetype == 'help' || &filetype == 'denite-filter'  
+        return ''
+    endif
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
 endfunction
 
 " Return the encodings
 function! LightlineFileencoding()
+    if &filetype == 'help'
+        return ''
+    endif
     return winwidth(0) > 70 ? &fileencoding : ''
 endfunction
 
