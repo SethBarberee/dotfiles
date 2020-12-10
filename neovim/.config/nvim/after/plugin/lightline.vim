@@ -70,7 +70,6 @@ function! LightlineMode() abort
         return fname  ==# '__Tagbar__' ? 'Tagbar':
             \ fname ==# '__vista__' ? 'Vista':
             \ fname ==# 'ControlP' ? 'CtrlP':
-            \ &filetype ==# 'chadtree' ? 'CHADTree' :
             \ lightline#mode()
     endif
 endfunction
@@ -85,8 +84,8 @@ function! LightlineTime() abort
 endfunction
 
 fun! GitInfo() abort
-    " Don't show GitInfo on netrw/help/denite
-    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' 
+    " Don't show GitInfo on netrw/help/denite/vista
+    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' || &filetype == 'vista'
         return ''
     endif
     let branch = FugitiveHead()
