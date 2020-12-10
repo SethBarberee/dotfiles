@@ -98,17 +98,27 @@ Plug 'ryanoasis/vim-devicons'
 " Markdown Rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
 
+
+
 if has('nvim')
     Plug 'Shougo/denite.nvim' " maybe replace with vim-clap
     " Deoplete and sources
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
-    Plug 'Shougo/neoinclude.vim' " completion for include files
-    Plug 'zchee/deoplete-jedi', {'for': 'python'}
-    Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-    Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neco-vim', {'for': 'vim'}
+else
+    " Allow Denite/Deoplete to run on vim
+    Plug 'Shougo/denite.nvim'
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 end
+
+Plug 'Shougo/neoinclude.vim' " completion for include files
+Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}
+Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
+Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
+Plug 'deoplete-plugins/deoplete-tag'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim', {'for': 'vim'}
 
 call plug#end()
 
@@ -235,9 +245,4 @@ endif
 augroup rasi_css
     " set rasi filetypes to css
     autocmd BufRead,BufNewFile /*.rasi setf css
-augroup end
-
-augroup startup
-    " start netrw on startup
-    autocmd VimEnter * :Vexplore
 augroup end
