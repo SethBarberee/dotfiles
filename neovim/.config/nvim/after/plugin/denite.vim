@@ -18,6 +18,9 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
        \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.o', 'tags',
        \ '*.png'])
 
+" Remove date from buffer list
+call denite#custom#var('buffer', 'date_format', '')
+
 " Custom function to see if we have webicons or not
 function! WebIconTest()
     try

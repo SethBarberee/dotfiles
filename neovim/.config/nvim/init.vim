@@ -55,74 +55,7 @@ if has('nvim')
     let g:python3_host_prog = '/usr/bin/python3'
 endif
 
-"""""""""""""""""""""""""""""""""""
-" Vim Plug Settings
-" Check if VimPlug exists. If not, download it
-if empty('~/.local/share/nvim/plugged')
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-" VimPlug plugins
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Check if we have plugins installed and install if we don't
-if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-    autocmd VimEnter * PlugInstall | q
-endif
-
-" Looks/UI
-Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
-Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'thaerkh/vim-indentguides'
-
-Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}
-
-" Tags
-Plug 'ludovicchabant/vim-gutentags' "tag management
-Plug 'liuchengxu/vista.vim'
-
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'sgur/vim-editorconfig' " to honor editorconfig
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
-Plug 'ryanoasis/vim-devicons'
-
-" Markdown Rendering
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
-
-
-
-if has('nvim')
-    Plug 'Shougo/denite.nvim' " maybe replace with vim-clap
-    " Deoplete and sources
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} " TODO look at ale
-else
-    " Allow Denite/Deoplete to run on vim
-    Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-end
-
-Plug 'Shougo/neoinclude.vim' " completion for include files
-Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}
-Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
-Plug 'deoplete-plugins/deoplete-tag'
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim', {'for': 'vim'}
-
-call plug#end()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
+let g:vimpath = fnamemodify(expand("$MYVIMRC"), ":p:h")
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
@@ -148,6 +81,10 @@ augroup numbertoggle
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
 augroup END
 
+augroup rasi_css
+    " set rasi filetypes to css
+    autocmd BufRead,BufNewFile /*.rasi setf css
+augroup end
 
 " Better diff (https://vimways.org/2018/the-power-of-diff)
 set diffopt+=algorithm:patience
@@ -160,6 +97,11 @@ if !exists(':DiffOrig')
     command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
+
+
+" Load plugins and mappings
+exec "source "  . g:vimpath . "/plugins.vim"
+exec "source "  . g:vimpath . "/mappings.vim"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
@@ -179,70 +121,3 @@ if g:colors_name ==# 'challenger_deep'
     hi DiffText guibg=#ffe9aa guifg=black
     let g:challenger_deep_terminal_italics = 1
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
-
-" Mappings
-
-let mapleader = ','  " Change leader to comma which is easier to reach
-
-" Use System clipboard
-noremap yy "+yy
-noremap dd "+dd
-noremap p "+gP
-
-noremap <C-c> "+yy
-vnoremap <C-c> "+y
-noremap <C-x> "+dd
-vnoremap <C-x> "+d
-"map <C-v> "+gP
-
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-nnoremap <Right> :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-nnoremap <Left> :bprev<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" Automatically add a closing parentheses/brace when typing the opening 
-inoremap ( ()<Esc>i
-inoremap { {}<Esc>i
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Devicon config
-if has_key(plugs, "vim-devicons") && has_key(plugs, "denite.nvim")
-    let g:webdevicons_enable_denite = 1
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Hexokinase settings since a seperate file doesn't work
-if has_key(plugs, "vim-hexokinase")
-    let g:Hexokinase_ftAutoload = ['*']
-    let g:Hexokinase_highlighters = ['backgroundfull']
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-" These lightline settings can't be moved...
-if has_key(plugs, "lightline.vim")
-    let g:lightline#bufferline#unnamed = '[No Name]'
-    let g:lightline#bufferline#show_number=2
-    let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
-    let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
-endif
-
-augroup rasi_css
-    " set rasi filetypes to css
-    autocmd BufRead,BufNewFile /*.rasi setf css
-augroup end
