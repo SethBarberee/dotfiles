@@ -1,7 +1,5 @@
 #! /bin/bash
 
-$HOME/.cache/wal/colors.sh
-
 # TODO test if swayidle and swaylock exits
 
 swayidle -w \

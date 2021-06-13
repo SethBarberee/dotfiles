@@ -14,6 +14,11 @@
 include "$HOME/.cache/wal/colors-sway"
 
 hide_edge_borders smart
+# Focus urgent windows
+focus_on_window_activation focus
+
+gaps inner 5
+smart_gaps on
 
 ### Variables
 #
@@ -28,13 +33,22 @@ set $right l
 set $term kitty
 # Your preferred application launcher
 set $menu dmenu_run
-set $menu2 rofi -show run
+set $menu2 "rofi -combi-modi window,run,drun -show combi -modi combi"
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 output * bg $wallpaper fill
 output eDP-1 scale 1.1
+
+# Set up dual Viotek freesync monitors (2560 x 1440 @ 144 Hz)
+output "Unknown GNV32DB-DP 0x00000000" adaptive_sync on
+output DP-1 pos 0 0
+output DP-3 pos 2560 0
+output DP-3 mode 2560x1440@144Hz
+output DP-1 mode 2560x1440@144Hz
+
+
 #
 # Example configuration:
 #
@@ -248,9 +262,9 @@ bar {
 }
 
 # Personal hotkeys
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
-bindsym --locked XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle 
+bindsym --locked XF86AudioRaiseVolume exec pamixer --increase 10
+bindsym --locked XF86AudioLowerVolume exec pamixer --decrease 10
+bindsym --locked XF86AudioMute exec pamixer -t
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioNext exec playerctl next
@@ -276,5 +290,11 @@ exec mako --background-color=$color1 --border-color=$color1 --text-color=#ffffff
 
 ##### Colors
 client.focused $color1 $color1 $foreground #2e9ef4 $color1
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+exec udiskie -a --appindicator
 
 #include /etc/sway/config.d/*
