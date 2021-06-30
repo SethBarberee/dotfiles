@@ -21,6 +21,44 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 " Remove date from buffer list
 call denite#custom#var('buffer', 'date_format', '')
 
+" For ripgrep
+" Note: Checks if we have it and sets it
+if executable("rg")
+    call denite#custom#var('file/rec', 'command',
+            \ ['rg', '--files', '--glob', '!.git', '--color', 'never'])
+    call denite#custom#var('grep', {
+                \ 'command': ['rg'],
+                \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
+                \ 'recursive_opts': [],
+                \ 'pattern_opt': ['--regexp'],
+                \ 'separator': ['--'],
+                \ 'final_opts': [],
+                \ })
+endif
+
+" Add custom menus
+let s:menus = {}
+
+let s:menus.nvim = {
+            \ 'description': 'Edit NVIM config'
+            \ }
+let s:menus.nvim.file_candidates = [
+            \ ['init', '~/.config/nvim/init.vim'],
+            \ ['plugins', '~/.config/nvim/plugins.vim'],
+            \ ['mappings', '~/.config/nvim/mappings.vim'],
+            \ ]
+
+
+"let s:menus.my_commands = {
+"            \ 'description': 'Example commands'
+"            \ }
+"let s:menus.my_commands.command_candidates = [
+"            \ ['Open nvim menu', 'Denite menu:nvim'],
+"            \ ]
+
+call denite#custom#var('menu', 'menus', s:menus)
+
+
 " Custom function to see if we have webicons or not
 function! WebIconTest()
     try
@@ -39,6 +77,8 @@ endif
 
 nnoremap <space>s :Denite file <cr>
 nnoremap <space>l :Denite line <cr>
+nnoremap <space>m :Denite menu <cr>
+nnoremap <space>g :Denite grep <cr>
 
 autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort

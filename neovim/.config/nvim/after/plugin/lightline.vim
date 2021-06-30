@@ -40,6 +40,10 @@ let g:lightline = {
     \ }
 
 fun! LightlineTag() abort
+    let fname = expand('%:t')
+    if &filetype == 'netrw'
+        return ''
+    endif
     return get(b:, 'vista_nearest_method_or_function', '')
 endf
 
