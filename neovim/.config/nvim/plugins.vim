@@ -2,7 +2,9 @@
 " Vim Plug Settings
 " Check if VimPlug exists. If not, download it
 
+" NOTE:  Defaults to ~/.config/nvim/autoload/plug.vim on Linux
 let plugpath = expand('<sfile>:p:h'). '/autoload/plug.vim'
+
 if !filereadable(plugpath)
     if executable('curl')
         let plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -32,6 +34,8 @@ endif
     Plug 'mengelbrecht/lightline-bufferline'
     Plug 'thaerkh/vim-indentguides'
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
+    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+    Plug 'liuchengxu/vim-which-key'
 
     " Tags
     Plug 'ludovicchabant/vim-gutentags' "tag management
@@ -56,8 +60,13 @@ if has('nvim')
     Plug 'Shougo/defx.nvim'
     " Deoplete and sources
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'neovim/nvim-lspconfig'
+
+    " Enable LSP plugins
+    if has('nvim-0.5')
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'deoplete-plugins/deoplete-lsp'
+    end
 else
     " Allow Denite/Deoplete to run on vim
     Plug 'Shougo/denite.nvim'
@@ -76,7 +85,6 @@ end
     Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
     Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
     Plug 'deoplete-plugins/deoplete-tag'
-    Plug 'deoplete-plugins/deoplete-lsp'
     Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neco-vim', {'for': 'vim'}
 

@@ -1,11 +1,13 @@
 " Mappings
 
-let mapleader = ','  " Change leader to comma which is easier to reach
+let mapleader = "\<Space>"  " Change leader to space which is easier to reach
+let maplocalleader = ','  " Change localleader to ,
 
 " No need for ex mode
 nnoremap Q <nop>
 " recording macros is not my thing
 map q <Nop>
+
 
 " Use System clipboard
 noremap yy "+yy
@@ -23,16 +25,10 @@ vnoremap <C-x> "+d
 nmap <leader>T :enew<cr>
 
 " Move to the next buffer
-nmap <leader>l :bnext<CR>
 nnoremap <Right> :bnext<CR>
 
 " Move to the previous buffer
-nmap <leader>h :bprevious<CR>
 nnoremap <Left> :bprev<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>

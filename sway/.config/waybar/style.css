@@ -33,7 +33,7 @@ window#waybar {
   color: #c5c8c6;
 }
 
-#memory, #cpu, #temperature, #idle_inhibitor {
+#memory, #cpu, #temperature, #idle_inhibitor, #backlight, #battery {
   margin: 3px 0px 3px 3px;
   padding: 5px;
   color: #FFF;

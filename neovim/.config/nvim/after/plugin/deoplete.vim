@@ -1,5 +1,9 @@
 " Deoplete Settings
 
+if !exists('g:loaded_deoplete')
+    finish
+endif
+
 call deoplete#custom#option('min_patern_length', 1)
 
 " maximum candidate window length
@@ -7,7 +11,7 @@ call deoplete#custom#option('min_patern_length', 1)
 "call deoplete#custom#source('_', 'max_menu_width', 80)
 
 call deoplete#custom#option('sources', {
-            \ '_': ['ultisnips', 'tag'],
+            \ '_': ['ultisnips', 'tag', 'buffer'],
             \ 'cpp': ['ultisnips', 'tag', 'clang, buffer'],
             \ 'python': ['ultisnips', 'tag', 'jedi, buffer'],
             \ 'disabled_syntaxes': ['Comment', 'String']

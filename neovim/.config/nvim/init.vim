@@ -15,6 +15,7 @@ set ignorecase
 set smartcase
 set hlsearch	       " switch on highlighting the last used search pattern
 set noshowmode         " get rid of the -- INSERT -- at the bottom
+set timeoutlen=300     " don't wait as long for timeout (mainly for which-key)
 
 """""""""""""""""""
 " Indent Settings "
@@ -97,7 +98,6 @@ if !exists(':DiffOrig')
     command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
-
 
 " Load plugins and mappings
 exec "source "  . g:vimpath . "/plugins.vim"
@@ -182,6 +182,19 @@ let g:gutentags_ctags_exclude = [
       \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       \ ]
 
+let g:gutentags_cache_dir = expand('~/cache/vim/ctags/')
+
+" a -> acccess or export of class members
+" i -> inheritance information
+" l -> language of input file containing tag
+" m -> implementation information
+" n -> line number of tag definition
+" S -> Signature of routine (prototype or parameter list)
+
+let g:gutentags_ctags_extra_args = [
+    \ '--tag-relative=yes',
+    \ '--fields=+ailmnS',
+    \ ]
 
 " Disable LSP for now
 "lua require('lspconfig').ccls.setup{...}
@@ -189,9 +202,12 @@ let g:gutentags_ctags_exclude = [
 " Enable Treesitter for C/C++ only
 lua  <<EOF
 require('nvim-treesitter.configs').setup {
-  ensure_installed = "c", "cpp",
+  ensure_installed = "c", "cpp", "python",
   highlight = {
     enable = true,              -- false will disable the whole extension
+  },
+  indent = {
+    enable = true,
   },
 }
 EOF

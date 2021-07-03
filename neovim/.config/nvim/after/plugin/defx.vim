@@ -1,4 +1,4 @@
-if !exists(':Defx')
+if !exists('g:loaded_defx')
     finish
 endif
 

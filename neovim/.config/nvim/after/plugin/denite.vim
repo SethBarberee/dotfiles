@@ -1,4 +1,4 @@
-if !exists(':Denite')
+if !exists('g:loaded_denite')
     finish
 endif
 
@@ -34,6 +34,17 @@ if executable("rg")
                 \ 'separator': ['--'],
                 \ 'final_opts': [],
                 \ })
+else
+    " Sane default for normal denite grep
+    " Filter out build dirs
+    call denite#custom#var('grep', {
+                \ 'command': ['grep'],
+                \ 'default_opts': ['-inH'],
+                \ 'recursive_opts': ['-r', '--exclude-dir=build'],
+                \ 'pattern_opt': ['-e'],
+                \ 'separator': ['--'],
+                \ 'final_opts': [],
+                \ })
 endif
 
 " Add custom menus
@@ -42,10 +53,11 @@ let s:menus = {}
 let s:menus.nvim = {
             \ 'description': 'Edit NVIM config'
             \ }
+
 let s:menus.nvim.file_candidates = [
-            \ ['init', '~/.config/nvim/init.vim'],
-            \ ['plugins', '~/.config/nvim/plugins.vim'],
-            \ ['mappings', '~/.config/nvim/mappings.vim'],
+            \ ['init', g:vimpath . '/init.vim'],
+            \ ['plugins', g:vimpath . '/plugins.vim'],
+            \ ['mappings',g:vimpath . '/mappings.vim'],
             \ ]
 
 
@@ -75,10 +87,10 @@ if(WebIconTest())
     call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
 endif
 
-nnoremap <space>s :Denite file <cr>
-nnoremap <space>l :Denite line <cr>
-nnoremap <space>m :Denite menu <cr>
-nnoremap <space>g :Denite grep <cr>
+nnoremap <Leader>ds :Denite file <cr>
+nnoremap <Leader>dl :Denite line <cr>
+nnoremap <Leader>dm :Denite menu <cr>
+nnoremap <Leader>dg :Denite grep <cr>
 
 autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
