@@ -64,6 +64,7 @@ if has('nvim')
     " Enable LSP plugins
     if has('nvim-0.5')
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'nvim-treesitter/playground'
         Plug 'neovim/nvim-lspconfig'
         Plug 'deoplete-plugins/deoplete-lsp'
     end
@@ -112,3 +113,24 @@ if has_key(plugs, "lightline.vim")
     let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
 endif
 
+
+" Disable LSP for now
+"lua require('lspconfig').ccls.setup{...}
+
+
+" Custom messages to install both for setup
+if has_key(plugs, "nvim-treesitter") && !has_key(plugs, "playground")
+    echoerr "ERR: Please install nvim-treesitter/playground"
+endif
+
+if !has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
+    echoerr "ERR: Please install nvim-treesitter/nvim-treesitter"
+endif
+
+" Enable Treesitter
+if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
+    " Load my treesitter config stuff
+    "set foldmethod=expr
+    "set foldexpr=nvim_treesitter#foldexpr()
+    lua require("treesitter")
+endif

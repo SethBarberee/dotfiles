@@ -1,4 +1,4 @@
-if &filetype !=# 'c' || v:version < 700
+if &filetype !=# 'cpp' || v:version < 700
   finish
 endif
 

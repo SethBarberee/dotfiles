@@ -33,7 +33,7 @@ set encoding=UTF-8
 set laststatus=2
 set showtabline=2
 set backspace=indent,eol,start
-syntax on               " turn on syntax
+syntax on
 set clipboard+=unnamedplus " set clipboard
 set splitbelow
 set splitright
@@ -196,18 +196,3 @@ let g:gutentags_ctags_extra_args = [
     \ '--fields=+ailmnS',
     \ ]
 
-" Disable LSP for now
-"lua require('lspconfig').ccls.setup{...}
-
-" Enable Treesitter for C/C++ only
-lua  <<EOF
-require('nvim-treesitter.configs').setup {
-  ensure_installed = "c", "cpp", "python",
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-  indent = {
-    enable = true,
-  },
-}
-EOF
