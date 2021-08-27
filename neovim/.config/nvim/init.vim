@@ -168,6 +168,7 @@ let g:gutentags_ctags_exclude = [
       \ '*.tmp',
       \ '*.csproj.user',
       \ '*.cache',
+      \ '*.ccls-cache',
       \ '*.pdb',
       \ 'tags*',
       \ 'cscope.*',
@@ -182,7 +183,7 @@ let g:gutentags_ctags_exclude = [
       \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       \ ]
 
-let g:gutentags_cache_dir = expand('~/cache/vim/ctags/')
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 
 " a -> acccess or export of class members
 " i -> inheritance information
@@ -196,3 +197,5 @@ let g:gutentags_ctags_extra_args = [
     \ '--fields=+ailmnS',
     \ ]
 
+
+autocmd BufNewFile,BufRead *.inc set ft=asm

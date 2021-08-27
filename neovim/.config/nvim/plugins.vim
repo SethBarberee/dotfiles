@@ -115,7 +115,7 @@ endif
 
 
 " Disable LSP for now
-"lua require('lspconfig').ccls.setup{...}
+lua require('lspconfig').ccls.setup{...}
 
 
 " Custom messages to install both for setup
