@@ -30,9 +30,6 @@ nnoremap <Right> :bnext<CR>
 " Move to the previous buffer
 nnoremap <Left> :bprev<CR>
 
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
 " https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
 function! SynStack()
   if !exists("*synstack")
@@ -40,22 +37,3 @@ function! SynStack()
   endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-" Use the treesitter impl if we have it
-if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
-    nnoremap <Leader>hg :TSHighlightCapturesUnderCursor<CR>
-else
-    nnoremap <Leader>hg :call SynStack()<CR>
-endif
-
-if has_key(plugs, "nvim-lspconfig")
-    nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
-    nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-    nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-endif
