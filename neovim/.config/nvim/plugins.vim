@@ -37,6 +37,9 @@ endif
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
     Plug 'liuchengxu/vim-which-key'
 
+    " Utils
+    Plug 'airblade/vim-rooter' " auto cd to base dir of project
+
     " Tags
     Plug 'ludovicchabant/vim-gutentags' "tag management
     Plug 'liuchengxu/vista.vim'
@@ -86,6 +89,7 @@ end
     Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
     Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
     Plug 'deoplete-plugins/deoplete-tag'
+    Plug 'deathlyfrantic/deoplete-spell' " spelling check source
     Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neco-vim', {'for': 'vim'}
 

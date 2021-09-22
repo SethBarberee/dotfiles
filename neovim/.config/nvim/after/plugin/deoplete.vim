@@ -12,6 +12,7 @@ call deoplete#custom#option('min_patern_length', 1)
 
 call deoplete#custom#option('sources', {
             \ '_': ['ultisnips', 'tag', 'buffer'],
+            \ 'markdown': ['ultisnips', 'spell', 'buffer'],
             \ 'cpp': ['ultisnips', 'tag', 'clang, buffer'],
             \ 'python': ['ultisnips', 'tag', 'jedi, buffer'],
             \ 'disabled_syntaxes': ['Comment', 'String']

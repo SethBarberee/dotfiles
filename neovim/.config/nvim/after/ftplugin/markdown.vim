@@ -13,7 +13,7 @@ if has('spell')
 
   " Spellcheck documents we're actually editing (not just viewing)
   if &modifiable && !&readonly
-    setlocal spell
+    setlocal spell spelllang=en_us
     let b:undo_ftplugin .= '|setlocal spell<'
   endif
 
