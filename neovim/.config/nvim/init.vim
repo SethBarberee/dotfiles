@@ -34,6 +34,7 @@ set laststatus=2
 set showtabline=2
 set backspace=indent,eol,start
 syntax on
+set re=0
 set clipboard+=unnamedplus " set clipboard
 set splitbelow
 set splitright

@@ -118,8 +118,8 @@ if has_key(plugs, "lightline.vim")
 endif
 
 
-" Disable LSP for now
-lua require('lspconfig').ccls.setup{...}
+" Set it to clangd for now..
+lua require('lspconfig').clangd.setup{...}
 
 
 " Custom messages to install both for setup
