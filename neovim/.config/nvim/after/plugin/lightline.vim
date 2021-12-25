@@ -1,3 +1,7 @@
+if !exists('g:loaded_lightline')
+    finish
+endif
+
 " Lightline
 
 

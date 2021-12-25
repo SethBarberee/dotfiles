@@ -36,6 +36,7 @@ if has_key(plugs, "nvim-lspconfig")
       \ 'name' : '+lsp' ,
       \ 'D'    : ['v:lua.vim.lsp.buf.declaration()',     'lsp-declaration'],
       \ 'd'    : ['v:lua.vim.lsp.buf.definition()',      'lsp-definition'],
+      \ 'f'    : ['v:lua.vim.lsp.buf.formatting()',      'lsp-formatting'],
       \ 'h'    : ['v:lua.vim.lsp.buf.hover()',           'lsp-hover'],
       \ 'i'    : ['v:lua.vim.lsp.buf.implementation()',  'lsp-implemenation'],
       \ '<c-k>': ['v:lua.vim.lsp.buf.signature_help()',  'lsp-sighelp'],
