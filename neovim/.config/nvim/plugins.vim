@@ -58,30 +58,24 @@ endif
     " Markdown Rendering
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
 
-if has('nvim')
+    " Denite
     Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/defx.nvim'
+
+if has('nvim')
     " Deoplete and sources
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 
-    " Enable LSP plugins
-    if has('nvim-0.5')
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-        Plug 'nvim-treesitter/playground'
-        Plug 'neovim/nvim-lspconfig'
-        Plug 'deoplete-plugins/deoplete-lsp'
-    end
+    " Enable LSP/Treesitter plugins
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'deoplete-plugins/deoplete-lsp'
 else
     " Allow Denite/Deoplete to run on vim
-    Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/defx.nvim'
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
 end
-    " Defx addons
-    Plug 'kristijanhusak/defx-icons'
-    Plug 'kristijanhusak/defx-git'
 
     " Deoplete addons
     Plug 'Shougo/neoinclude.vim' " completion for include files
@@ -117,10 +111,10 @@ if has_key(plugs, "lightline.vim")
     let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
 endif
 
-
 " Set it to clangd for now..
-lua require('lspconfig').clangd.setup{...}
-
+if has_key(plugs, "nvim-lspconfig")
+    lua require('lspconfig').clangd.setup{...}
+endif
 
 " Custom messages to install both for setup
 if has_key(plugs, "nvim-treesitter") && !has_key(plugs, "playground")
