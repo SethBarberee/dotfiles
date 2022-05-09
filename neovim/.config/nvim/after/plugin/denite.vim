@@ -22,7 +22,7 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 call denite#custom#var('buffer', 'date_format', '')
 
 " For ripgrep
-" Note: Checks if we have it and sets it
+" NOTE: Checks if we have it and sets it
 if executable("rg")
     call denite#custom#var('file/rec', 'command',
             \ ['rg', '--files', '--glob', '!.git', '--color', 'never'])
