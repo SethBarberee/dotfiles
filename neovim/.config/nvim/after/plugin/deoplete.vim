@@ -11,10 +11,10 @@ call deoplete#custom#option('min_patern_length', 1)
 "call deoplete#custom#source('_', 'max_menu_width', 80)
 
 call deoplete#custom#option('sources', {
-            \ '_': ['ultisnips', 'tag', 'buffer'],
-            \ 'markdown': ['ultisnips', 'spell', 'buffer'],
-            \ 'cpp': ['ultisnips', 'tag', 'clang, buffer'],
-            \ 'python': ['ultisnips', 'tag', 'jedi, buffer'],
+            \ '_': ['ultisnips', 'tag', 'lsp'],
+            \ 'markdown': ['ultisnips', 'spell'],
+            \ 'cpp': ['ultisnips', 'tag', 'clang', 'lsp'],
+            \ 'python': ['ultisnips', 'tag', 'jedi','lsp'],
             \ 'disabled_syntaxes': ['Comment', 'String']
             \})
 
@@ -34,6 +34,9 @@ let g:deoplete#sources#rust#rust_source_path= '/usr/lib/rustlib/src/rust/src'
 
 " Jedi Deoplete
 let g:deoplete#sources#jedi#show_docstring = 1
+
+" LSP Deoplete
+let g:deoplete#lsp#use_icons_for_candidates = v:true
 
 " Snippets
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])

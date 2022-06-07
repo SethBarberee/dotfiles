@@ -29,6 +29,7 @@ endif
 
     " Looks/UI
     Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
+
     Plug 'itchyny/lightline.vim'
     Plug 'edkolev/tmuxline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
@@ -36,6 +37,8 @@ endif
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
     Plug 'liuchengxu/vim-which-key'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 
     " Utils
     Plug 'airblade/vim-rooter' " auto cd to base dir of project
@@ -51,9 +54,8 @@ endif
     " Snippets
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+
     Plug 'sgur/vim-editorconfig' " to honor editorconfig
-    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
-    Plug 'ryanoasis/vim-devicons'
 
     " Markdown Rendering
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
@@ -95,20 +97,22 @@ if has_key(plugs, "vim-devicons") && has_key(plugs, "denite.nvim")
     let g:webdevicons_enable_denite = 1
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " Hexokinase settings since a seperate file doesn't work
 if has_key(plugs, "vim-hexokinase")
     let g:Hexokinase_ftAutoload = ['*']
     let g:Hexokinase_highlighters = ['backgroundfull']
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
 " These lightline settings can't be moved...
 if has_key(plugs, "lightline.vim")
     let g:lightline#bufferline#unnamed = '[No Name]'
     let g:lightline#bufferline#show_number=2
     let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
     let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+endif
+
+if has_key(plugs, "vim-clap")
+    let g:clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
 endif
 
 " Set it to clangd for now..
@@ -132,3 +136,4 @@ if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
     "set foldexpr=nvim_treesitter#foldexpr()
     lua require("treesitter")
 endif
+

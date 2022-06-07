@@ -5,8 +5,6 @@ let maplocalleader = ','  " Change localleader to ,
 
 " No need for ex mode
 nnoremap Q <nop>
-" recording macros is not my thing
-map q <Nop>
 
 
 " Use System clipboard

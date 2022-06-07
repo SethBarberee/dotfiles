@@ -4,7 +4,7 @@ require('nvim-treesitter.configs').setup {
     enable = true,              -- false will disable the whole extension
     additional_vim_regex_highlighting = "vim",
     disable = function(lang, bufnr) -- Disable in large C buffers (found that 2000 lines is a good limit)
-        return lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 5000
+        return lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 6000
     end,
   },
   indent = {

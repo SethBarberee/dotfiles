@@ -304,7 +304,7 @@ function challenger_deeper.colorscheme()
       end
       vim.o.background = 'dark'
       vim.o.termguicolors = true
-      vim.g.colors_name = 'challenger_deeper'
+      vim.g.colors_name = 'challenger_deep'
       local syntax = challenger_deeper.load_syntax()
       for group,colors in pairs(syntax) do
         challenger_deeper.highlight(group,colors)

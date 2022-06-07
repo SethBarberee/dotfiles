@@ -19,6 +19,12 @@ let g:which_key_map['b'] = {
       \ 'q' : ['bd'     , 'quit-buffer'] ,
       \ }
 
+let g:which_key_map['c'] = {
+      \ 'name' : '+clap' ,
+      \ 'l' : [':Clap'     , 'main-menu'],
+      \ 'h' : [':Clap help_tags' , 'help-tags'],
+      \ }
+
 " Create key in dictionary so we can set g key for highlight groups
 let g:which_key_map['h'] = {}
 
@@ -41,7 +47,7 @@ if has_key(plugs, "nvim-lspconfig")
       \ 'h'    : ['v:lua.vim.lsp.buf.hover()',           'lsp-hover'],
       \ 'i'    : ['v:lua.vim.lsp.buf.implementation()',  'lsp-implemenation'],
       \ '<c-k>': ['v:lua.vim.lsp.buf.signature_help()',  'lsp-sighelp'],
-      \ 't'   : ['v:lua.vim.lsp.buf.type_definition()', 'lsp-typedef'],
+      \ 't'    : ['v:lua.vim.lsp.buf.type_definition()', 'lsp-typedef'],
       \ 'r'    : ['v:lua.vim.lsp.buf.references()',      'lsp-references'],
       \ 'R'    : ['v:lua.vim.lsp.buf.rename()',      'lsp-rename'],
       \ '0'    : ['v:lua.vim.lsp.buf.document_symbol()', 'lsp-docsymbol'],

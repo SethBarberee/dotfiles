@@ -113,7 +113,8 @@ if has('termguicolors')
 endif
 
 " Set colorscheme
-colorscheme challenger_deep
+" colorscheme challenger_deep
+lua require("challenger_deep")
 if g:colors_name ==# 'challenger_deep'
     " These overrides were taken from https://github.com/skbolton/titan/blob/master/states/nvim/nvim/plugin/themes.vim
     hi DiffAdd guibg=#62d196 guifg=black
