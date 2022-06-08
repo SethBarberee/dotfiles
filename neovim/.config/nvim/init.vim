@@ -43,7 +43,7 @@ set shortmess=FaWc " see :help shortmess
 
 """"""""""""""""""""""
 " Fold Settings "
-set foldmethod=syntax "syntax folds
+set foldmethod=syntax " we use treesitter folds in certain filetypes but default to syntax for now
 set foldcolumn=1 " define 1 col at window left to indicate folding
 set foldlevelstart=99 "start with all folds opened
 """""""""""""""""""""""

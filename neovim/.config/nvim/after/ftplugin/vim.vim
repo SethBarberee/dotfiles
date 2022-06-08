@@ -1,4 +1,4 @@
-if &filetype !=# 'python' || v:version < 700
+if &filetype !=# 'vim'
   finish
 endif
 
