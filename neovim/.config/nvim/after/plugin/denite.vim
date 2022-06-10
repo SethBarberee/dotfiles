@@ -56,8 +56,9 @@ let s:menus.nvim = {
 
 let s:menus.nvim.file_candidates = [
             \ ['init', g:vimpath . '/init.vim'],
-            \ ['plugins', g:vimpath . '/plugins.vim'],
             \ ['mappings',g:vimpath . '/mappings.vim'],
+            \ ['plugins', g:vimpath . '/plugins.vim'],
+            \ ['statusline',g:vimpath . '/after/plugin/lightline.vim'],
             \ ]
 
 

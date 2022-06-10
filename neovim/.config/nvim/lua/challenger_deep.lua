@@ -208,6 +208,9 @@ function challenger_deeper.load_syntax()
 
     function challenger_deeper.load_plugin_syntax()
       local plugin_syntax = {
+        TreesitterContext = {bg=challenger_deeper.bg_dark};
+        --TreesitterContextLineNumber = {bg=challenger_deeper.bg_dark};
+
         --TSFunction = {fg=challenger_deeper.cyan};
         --TSMethod = {fg=challenger_deeper.cyan};
         --TSKeywordFunction = {fg=challenger_deeper.red};
@@ -215,6 +218,7 @@ function challenger_deeper.load_syntax()
         --TSType = {fg=challenger_deeper.teal};
         --TSVariable = {fg=challenger_deeper.blue};
         --TSPunctBracket = {fg=challenger_deeper.bracket};
+
         --vimCommentTitle = {fg=challenger_deeper.grey,gui='bold'};
         --vimLet = {fg=challenger_deeper.orange};
         --vimVar = {fg=challenger_deeper.cyan};
@@ -224,6 +228,7 @@ function challenger_deeper.load_syntax()
         --vimNotFunc = {fg=challenger_deeper.violet,gui='bold'};
         --vimUserFunc = {fg=challenger_deeper.yellow,gui='bold'};
         --vimFuncName= {fg=challenger_deeper.yellow,gui='bold'};
+
         --diffAdded = {fg = challenger_deeper.dark_green};
         --diffRemoved = {fg =challenger_deeper.red};
         --diffChanged = {fg = challenger_deeper.blue};
@@ -232,11 +237,13 @@ function challenger_deeper.load_syntax()
         --diffFile    = {fg = challenger_deeper.aqua};
         --diffLine    = {fg = challenger_deeper.grey};
         --diffIndexLine = {fg = challenger_deeper.violet};
+
         DiffAdd = {fg=challenger_deeper.green};
         DiffDelete = {fg=challenger_deeper.red};
         DiffChange = {fg=challenger_deeper.dark_yellow};
         DiffText = {fg=challenger_deeper.dark_blue};
         SignColumn = {fg=challenger_deeper.green};
+
         --gitcommitSummary = {fg = challenger_deeper.red};
         --gitcommitUntracked = {fg = challenger_deeper.grey};
         --gitcommitDiscarded = {fg = challenger_deeper.grey};
@@ -245,6 +252,7 @@ function challenger_deeper.load_syntax()
         --gitcommitOnBranch = { fg=challenger_deeper.grey};
         --gitcommitArrow  = {fg = challenger_deeper.grey};
         --gitcommitFile  = {fg = challenger_deeper.dark_green};
+
         --VistaBracket = {fg=challenger_deeper.grey};
         --VistaChildrenNr = {fg=challenger_deeper.orange};
         --VistaKind = {fg=challenger_deeper.purpl};
@@ -255,10 +263,12 @@ function challenger_deeper.load_syntax()
         --VistaColon = {fg=challenger_deeper.magenta};
         --VistaIcon = {fg=challenger_deeper.yellow};
         --VistaLineNr = {fg=challenger_deeper.fg};
+
         GitGutterAdd = {fg=challenger_deeper.green, bg=challenger_deeper.bg_subtle};
         GitGutterDelete = {fg=challenger_deeper.red, bg=challenger_deeper.bg_subtle};
         GitGutterChange = {fg=challenger_deeper.yellow, bg=challenger_deeper.bg_subtle};
         GitGutterChangeDelete = {fg=challenger_deeper.red, bg=challenger_deeper.bg_subtle};
+
         --LspDiagnosticsSignError = {fg=challenger_deeper.red};
         --LspDiagnosticsSignWarning = {fg=challenger_deeper.yellow};
         --LspDiagnosticsSignInformation = {fg=challenger_deeper.blue};
@@ -271,6 +281,7 @@ function challenger_deeper.load_syntax()
         --LspDiagnosticsUnderlineWarning = {gui="undercurl",sp=challenger_deeper.yellow};
         --LspDiagnosticsUnderlineInformation = {gui="undercurl",sp=challenger_deeper.blue};
         --LspDiagnosticsUnderlineHint = {gui="undercurl",sp=challenger_deeper.cyan};
+
         --CursorWord0 = {bg=challenger_deeper.currsor_bg};
         --CursorWord1 = {bg=challenger_deeper.currsor_bg};
         --NvimTreeFolderName = {fg=challenger_deeper.blue};

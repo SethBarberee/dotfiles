@@ -43,20 +43,20 @@ if has_key(plugs, "nvim-lspconfig")
       \ 'c'    : ['v:lua.vim.lsp.buf.code_action()',     'lsp-code_action'],
       \ 'D'    : ['v:lua.vim.lsp.buf.declaration()',     'lsp-declaration'],
       \ 'd'    : ['v:lua.vim.lsp.buf.definition()',      'lsp-definition'],
+      \ 'dj'    : ['v:lua.vim.diagnostic.goto_next()',   'lsp-diag-next'],
+      \ 'dk'    : ['v:lua.vim.diagnostic.goto_prev()',   'lsp-diag-prev'],
       \ 'f'    : ['v:lua.vim.lsp.buf.formatting()',      'lsp-formatting'],
       \ 'h'    : ['v:lua.vim.lsp.buf.hover()',           'lsp-hover'],
       \ 'i'    : ['v:lua.vim.lsp.buf.implementation()',  'lsp-implemenation'],
       \ '<c-k>': ['v:lua.vim.lsp.buf.signature_help()',  'lsp-sighelp'],
       \ 't'    : ['v:lua.vim.lsp.buf.type_definition()', 'lsp-typedef'],
       \ 'r'    : ['v:lua.vim.lsp.buf.references()',      'lsp-references'],
-      \ 'R'    : ['v:lua.vim.lsp.buf.rename()',      'lsp-rename'],
+      \ 'R'    : ['v:lua.vim.lsp.buf.rename()',          'lsp-rename'],
       \ '0'    : ['v:lua.vim.lsp.buf.document_symbol()', 'lsp-docsymbol'],
       \ 'W'    : ['v:lua.vim.lsp.buf.workspace_symbol()','lsp-workspacesymbol'],
       \ }
 
 endif
-
-
 
 let g:which_key_map.d = { 'name' : '+denite'}
 

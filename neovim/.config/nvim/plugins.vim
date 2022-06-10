@@ -70,6 +70,9 @@ if has('nvim')
     " Enable LSP/Treesitter plugins
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'SmiteshP/nvim-gps'
     Plug 'neovim/nvim-lspconfig'
     Plug 'deoplete-plugins/deoplete-lsp'
 else
@@ -118,6 +121,7 @@ endif
 " Set it to clangd for now..
 if has_key(plugs, "nvim-lspconfig")
     lua require('lspconfig').clangd.setup{...}
+    lua require('lspconfig').vimls.setup{...}
 endif
 
 " Custom messages to install both for setup

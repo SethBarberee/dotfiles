@@ -48,6 +48,17 @@ fun! LightlineTag() abort
     if &filetype == 'netrw'
         return ''
     endif
+
+    if has('nvim')
+        " Use nvim-gps to get precise location
+        " Else, we'll use vista
+        if luaeval("require'nvim-gps'.is_available()")
+            return luaeval("require'nvim-gps'.get_location()")
+        else
+            return get(b:, 'vista_nearest_method_or_function', '')
+        endif
+    endif
+
     return get(b:, 'vista_nearest_method_or_function', '')
 endf
 
