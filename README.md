@@ -8,7 +8,6 @@ Hi, here's a collection of dotfiles that I have accumulated
 ## Overview of Programs:
 | Program | Description |
 | ------- | ----------- |
-| BSPWM   | Idk why I still have this but :shrug: |
 | Sway    | This is my daily config on my Dell XPS 15 2-in-1 |
 | Tmux    | my little delve into tmux |
 | neovim  | my config for neovim with plugins |
