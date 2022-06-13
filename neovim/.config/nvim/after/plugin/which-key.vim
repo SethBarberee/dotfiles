@@ -2,14 +2,13 @@ if !exists('g:loaded_vim_which_key')
     finish
 endif
 
-let g:which_key_use_floating_win = 0
 let g:which_key_timeout = 300
 let g:which_key_fallback_to_native_key=1 " use native vim commands if key isn't used
 
-" Uncomment to get rid of statusline
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode
+" NOTE: have to use this or weird things happen when nvim-treesitter-context
+" is active..
+let g:which_key_use_floating_win = 1
+
 
 let g:which_key_map = {}
 

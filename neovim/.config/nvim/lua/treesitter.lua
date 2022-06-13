@@ -42,6 +42,26 @@ require("nvim-gps").setup()
 require("indent_blankline").setup{
     show_current_context = true,
     show_current_context_start = true,
+    context_patterns = { -- Mainly default except adding switch
+        "class",
+        "^func",
+        "method",
+        "^if",
+        "while",
+        "for",
+        "with",
+        "try",
+        "except",
+        "arguments",
+        "argument_list",
+        "object",
+        "dictionary",
+        "element",
+        "table",
+        "tuple",
+        "do_block",
+        "switch",
+    },
 }
 
 require('treesitter-context').setup{

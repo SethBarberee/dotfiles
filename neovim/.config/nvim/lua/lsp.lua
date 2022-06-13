@@ -6,7 +6,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 
 function common_lsp.on_attach(client, bufnr)
     local caps = client.server_capabilities
-      if not ok or not caps.documentSymbolProvider then
+      if not caps.documentSymbolProvider then
         return
       end
     require("nvim-navic").attach(client, bufnr)
@@ -63,7 +63,7 @@ cmp.setup({
                 nvim_lua = "[Lua]",
                 latex_symbols = "[Latex]",
                 tags = "[Tags]",
-                ultisnips = "[US]",
+                ultisnips = "[UltiSnip]",
             }),
             maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 
@@ -94,7 +94,8 @@ cmp.setup({
       { name = 'nvim_lsp' },
       { name = 'ultisnips' }, -- For ultisnips users.
       { name = 'tags'},
-    }, {
+    },
+    {
       { name = 'buffer' },
     })
   })

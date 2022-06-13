@@ -87,6 +87,8 @@ function! LightlineMode() abort
         return ''
     elseif &filetype == 'help'
         return 'HELP'
+    elseif &filetype == 'tsplayground'
+        return 'Treesitter'
     else
         return fname  ==# '__Tagbar__' ? 'Tagbar':
             \ fname ==# '__vista__' ? 'Vista':
@@ -106,7 +108,7 @@ endfunction
 
 fun! GitInfo() abort
     " Don't show GitInfo on netrw/help/denite/vista
-    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' || &filetype == 'vista'
+    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' || &filetype == 'vista' || &filetype == 'tsplayground'
         return ''
     endif
     let branch = FugitiveHead()
@@ -121,6 +123,7 @@ fun! GitInfo() abort
     endif
     return l:line
 endf
+
 
 " Get rid of RO when looking at help pages and in Vista
 function! LightlineReadonly()
