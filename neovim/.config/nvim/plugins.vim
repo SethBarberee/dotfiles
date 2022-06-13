@@ -63,37 +63,31 @@ endif
     " Denite
     Plug 'Shougo/denite.nvim'
 
-if has('nvim')
-    " Deoplete and sources
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-
     " Enable LSP/Treesitter plugins
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-context'
     Plug 'SmiteshP/nvim-gps'
+    Plug 'SmiteshP/nvim-navic'
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'deoplete-plugins/deoplete-lsp'
-else
-    " Allow Denite/Deoplete to run on vim
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-end
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+    Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+    Plug 'quangnguyen30192/cmp-nvim-tags'
+    Plug 'onsails/lspkind.nvim'
 
-    " Deoplete addons
     Plug 'Shougo/neoinclude.vim' " completion for include files
-    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-    Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-    Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
-    Plug 'deoplete-plugins/deoplete-tag'
-    Plug 'deathlyfrantic/deoplete-spell' " spelling check source
     Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neco-vim', {'for': 'vim'}
 
 call plug#end()
 
+set completeopt=menu,menuone,noselect " for nvim-cmp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Devicon config
 if has_key(plugs, "vim-devicons") && has_key(plugs, "denite.nvim")
@@ -118,10 +112,9 @@ if has_key(plugs, "vim-clap")
     let g:clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
 endif
 
-" Set it to clangd for now..
+" Enable LSP configs
 if has_key(plugs, "nvim-lspconfig")
-    lua require('lspconfig').clangd.setup{...}
-    lua require('lspconfig').vimls.setup{...}
+    lua require("lsp")
 endif
 
 " Custom messages to install both for setup
@@ -136,8 +129,6 @@ endif
 " Enable Treesitter
 if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
     " Load my treesitter config stuff
-    "set foldmethod=expr
-    "set foldexpr=nvim_treesitter#foldexpr()
     lua require("treesitter")
 endif
 

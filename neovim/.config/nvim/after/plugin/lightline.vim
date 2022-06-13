@@ -50,9 +50,11 @@ fun! LightlineTag() abort
     endif
 
     if has('nvim')
-        " Use nvim-gps to get precise location
-        " Else, we'll use vista
-        if luaeval("require'nvim-gps'.is_available()")
+        " Use the following order to figure out where we are:
+        " navic -> gps -> vista
+        if luaeval("require'nvim-navic'.is_available()")
+            return luaeval("require'nvim-navic'.get_location()")
+        elseif luaeval("require'nvim-gps'.is_available()")
             return luaeval("require'nvim-gps'.get_location()")
         else
             return get(b:, 'vista_nearest_method_or_function', '')

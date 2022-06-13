@@ -39,6 +39,11 @@ require('nvim-treesitter.configs').setup {
 
 require("nvim-gps").setup()
 
+require("indent_blankline").setup{
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
 require('treesitter-context').setup{
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.

@@ -72,7 +72,7 @@ augroup vimrcEx
 
     " Close any automatically opened scratch-buffers 
     " " once completion popup the is closed
-    autocmd CompleteDone * pclose
+    "autocmd CompleteDone * pclose
 
 augroup END
 

@@ -8,7 +8,8 @@ call deoplete#custom#option('min_patern_length', 1)
 
 " maximum candidate window length
 " TODO play with this
-"call deoplete#custom#source('_', 'max_menu_width', 80)
+call deoplete#custom#source('_', 'max_menu_width', 80)
+call deoplete#custom#source('_', 'max_abbr_width', 1000)
 
 call deoplete#custom#option('sources', {
             \ '_': ['ultisnips', 'tag', 'lsp'],
@@ -19,10 +20,10 @@ call deoplete#custom#option('sources', {
             \})
 
 " Deoplete is off initially so start it when entering insert mode
-augroup DeopleteToggle 
-    autocmd InsertEnter * call deoplete#enable()
-    autocmd InsertLeave * call deoplete#disable()
-augroup END
+"augroup DeopleteToggle 
+"    autocmd InsertEnter * call deoplete#enable()
+"    autocmd InsertLeave * call deoplete#disable()
+"augroup END
 
 " Clang Deoplete
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
