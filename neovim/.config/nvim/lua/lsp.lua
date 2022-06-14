@@ -5,14 +5,24 @@ local common_lsp = {}
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 function common_lsp.on_attach(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     local caps = client.server_capabilities
-      if not caps.documentSymbolProvider then
+    if not caps.documentSymbolProvider then
         return
-      end
+    end
     require("nvim-navic").attach(client, bufnr)
 end
 
 require('lspconfig').clangd.setup{
+    -- Stolen from TJ DeVries and his glorious dotfiles
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--suggest-missing-includes",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+    },
     on_attach = common_lsp.on_attach,
     capabilities = capabilities
 }
@@ -46,6 +56,7 @@ require('lspconfig').vimls.setup{
 
 local cmp = require'cmp'
 local lspkind = require'lspkind'
+local cmp_ultisnips_mappings = require'cmp_nvim_ultisnips.mappings'
 
 cmp.setup({
     snippet = {
@@ -85,7 +96,21 @@ cmp.setup({
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ["<Tab>"] = cmp.mapping(
+            function(fallback)
+                cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+            end,
+            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+        ),
+      ["<S-Tab>"] = cmp.mapping(
+            function(fallback)
+                cmp_ultisnips_mappings.jump_backwards(fallback)
+            end,
+            { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+        ),
     }),
+
+    -- Buffer only gets showed when no other source is available
     sources = cmp.config.sources(
     {
        { name = 'nvim_lsp_signature_help'},
@@ -93,6 +118,7 @@ cmp.setup({
     {
       { name = 'nvim_lsp' },
       { name = 'ultisnips' }, -- For ultisnips users.
+      { name = 'nvim_lua' },
       { name = 'tags'},
     },
     {

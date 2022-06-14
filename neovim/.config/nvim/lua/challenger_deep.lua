@@ -294,6 +294,10 @@ function challenger_deeper.load_plugin_syntax()
         --TelescopeSelection = {fg=challenger_deeper.yellow, bg=challenger_deeper.bg_highlight,gui= 'bold'};
         --TelescopeSelectionCaret = {fg=challenger_deeper.yellow};
         --TelescopeMultiSelection = {fg=challenger_deeper.teal};
+
+        -- nvim-cmp
+        CmpItemAbbrMatchFuzzy = { fg = challenger_deeper.dark_cyan };
+        CmpItemAbbrMatch = { fg = challenger_deeper.dark_cyan };
     }
     return plugin_syntax
 end
