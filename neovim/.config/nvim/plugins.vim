@@ -63,15 +63,19 @@ endif
     " Denite
     Plug 'Shougo/denite.nvim'
 
-    " Enable LSP/Treesitter plugins
+    " Treesitter Plugins
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-context'
     Plug 'SmiteshP/nvim-gps'
-    Plug 'SmiteshP/nvim-navic'
     Plug 'lukas-reineke/indent-blankline.nvim'
+
+    " LSP Plugins
+    Plug 'SmiteshP/nvim-navic'
     Plug 'neovim/nvim-lspconfig'
+
+    " NVIM cmp / autocomplete
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-nvim-lua'
@@ -82,9 +86,8 @@ endif
     Plug 'quangnguyen30192/cmp-nvim-tags'
     Plug 'onsails/lspkind.nvim'
 
-    Plug 'Shougo/neoinclude.vim' " completion for include files
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neco-vim', {'for': 'vim'}
+    " Lua NVIM
+    Plug 'folke/lua-dev.nvim' " some more completion stuff for nvim lua LSP
 
 call plug#end()
 
@@ -132,4 +135,3 @@ if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
     " Load my treesitter config stuff
     lua require("treesitter")
 endif
-
