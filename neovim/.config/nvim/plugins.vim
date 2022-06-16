@@ -36,7 +36,7 @@ endif
     Plug 'thaerkh/vim-indentguides'
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
     Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-    Plug 'liuchengxu/vim-which-key'
+    Plug 'folke/which-key.nvim'
     Plug 'ryanoasis/vim-devicons'
     Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 
@@ -134,4 +134,8 @@ endif
 if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
     " Load my treesitter config stuff
     lua require("treesitter")
+endif
+
+if has_key(plugs, "which-key.nvim")
+    lua require("which_key")
 endif
