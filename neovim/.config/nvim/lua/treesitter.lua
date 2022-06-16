@@ -2,7 +2,7 @@ require('nvim-treesitter.configs').setup {
     -- Make sure these are installed
     ensure_installed = "c", "cpp", "python", "vim", "comment", "query",
     highlight = {
-        enable = true,              -- false will disable the whole extension
+        enable = true, -- false will disable the whole extension
         additional_vim_regex_highlighting = "vim",
         disable = function(lang, bufnr) -- Disable in large C buffers (found that 2000 lines is a good limit)
             return lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 6000
@@ -39,7 +39,7 @@ require('nvim-treesitter.configs').setup {
 
 require("nvim-gps").setup()
 
-require("indent_blankline").setup{
+require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = true,
     context_patterns = { -- Mainly default except adding switch
@@ -64,7 +64,7 @@ require("indent_blankline").setup{
     },
 }
 
-require('treesitter-context').setup{
+require('treesitter-context').setup {
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
     patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
@@ -89,10 +89,10 @@ require('treesitter-context').setup{
         --   },
     },
     --exact_patterns = {
-        -- Example for a specific filetype with Lua patterns
-        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-        -- exactly match "impl_item" only)
-        -- rust = true,
+    -- Example for a specific filetype with Lua patterns
+    -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+    -- exactly match "impl_item" only)
+    -- rust = true,
     --},
 
     -- [!] The options below are exposed but shouldn't require your attention,

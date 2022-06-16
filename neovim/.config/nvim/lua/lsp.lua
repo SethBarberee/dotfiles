@@ -1,11 +1,10 @@
-
 local common_lsp = {}
 
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 function common_lsp.on_attach(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
+    -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     local caps = client.server_capabilities
     if not caps.documentSymbolProvider then
@@ -14,7 +13,7 @@ function common_lsp.on_attach(client, bufnr)
     require("nvim-navic").attach(client, bufnr)
 end
 
-require('lspconfig').clangd.setup{
+require('lspconfig').clangd.setup {
     -- Stolen from TJ DeVries and his glorious dotfiles
     cmd = {
         "clangd",
@@ -27,7 +26,7 @@ require('lspconfig').clangd.setup{
     capabilities = capabilities
 }
 
-require('lspconfig').pylsp.setup{
+require('lspconfig').pylsp.setup {
     on_attach = common_lsp.on_attach,
     capabilities = capabilities
 }
@@ -37,20 +36,20 @@ local lspconfig = require('lspconfig')
 lspconfig.sumneko_lua.setup(luadev)
 
 
-require('lspconfig').vimls.setup{
+require('lspconfig').vimls.setup {
     on_attach = common_lsp.on_attach,
     capabilities = capabilities
 }
 
-local cmp = require'cmp'
-local lspkind = require'lspkind'
-local cmp_ultisnips_mappings = require'cmp_nvim_ultisnips.mappings'
+local cmp = require 'cmp'
+local lspkind = require 'lspkind'
+local cmp_ultisnips_mappings = require 'cmp_nvim_ultisnips.mappings'
 
 cmp.setup({
     snippet = {
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
+        expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        end,
     },
     formatting = {
         format = lspkind.cmp_format({
@@ -75,22 +74,22 @@ cmp.setup({
         })
     },
     window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ["<Tab>"] = cmp.mapping(
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = cmp.mapping(
             function(fallback)
                 cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
             end,
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
         ),
-      ["<S-Tab>"] = cmp.mapping(
+        ["<S-Tab>"] = cmp.mapping(
             function(fallback)
                 cmp_ultisnips_mappings.jump_backwards(fallback)
             end,
@@ -100,16 +99,21 @@ cmp.setup({
 
     -- Buffer only gets showed when no other source is available
     sources = cmp.config.sources(
-    {
-       { name = 'nvim_lsp_signature_help'},
-    },
-    {
-      { name = 'nvim_lsp' },
-      { name = 'ultisnips' }, -- For ultisnips users.
-      { name = 'nvim_lua' },
-      { name = 'tags'},
-    },
-    {
-      { name = 'buffer' },
-    })
-  })
+        {
+            { name = 'nvim_lsp_signature_help' },
+        },
+        {
+            { name = 'nvim_lsp' },
+            { name = 'ultisnips' }, -- For ultisnips users.
+            { name = 'nvim_lua' },
+            { name = 'tags' },
+        },
+        {
+            { name = 'buffer' },
+        })
+})
+
+-- Disable nvim-cmp on vim-clap
+cmp.setup.filetype('clap_input', {
+    enabled = false,
+})
