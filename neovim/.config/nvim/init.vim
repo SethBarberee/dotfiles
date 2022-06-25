@@ -57,7 +57,7 @@ if has('nvim')
     let g:python3_host_prog = '/usr/bin/python3'
 endif
 
-let g:vimpath = fnamemodify(expand("$MYVIMRC"), ":p:h")
+let g:vimpath = fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
@@ -101,8 +101,9 @@ if !exists(':DiffOrig')
 endif
 
 " Load plugins and mappings
-exec "source "  . g:vimpath . "/plugins.vim"
-exec "source "  . g:vimpath . "/mappings.vim"
+exec 'source '  . g:vimpath . '/plugins.vim'
+lua require('impatient-config')
+exec 'source '  . g:vimpath . '/mappings.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme

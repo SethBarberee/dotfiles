@@ -41,6 +41,17 @@ require('lspconfig').vimls.setup {
     capabilities = capabilities
 }
 
+-- Null LS
+local null_ls = require('null-ls')
+local nls_diags = null_ls.builtins.diagnostics
+local nls_format = null_ls.builtins.formatting
+null_ls.setup({
+    sources = {
+       nls_diags.vint.with({ extra_args = {"--enable-neovim"}}), -- use vint for vim files and enable neovim syntax
+    },
+})
+
+-- NVIM cmp
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local cmp_ultisnips_mappings = require 'cmp_nvim_ultisnips.mappings'

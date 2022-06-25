@@ -270,6 +270,7 @@ function challenger_deeper.load_plugin_syntax()
         GitGutterChange = { fg = challenger_deeper.yellow, bg = challenger_deeper.bg_subtle };
         GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
 
+
         --LspDiagnosticsSignError = {fg=challenger_deeper.red};
         --LspDiagnosticsSignWarning = {fg=challenger_deeper.yellow};
         --LspDiagnosticsSignInformation = {fg=challenger_deeper.blue};
@@ -298,6 +299,15 @@ function challenger_deeper.load_plugin_syntax()
         -- nvim-cmp
         CmpItemAbbrMatchFuzzy = { fg = challenger_deeper.dark_cyan };
         CmpItemAbbrMatch = { fg = challenger_deeper.dark_cyan };
+
+        -- nvim-scrollbar
+        ScrollbarWarn = { fg = challenger_deeper.dark_yellow};
+        ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow};
+        ScrollbarError = { fg = challenger_deeper.red};
+        ScrollbarErrorHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.red};
+        ScrollbarHint = { fg = challenger_deeper.green};
+        ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green};
+        ScrollbarHandle = { bg = challenger_deeper.bg_dark};
     }
     return plugin_syntax
 end

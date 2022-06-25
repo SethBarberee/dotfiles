@@ -27,15 +27,21 @@ if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
     autocmd VimEnter * PlugInstall | q
 endif
 
+    Plug 'lewis6991/impatient.nvim'
+
     " Looks/UI
     Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
+    Plug 'lewis6991/satellite.nvim' " add Scrollbar to side of NVIM
+    Plug 'j-hui/fidget.nvim' " Lsp status notifications
+    Plug 'nvim-lua/plenary.nvim'
 
     Plug 'itchyny/lightline.vim'
     Plug 'edkolev/tmuxline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
     Plug 'thaerkh/vim-indentguides'
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
-    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+    "Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+    Plug 'nvim-telescope/telescope.nvim'
     Plug 'folke/which-key.nvim'
     Plug 'ryanoasis/vim-devicons'
     Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
@@ -74,6 +80,7 @@ endif
     " LSP Plugins
     Plug 'SmiteshP/nvim-navic'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'jose-elias-alvarez/null-ls.nvim'
 
     " NVIM cmp / autocomplete
     Plug 'hrsh7th/nvim-cmp'
@@ -94,48 +101,30 @@ call plug#end()
 set completeopt=menu,menuone,noselect " for nvim-cmp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Devicon config
-if has_key(plugs, "vim-devicons") && has_key(plugs, "denite.nvim")
+if has_key(plugs, 'vim-devicons') && has_key(plugs, 'denite.nvim')
     let g:webdevicons_enable_denite = 1
 endif
 
 " Hexokinase settings since a seperate file doesn't work
-if has_key(plugs, "vim-hexokinase")
+if has_key(plugs, 'vim-hexokinase')
     let g:Hexokinase_ftAutoload = ['*']
     let g:Hexokinase_highlighters = ['backgroundfull']
 endif
 
 " These lightline settings can't be moved...
-if has_key(plugs, "lightline.vim")
+if has_key(plugs, 'lightline.vim')
     let g:lightline#bufferline#unnamed = '[No Name]'
     let g:lightline#bufferline#show_number=2
     let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
     let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
 endif
 
-if has_key(plugs, "vim-clap")
-    let g:clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
-endif
+let g:clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
 
-" Enable LSP configs
-if has_key(plugs, "nvim-lspconfig")
-    lua require("lsp")
-endif
-
-" Custom messages to install both for setup
-if has_key(plugs, "nvim-treesitter") && !has_key(plugs, "playground")
-    echoerr "ERR: Please install nvim-treesitter/playground"
-endif
-
-if !has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
-    echoerr "ERR: Please install nvim-treesitter/nvim-treesitter"
-endif
-
-" Enable Treesitter
-if has_key(plugs, "nvim-treesitter") && has_key(plugs, "playground")
-    " Load my treesitter config stuff
-    lua require("treesitter")
-endif
-
-if has_key(plugs, "which-key.nvim")
-    lua require("which_key")
-endif
+" Load our lua plugin config files
+lua require('lsp')
+lua require("treesitter")
+lua require("which_key")
+lua require('fidget').setup()
+lua require('satellite').setup()
+lua require('telescope').setup()

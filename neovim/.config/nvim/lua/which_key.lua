@@ -12,11 +12,6 @@ wk.register({
         l = { '<cmd>ls<cr>', "list-buffers" },
         q = { '<cmd>bd<cr>', "quit-buffer" },
     },
-    c = {
-        name = "clap",
-        l = { '<cmd>Clap<cr>', 'main-menu' },
-        h = { '<cmd>Clap help_tags<cr>', 'help-tags' },
-    },
     d = {
         -- Labeling mappings from after/plugins/denite.vim
         name = "denite",
@@ -28,8 +23,11 @@ wk.register({
     g = {
         -- Labeling mappings from after/plugins/gitgutter.vim
         name = "Git",
+        d = { 'git-diff'},
         n = { 'next-git-hunk' },
         p = { 'prev-git-hunk' },
+        s = { '<cmd>Git status<cr>', 'git-status'},
+        b = { 'git-blame'},
     },
     h = {
         g = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'highlight-group' },
@@ -51,6 +49,12 @@ wk.register({
         ["0"]     = { '<cmd>lua vim.lsp.buf.document_symbol()<cr>', 'lsp-docsymbol' },
         W         = { '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>', 'lsp-workspacesymbol' },
 
+    },
+    t = {
+        name = "telescope",
+        m = { '<cmd>Telescope<cr>', 'main-menu' },
+        f = { '<cmd>Telescope find_files<cr>', 'main-menu' },
+        h = { '<cmd>Telescope help_tags<cr>', 'help-tags' },
     },
 }, { prefix = "<leader>" }
 )

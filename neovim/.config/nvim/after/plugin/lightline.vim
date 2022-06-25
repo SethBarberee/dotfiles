@@ -52,7 +52,10 @@ fun! LightlineTag() abort
     if has('nvim')
         " Use the following order to figure out where we are:
         " navic -> gps -> vista
-        if luaeval("require'nvim-navic'.is_available()")
+        "
+        " NOTE: python lsp still doesn't support documentSymbol so have this
+        " check to force nvim-gps
+        if luaeval("require'nvim-navic'.is_available()") && &filetype != 'python'
             return luaeval("require'nvim-navic'.get_location()")
         elseif luaeval("require'nvim-gps'.is_available()")
             return luaeval("require'nvim-gps'.get_location()")
