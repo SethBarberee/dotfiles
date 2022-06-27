@@ -45,7 +45,7 @@ let g:lightline = {
 
 fun! LightlineTag() abort
     let fname = expand('%:t')
-    if &filetype == 'netrw'
+    if &filetype ==# 'netrw'
         return ''
     endif
 
@@ -55,10 +55,10 @@ fun! LightlineTag() abort
         "
         " NOTE: python lsp still doesn't support documentSymbol so have this
         " check to force nvim-gps
-        if luaeval("require'nvim-navic'.is_available()") && &filetype != 'python'
+        if luaeval("require'nvim-navic'.is_available()") && &filetype !=# 'python'
             return luaeval("require'nvim-navic'.get_location()")
         elseif luaeval("require'nvim-gps'.is_available()")
-            return luaeval("require'nvim-gps'.get_location()")
+                return luaeval("require'nvim-gps'.get_location()")
         else
             return get(b:, 'vista_nearest_method_or_function', '')
         endif
@@ -67,37 +67,28 @@ fun! LightlineTag() abort
     return get(b:, 'vista_nearest_method_or_function', '')
 endf
 
-" Update Function 
+" Update Function
 augroup lightline_startup
-    autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+    autocmd VimEnter * call LightlineTag()
+    autocmd BufEnter * SatelliteEnable
 augroup end
 
 fun! LightlineFilename() abort
     let fname = expand('%:t')
-    if fname ==# '__vista__'
-        " Get rid of name
-        return 'Tags'
-    endif
-    if fname ==# 'NetrwTreeListing'
-        return 'Netrw'
-    endif
-    return fname
+    return fname ==# '__vista__' ? 'Tags' :
+        \ fname ==# 'NetrwTreeListing' ? 'Netrw' :
+        \ fname
 endf
 
 function! LightlineMode() abort
     let fname = expand('%:t')
-    if &filetype == 'netrw'
-        return ''
-    elseif &filetype == 'help'
-        return 'HELP'
-    elseif &filetype == 'tsplayground'
-        return 'Treesitter'
-    else
-        return fname  ==# '__Tagbar__' ? 'Tagbar':
+    return &filetype ==# 'netrw' ? '' :
+            \ &filetype ==# 'help' ? 'HELP' :
+            \ &filetype ==# 'tsplayground' ? 'Treesitter' :
+            \ fname  ==# '__Tagbar__' ? 'Tagbar':
             \ fname ==# '__vista__' ? 'Vista':
             \ fname ==# 'ControlP' ? 'CtrlP':
             \ lightline#mode()
-    endif
 endfunction
 
 " Get the time
@@ -111,7 +102,7 @@ endfunction
 
 fun! GitInfo() abort
     " Don't show GitInfo on netrw/help/denite/vista
-    if &filetype == 'netrw' || &filetype == 'help' || &filetype == 'denite' || &filetype == 'denite-filter' || &filetype == 'vista' || &filetype == 'tsplayground'
+    if &filetype ==# 'netrw' || &filetype ==# 'help' || &filetype ==# 'denite' || &filetype ==# 'denite-filter' || &filetype ==# 'vista' || &filetype ==# 'tsplayground'
         return ''
     endif
     let branch = FugitiveHead()
@@ -136,7 +127,7 @@ endfunction
 
 " Add a devicon with the filetype
 function! MyFiletype()
-    if &filetype == 'denite' || &filetype == 'help' || &filetype == 'denite-filter'  
+    if &filetype ==# 'denite' || &filetype ==# 'help' || &filetype ==# 'denite-filter' || &filetype ==# 'tsplayground'
         return ''
     endif
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
@@ -144,7 +135,7 @@ endfunction
 
 " Return the encodings
 function! LightlineFileencoding()
-    if &filetype == 'help'
+    if &filetype ==# 'help'
         return ''
     endif
     return winwidth(0) > 70 ? &fileencoding : ''
