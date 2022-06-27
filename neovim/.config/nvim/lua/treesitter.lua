@@ -1,6 +1,6 @@
 require('nvim-treesitter.configs').setup {
     -- Make sure these are installed
-    ensure_installed = "c", "cpp", "python", "vim", "comment", "query",
+    ensure_installed = "all",
     highlight = {
         enable = true, -- false will disable the whole extension
         additional_vim_regex_highlighting = "vim",
