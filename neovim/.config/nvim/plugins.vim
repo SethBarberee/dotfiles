@@ -126,5 +126,7 @@ lua require('lsp')
 lua require("treesitter")
 lua require("which_key")
 lua require('fidget').setup()
-lua require('satellite').setup()
+if has('nvim-0.8')
+    lua require('satellite').setup()
+endif
 lua require('telescope').setup()

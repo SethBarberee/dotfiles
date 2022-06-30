@@ -70,7 +70,9 @@ endf
 " Update Function
 augroup lightline_startup
     autocmd VimEnter * call LightlineTag()
-    autocmd BufEnter * SatelliteEnable
+    if has('nvim-0.8')
+        autocmd BufEnter * SatelliteEnable
+    endif
 augroup end
 
 fun! LightlineFilename() abort
