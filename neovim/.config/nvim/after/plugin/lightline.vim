@@ -104,7 +104,8 @@ endfunction
 
 fun! GitInfo() abort
     " Don't show GitInfo on netrw/help/denite/vista
-    if &filetype ==# 'netrw' || &filetype ==# 'help' || &filetype ==# 'denite' || &filetype ==# 'denite-filter' || &filetype ==# 'vista' || &filetype ==# 'tsplayground'
+    " Filter out any dap windows
+    if &filetype ==# 'netrw' || &filetype ==# 'help' || &filetype ==# 'denite' || &filetype ==# 'denite-filter' || &filetype ==# 'vista' || &filetype ==# 'tsplayground' || stridx(&filetype, 'dap') >= 0
         return ''
     endif
     let branch = FugitiveHead()

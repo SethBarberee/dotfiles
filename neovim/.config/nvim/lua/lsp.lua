@@ -51,7 +51,7 @@ null_ls.setup {
 -- Tables within are the additional config that is passed to lspconfig
 local enabled_lsp = {
     pylsp = true,
-    rust_analyzer = true,
+    rust_tools = true,
     vimls = true,
     clangd = {
         cmd = {
@@ -83,7 +83,11 @@ local setup_server = function(server, config)
     }, config)
 
     -- Run each setup
-    lspconfig[server].setup(config)
+    if server ~= "rust_tools" then
+        lspconfig[server].setup(config)
+    else
+        require('rust-tools').setup(config)
+    end
 end
 
 for server, config in pairs(enabled_lsp) do
@@ -127,6 +131,9 @@ cmp.setup({
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
+    },
+    experimental = {
+        ghost_text = true,
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),

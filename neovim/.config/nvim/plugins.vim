@@ -40,8 +40,17 @@ endif
     Plug 'mengelbrecht/lightline-bufferline'
     Plug 'thaerkh/vim-indentguides'
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
-    "Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+    Plug 'simrat39/rust-tools.nvim'
+
+    " Nvim DAP
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'nvim-telescope/telescope-dap.nvim'
+
+    " Telescope
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-ui-select.nvim'
+
     Plug 'folke/which-key.nvim'
     Plug 'ryanoasis/vim-devicons'
     Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
@@ -65,9 +74,6 @@ endif
 
     " Markdown Rendering
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
-
-    " Denite
-    Plug 'Shougo/denite.nvim'
 
     " Treesitter Plugins
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -100,23 +106,28 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect " for nvim-cmp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Devicon config
-if has_key(plugs, 'vim-devicons') && has_key(plugs, 'denite.nvim')
-    let g:webdevicons_enable_denite = 1
-endif
-
 " Hexokinase settings since a seperate file doesn't work
 if has_key(plugs, 'vim-hexokinase')
     let g:Hexokinase_ftAutoload = ['*']
     let g:Hexokinase_highlighters = ['backgroundfull']
 endif
 
-" These lightline settings can't be moved...
+" These lightline (bufferline) settings can't be moved...
 if has_key(plugs, 'lightline.vim')
     let g:lightline#bufferline#unnamed = '[No Name]'
     let g:lightline#bufferline#show_number=2
     let g:lightline#bufferline#enable_devicons=1 " until i'm using a decent font
     let g:lightline#bufferline#filename_modifier=':t' " only show basefile and extension
+
+    " Allow me to filter what buffers appear in bufferline
+    function LightlineBufferlineFilter(buffer)
+
+      let buftype = getbufvar(a:buffer, '&buftype')
+      return buftype !=# 'terminal' && buftype !=# 'prompt'
+    endfunction
+
+    let g:lightline#bufferline#buffer_filter = 'LightlineBufferlineFilter'
+
 endif
 
 let g:clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
@@ -129,4 +140,6 @@ lua require('fidget').setup()
 if has('nvim-0.8')
     lua require('satellite').setup()
 endif
-lua require('telescope').setup()
+
+lua require("seth.dap")
+lua require("seth.telescope")
