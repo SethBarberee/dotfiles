@@ -44,6 +44,8 @@ endif
 
     " Nvim DAP
     Plug 'mfussenegger/nvim-dap'
+    Plug 'mfussenegger/nvim-dap-python'
+    Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'rcarriga/nvim-dap-ui'
     Plug 'nvim-telescope/telescope-dap.nvim'
 

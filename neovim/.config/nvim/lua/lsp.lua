@@ -1,7 +1,6 @@
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-
 -- Set up our lsp clients with the right options..
 local lsp_setup = function(client, bufnr)
     local caps = client.server_capabilities
@@ -154,7 +153,7 @@ cmp.setup({
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
         ),
     }),
-
+    
     -- Buffer only gets showed when no other source is available
     sources = cmp.config.sources(
         {

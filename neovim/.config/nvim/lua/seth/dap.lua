@@ -37,6 +37,10 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 require("dapui").setup({})
+require("nvim-dap-virtual-text").setup()
+
+-- Debugpy installed as module of system python
+require("dap-python").setup('/usr/bin/python')
 
 wk.register({
 
