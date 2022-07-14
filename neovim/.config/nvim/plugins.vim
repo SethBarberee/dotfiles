@@ -102,9 +102,6 @@ endif
     Plug 'quangnguyen30192/cmp-nvim-tags'
     Plug 'onsails/lspkind.nvim'
 
-    " Lua NVIM
-    Plug 'folke/lua-dev.nvim' " some more completion stuff for nvim lua LSP
-
 call plug#end()
 
 set completeopt=menu,menuone,noselect " for nvim-cmp
