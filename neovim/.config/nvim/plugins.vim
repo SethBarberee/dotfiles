@@ -54,7 +54,7 @@ endif
     Plug 'nvim-telescope/telescope-ui-select.nvim'
 
     Plug 'folke/which-key.nvim'
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
 
     " Utils
@@ -89,6 +89,7 @@ endif
     Plug 'SmiteshP/nvim-navic'
     Plug 'neovim/nvim-lspconfig'
     Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'glepnir/lspsaga.nvim'
 
     " NVIM cmp / autocomplete
     Plug 'hrsh7th/nvim-cmp'
@@ -139,9 +140,11 @@ lua require('lsp')
 lua require("treesitter")
 lua require("which_key")
 lua require('fidget').setup()
+lua require('lspsaga').init_lsp_saga()
 if has('nvim-0.8')
     lua require('satellite').setup()
 endif
 
 lua require("seth.dap")
+lua require("seth.diagnostic")
 lua require("seth.telescope")

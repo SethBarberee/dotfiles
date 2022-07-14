@@ -1,3 +1,8 @@
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded'}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'rounded' }),
+}
+
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -24,10 +29,22 @@ local custom_setup = function(client)
     lsp_setup(client, bufnr)
 end
 
-local lspconfig = require('lspconfig')
+-- Made this a function so I can re-use for luadev/sumneko_lua
+local function overwrite_config(config)
+    -- Add in our updated capabilities and handler/attach setup function
+    config = vim.tbl_deep_extend("force", {
+        on_attach = custom_setup,
+        capabilities = capabilities,
+        handlers = handlers,
+        --flags = {
+        --  debounce_text_changes = nil,
+        --},
+    }, config)
 
-local luadev = require("lua-dev").setup({})
-lspconfig.sumneko_lua.setup(luadev)
+    return config
+end
+
+local lspconfig = require('lspconfig')
 
 local null_ls = require('null-ls')
 local nls_diags = null_ls.builtins.diagnostics
@@ -61,6 +78,36 @@ local enabled_lsp = {
             "--header-insertion=iwyu",
         },
     },
+
+    sumneko_lua = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = {
+                -- vim
+                "vim",
+
+                -- Busted
+                "describe",
+                "it",
+                "before_each",
+                "after_each",
+                "teardown",
+                "pending",
+                "clear",
+
+                -- Custom
+                "RELOAD",
+              },
+            },
+
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+        }
+    }
+    }
 }
 
 local setup_server = function(server, config)
@@ -72,14 +119,7 @@ local setup_server = function(server, config)
         config = {}
     end
 
-    -- Add in our updated capabilities and handler/attach setup function
-    config = vim.tbl_deep_extend("force", {
-        on_attach = custom_setup,
-        capabilities = capabilities,
-        --flags = {
-        --  debounce_text_changes = nil,
-        --},
-    }, config)
+    config = overwrite_config(config)
 
     -- Run each setup
     if server ~= "rust_tools" then
@@ -153,7 +193,7 @@ cmp.setup({
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
         ),
     }),
-    
+
     -- Buffer only gets showed when no other source is available
     sources = cmp.config.sources(
         {

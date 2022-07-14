@@ -34,7 +34,7 @@ set laststatus=2
 set showtabline=2
 set backspace=indent,eol,start
 syntax on
-set re=0
+set regexpengine=0
 set clipboard+=unnamedplus " set clipboard
 set splitbelow
 set splitright
@@ -78,9 +78,10 @@ augroup END
 
 " Line numbers
 augroup numbertoggle
+    let number_ftToIgnore = ['Trouble', 'vista', 'qf']
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber number
+    autocmd BufEnter,FocusGained,InsertLeave * if index(number_ftToIgnore, &ft) < 0 | set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * if index(number_ftToIgnore, &ft) < 0 | set norelativenumber number
 augroup END
 
 augroup rasi_css

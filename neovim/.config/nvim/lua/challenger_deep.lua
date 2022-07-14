@@ -203,6 +203,11 @@ function challenger_deeper.load_syntax()
         SpellRare = { fg = challenger_deeper.red, sp = challenger_deeper.red, cterm = 'underline', gui = 'underline' };
         SpellLocal = { fg = challenger_deeper.dark_green, sp = challenger_deeper.dark_gren, cterm = 'underline',
             gui = 'underline' };
+
+        -- NVIM floating window theming
+        NormalFloat = { fg = challenger_deeper.fg, bg = challenger_deeper.bg };
+        FloatBorder = { fg = challenger_deeper.white, bg = challenger_deeper.bg };
+
     }
     return syntax
 end

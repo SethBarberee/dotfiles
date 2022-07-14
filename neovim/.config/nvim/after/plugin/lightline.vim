@@ -5,6 +5,7 @@ endif
 " Lightline
 
 
+
 let g:lightline = {
     \ 'colorscheme': 'challenger_deep',
     \ 'active': {
@@ -133,7 +134,7 @@ function! MyFiletype()
     if &filetype ==# 'denite' || &filetype ==# 'help' || &filetype ==# 'denite-filter' || &filetype ==# 'tsplayground'
         return ''
     endif
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : '' 
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . luaeval("require'nvim-web-devicons'.get_icon_by_filetype(vim.bo.filetype, {default=true})") : 'no ft') : '' 
 endfunction
 
 " Return the encodings

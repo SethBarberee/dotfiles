@@ -41,5 +41,4 @@ wk.register({
         ["0"]     = { '<cmd>lua vim.lsp.buf.document_symbol()<cr>', 'lsp-docsymbol' },
         W         = { '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>', 'lsp-workspacesymbol' },
     },
-}, { prefix = "<leader>" }
-)
+}, { prefix = "<leader>" })
