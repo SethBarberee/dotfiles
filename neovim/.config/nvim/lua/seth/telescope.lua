@@ -40,4 +40,3 @@ wk.register({
         t = { '<cmd>Telescope tags<cr>', 'project-tags' },
     },
 }, { prefix = '<leader>' })
-

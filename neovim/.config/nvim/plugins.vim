@@ -35,12 +35,13 @@ endif
     Plug 'j-hui/fidget.nvim' " Lsp status notifications
     Plug 'nvim-lua/plenary.nvim'
 
-    Plug 'itchyny/lightline.vim'
     Plug 'edkolev/tmuxline.vim'
-    Plug 'mengelbrecht/lightline-bufferline'
     Plug 'thaerkh/vim-indentguides'
     Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
     Plug 'simrat39/rust-tools.nvim'
+
+    " TODO: make equivalent to lightline
+    Plug 'nvim-lualine/lualine.nvim'
 
     " Nvim DAP
     Plug 'mfussenegger/nvim-dap'
@@ -48,6 +49,7 @@ endif
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'rcarriga/nvim-dap-ui'
     Plug 'nvim-telescope/telescope-dap.nvim'
+    Plug 'jbyuki/one-small-step-for-vimkind'
 
     " Telescope
     Plug 'nvim-telescope/telescope.nvim'
@@ -137,11 +139,13 @@ lua require('lsp')
 lua require("treesitter")
 lua require("which_key")
 lua require('fidget').setup()
-lua require('lspsaga').init_lsp_saga()
+"lua require('lspsaga').init_lsp_saga()
 if has('nvim-0.8')
     lua require('satellite').setup()
 endif
 
 lua require("seth.dap")
+lua require("seth.lualine")
+lua require("seth.navic")
 lua require("seth.diagnostic")
 lua require("seth.telescope")

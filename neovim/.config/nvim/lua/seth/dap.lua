@@ -36,6 +36,36 @@ dap.configurations.cpp = {
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
+dap.configurations.lua = {
+    {
+        type = 'nlua',
+        request = 'attach',
+        name = "Attach to running Neovim instance",
+        host = function()
+            local value = vim.fn.input('Host [127.0.0.1]: ')
+            if value ~= "" then
+                return value
+            end
+            return '127.0.0.1'
+        end,
+        port = function()
+            local val = tonumber(vim.fn.input('Port: '))
+            assert(val, "Please provide a port number")
+            return val
+        end,
+    }
+}
+
+
+dap.adapters.nlua = function(callback, config)
+    callback({ type = 'server', host = config.host, port = config.port })
+end
+
+-- Define user command to start up DAP for lua
+vim.api.nvim_create_user_command('DapStartLua', function()
+    require"osv".run_this()
+end, {})
+
 require("dapui").setup({})
 require("nvim-dap-virtual-text").setup()
 

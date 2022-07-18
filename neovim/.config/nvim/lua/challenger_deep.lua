@@ -120,8 +120,12 @@ function challenger_deeper.highlight(group, color)
         cterm = 'cterm=NONE'
     end
 
-    vim.api.nvim_command('highlight ' .. group .. ' ' .. gui .. ' ' .. fg ..
-        ' ' .. bg .. ' ' .. cterm .. ' ' .. ctermfg .. ' ' .. ctermbg .. ' ' .. sp)
+    if color.link ~= nil then
+        vim.api.nvim_command('highlight! link ' .. group .. " " .. color.link)
+    else
+        vim.api.nvim_command('highlight ' .. group .. ' ' .. gui .. ' ' .. fg ..
+            ' ' .. bg .. ' ' .. cterm .. ' ' .. ctermfg .. ' ' .. ctermbg .. ' ' .. sp)
+    end
 
 end
 
@@ -131,8 +135,8 @@ function challenger_deeper.load_syntax()
         Cursor = { fg = challenger_deeper.bg_dark, bg = challenger_deeper.blue };
         Comment = { fg = challenger_deeper.medium_gray, gui = 'italic', cterm = 'italic' };
         Constant = { fg = challenger_deeper.yellow };
-        String = { fg = challenger_deeper.yellow };
-        Character = { fg = challenger_deeper.yellow };
+        String = { link = 'Constant' };
+        Character = { link = 'Constant' };
         Number = { fg = challenger_deeper.dark_yellow };
         Boolean = { fg = challenger_deeper.dark_yellow };
         Float = { fg = challenger_deeper.dark_yellow };
@@ -142,10 +146,10 @@ function challenger_deeper.load_syntax()
         Operator = { fg = challenger_deeper.dark_cyan };
         Repeat = { fg = challenger_deeper.dark_cyan };
         PreProc = { fg = challenger_deeper.green };
-        Include = { fg = challenger_deeper.green };
-        Define = { fg = challenger_deeper.green };
-        Macro = { fg = challenger_deeper.green };
-        PreCondit = { fg = challenger_deeper.green };
+        Include = { link = 'PreProc' };
+        Define = { link = 'PrePrec' };
+        Macro = { link = 'PreProc' };
+        PreCondit = { link = 'PreProc' };
         Keyword = { fg = challenger_deeper.red };
         Statement = { fg = challenger_deeper.red };
         Conditional = { fg = challenger_deeper.red };
@@ -306,13 +310,42 @@ function challenger_deeper.load_plugin_syntax()
         CmpItemAbbrMatch = { fg = challenger_deeper.dark_cyan };
 
         -- nvim-scrollbar
-        ScrollbarWarn = { fg = challenger_deeper.dark_yellow};
-        ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow};
-        ScrollbarError = { fg = challenger_deeper.red};
-        ScrollbarErrorHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.red};
-        ScrollbarHint = { fg = challenger_deeper.green};
-        ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green};
-        ScrollbarHandle = { bg = challenger_deeper.bg_dark};
+        ScrollbarWarn = { fg = challenger_deeper.dark_yellow };
+        ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow };
+        ScrollbarError = { fg = challenger_deeper.red };
+        ScrollbarErrorHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.red };
+        ScrollbarHint = { fg = challenger_deeper.green };
+        ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green };
+        ScrollbarHandle = { bg = challenger_deeper.bg_dark };
+
+        NavicIconsFile = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsModule = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsNamespace = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsPackage = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsClass = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.blue };
+        NavicIconsMethod = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsProperty = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsField = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsConstructor = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsEnum = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsInterface = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsFunction = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.purple };
+        NavicIconsVariable = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsConstant = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.yellow };
+        NavicIconsString = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.yellow };
+        NavicIconsNumber = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_yellow };
+        NavicIconsBoolean = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_yellow };
+        NavicIconsArray = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsObject = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsKey = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsNull = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsEnumMember = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsStruct = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsEvent = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicIconsOperator = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
+        NavicIconsTypeParameter = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.blue };
+        NavicText = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+        NavicSeparator = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
     }
     return plugin_syntax
 end
