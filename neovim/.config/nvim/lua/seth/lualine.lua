@@ -7,6 +7,8 @@ local function tags()
         return navic.get_location()
     elseif gps.is_available() then
         return gps.get_location()
+    else
+        return ''
     end
 end
 

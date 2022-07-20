@@ -5,26 +5,21 @@
 -- Vim Plug Settings
 -- Check if VimPlug exists. If not, download it
 
--- TODO: port this to Lua
-
-
 vim.g.plugpath = vim.fn.expand('<sfile>:p:h') .. '/autoload/plug.vim'
+vim.g.plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-if not vim.fn.filereadable(vim.g.plugpath) then
-    if vim.fn.executable('curl') then
-        vim.g.plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if vim.fn.filereadable(vim.g.plugpath) == 0 then
+    if vim.fn.executable('curl') == 1 then
         vim.cmd([[
             call system('curl -fLo ' . shellescape(g:plugpath) . ' --create-dirs ' . g:plugurl)
-            if v:shell_error
-                echom "Error downloading vim-plug. Please install it manually.\n"
-                exit
-            endif
         ]])
+        if vim.v.shell_error ~= 0 then
+            vim.fn.echom("Error downloading vim-plug. Please install it manually.\n")
+            vim.fn.exit()
+        end
     else
-        vim.cmd([[
-            echom "vim-plug not installed. Please install it manually or install curl.\n"
-            exit
-        ]])
+        vim.fn.echom("vim-plug not installed. Please install it manually or install curl.\n")
+        vim.fn.exit()
     end
 end
 
@@ -130,7 +125,7 @@ require('seth.lsp')
 require("seth.treesitter")
 require("seth.which_key")
 require('fidget').setup()
---lua require('lspsaga').init_lsp_saga()
+--require('lspsaga').init_lsp_saga()
 
 if vim.fn.has('nvim-0.8') == 1 then
     require('satellite').setup()

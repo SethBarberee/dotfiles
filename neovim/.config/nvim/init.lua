@@ -97,14 +97,16 @@ vim.cmd([[exec 'source '  . g:vimpath . '/mappings.vim']])
 vim.opt.diffopt:append('algorithm:patience')
 vim.opt.diffopt:append('indent-heuristic')
 
---" Convenient command to see the difference between the current buffer and the
---" file it was loaded from, thus the changes you made.
---" Only define it when not defined already.
+-- Convenient command to see the difference between the current buffer and the
+-- file it was loaded from, thus the changes you made.
+-- Only define it when not defined already.
 --
-vim.cmd([[if !exists(':DiffOrig')
-    command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
-                \ | wincmd p | diffthis
-endif]])
+if vim.fn.exists(':DiffOrig') == 0 then
+    vim.cmd([[
+        command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
+                    \ | wincmd p | diffthis
+    ]])
+end
 
 
 vim.g.default_path = vim.fn.escape(vim.g.path, '\\ ')
