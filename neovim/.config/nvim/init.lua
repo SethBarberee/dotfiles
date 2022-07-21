@@ -66,16 +66,32 @@ vim.cmd([[augroup vimrcEx
 augroup END]])
 
 -- Line numbers
-vim.cmd([[augroup numbertoggle
-    let number_ftToIgnore = ['Trouble', 'vista', 'qf']
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * if index(number_ftToIgnore, &ft) < 0 | set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * if index(number_ftToIgnore, &ft) < 0 | set norelativenumber number
-augroup END]])
+local number_ftToIgnore = {'Trouble', 'vista', 'vista_kind', 'qf'};
+vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
+    pattern = {"*"},
+    callback = function()
+        for index, value in ipairs(number_ftToIgnore) do
+            --print(vim.bo.filetype)
+            if(value ~= vim.bo.filetype) then
+                vim.opt.relativenumber = true
+            end
+        end
+    end
+})
+vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
+    pattern = {"*"},
+    callback = function()
+        for index, value in ipairs(number_ftToIgnore) do
+            if(value ~= vim.bo.filetype) then
+                vim.opt.relativenumber = false
+                vim.opt.number = true
+            end
+        end
+    end
+})
 
 -- Set colorscheme
-
---vim.opt.termguicolors = true -- alredy set by colorscheme
+--vim.opt.termguicolors = true -- already set by colorscheme
 require('seth.challenger_deep')
 if vim.g.colors_name == 'challenger_deep' then
     vim.cmd([[
@@ -89,9 +105,9 @@ if vim.g.colors_name == 'challenger_deep' then
 end
 
 
+require('seth.mappings')
 require('seth.plugins')
 require('seth.impatient-config')
-vim.cmd([[exec 'source '  . g:vimpath . '/mappings.vim']])
 
 -- Better diff (https://vimways.org/2018/the-power-of-diff)
 vim.opt.diffopt:append('algorithm:patience')
@@ -185,4 +201,9 @@ vim.g.gutentags_ctags_extra_args = {
     '--fields=+ailmnS',
 }
 
-vim.cmd([[autocmd BufNewFile,BufRead *.inc set ft=asm]])
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+    pattern = {"*.inc"},
+    callback = function()
+        vim.bo.filetype = 'asm'
+    end
+})
