@@ -1,73 +1,86 @@
 # Neovim Config
+
 ```
-    " Looks/UI
-    Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep'}
+Plug 'lewis6991/impatient.nvim'
 
-    Plug 'itchyny/lightline.vim'
-    Plug 'edkolev/tmuxline.vim'
-    Plug 'mengelbrecht/lightline-bufferline'
-    Plug 'thaerkh/vim-indentguides'
-    Plug 'bfrg/vim-cpp-modern' " enhanced C and C++ highlighting
-    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " TODO check out nvim-colorizer
+-- Looks/UI
 
-    " Utils
-    Plug 'airblade/vim-rooter' " auto cd to base dir of project
+-- TODO: port local challenger-deep lua theme to plugin..
+Plug('challenger-deep-theme/vim', { as = 'challenger-deep' })
+Plug 'lewis6991/satellite.nvim' -- add Scrollbar to side of NVIM
+Plug 'j-hui/fidget.nvim' -- Lsp status notifications
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'thaerkh/vim-indentguides'
 
-    " Tags
-    Plug 'ludovicchabant/vim-gutentags' "tag management
-    Plug 'liuchengxu/vista.vim'
+Plug 'bfrg/vim-cpp-modern' -- enhanced C and C++ highlighting
+Plug 'simrat39/rust-tools.nvim'
 
-    " Git
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
+-- Nvim DAP
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'jbyuki/one-small-step-for-vimkind'
 
-    " Snippets
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+-- Telescope
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
-    Plug 'sgur/vim-editorconfig' " to honor editorconfig
+Plug 'folke/which-key.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug('rrethy/vim-hexokinase', { ['do'] = vim.fn['make hexokinase'] }) -- TODO check out nvim-colorizer
 
-    " Markdown Rendering
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown'  }
+-- Utils
+Plug 'airblade/vim-rooter' -- auto cd to base dir of project
 
-    " Denite
-    Plug 'Shougo/denite.nvim'
+-- Tags
+Plug 'ludovicchabant/vim-gutentags' --tag management
+Plug 'liuchengxu/vista.vim'
 
-if has('nvim')
-    " Deoplete and sources
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+-- Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-    " Enable LSP/Treesitter plugins
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/playground'
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'nvim-treesitter/nvim-treesitter-context'
-    Plug 'SmiteshP/nvim-gps'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'deoplete-plugins/deoplete-lsp'
-else
-    " Allow Denite/Deoplete to run on vim
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-end
+-- Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-    " Deoplete addons
-    Plug 'Shougo/neoinclude.vim' " completion for include files
-    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-    Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'} " completion for rust
-    Plug 'deoplete-plugins/deoplete-clang', { 'for': ['c', 'cpp', 'arduino'] } " completion for c/c++/arduino
-    Plug 'deoplete-plugins/deoplete-tag'
-    Plug 'deathlyfrantic/deoplete-spell' " spelling check source
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neco-vim', {'for': 'vim'}
+Plug 'sgur/vim-editorconfig' -- to honor editorconfig
+
+-- Markdown Rendering
+Plug('iamcco/markdown-preview.nvim', { ['do'] = vim.fn['cd app & yarn install'], ['for'] = 'markdown' })
+
+-- Treesitter Plugins
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = vim.fn[':TSUpdate'] })
+Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'SmiteshP/nvim-gps'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+-- LSP Plugins
+Plug 'SmiteshP/nvim-navic'
+Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'glepnir/lspsaga.nvim'
+
+-- NVIM cmp / autocomplete
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-tags'
+Plug 'onsails/lspkind.nvim'
 ```
 
-Pulled from `plugins.vim`
+Pulled from `lua/plugins/plugins.vim`
 
 ## Optional Dependencies
 
-* `rg` - enhanced search (in `denite`)
+* `rg` - enhanced search (in `telescope`)
