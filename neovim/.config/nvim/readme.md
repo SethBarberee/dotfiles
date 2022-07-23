@@ -79,7 +79,7 @@ Plug 'quangnguyen30192/cmp-nvim-tags'
 Plug 'onsails/lspkind.nvim'
 ```
 
-Pulled from `lua/plugins/plugins.vim`
+Pulled from `lua/seth/plugins.vim`
 
 ## Optional Dependencies
 
