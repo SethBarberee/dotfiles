@@ -84,40 +84,30 @@ function challenger_deeper.highlight(group, color)
 
     local ctermfg = 'ctermfg=NONE'
     local ctermbg = 'ctermbg=NONE'
-    local bg, fg, sp, gui, cterm
+    local bg = 'guibg=NONE'
+    local fg = 'guifg=NONE'
+    local sp  = 'guisp=NONE'
+    local gui  = 'gui=NONE'
+    local cterm = 'cterm=NONE'
 
     if color.fg ~= nil then
         fg = color.fg.gui and 'guifg=' .. color.fg.gui
-        ctermfg = color.fg.cterm and 'ctermfg=' .. color.fg.cterm
-    else
-        fg = 'guifg=NONE'
-        ctermfg = 'ctermfg=NONE'
     end
 
     if color.bg ~= nil then
         bg = color.bg.gui and 'guibg=' .. color.bg.gui
-        ctermbg = color.bg.cterm and 'ctermbg=' .. color.bg.cterm
-    else
-        bg = 'guibg=NONE'
-        ctermbg = 'ctermbg=NONE'
     end
 
     if color.sp ~= nil then
         sp = color.sp.gui and 'guisp=' .. color.sp.gui
-    else
-        sp = 'guisp=NONE'
     end
 
     if color.gui ~= nil then
         gui = color.gui and 'gui=' .. color.gui
-    else
-        gui = 'gui=NONE'
     end
 
     if color.cterm ~= nil then
         cterm = color.cterm and 'cterm=' .. color.cterm
-    else
-        cterm = 'cterm=NONE'
     end
 
     if color.link ~= nil then
@@ -239,19 +229,20 @@ function challenger_deeper.load_plugin_syntax()
         --vimUserFunc = {fg=challenger_deeper.yellow,gui='bold'};
         --vimFuncName= {fg=challenger_deeper.yellow,gui='bold'};
 
-        --diffAdded = {fg = challenger_deeper.dark_green};
-        --diffRemoved = {fg =challenger_deeper.red};
-        --diffChanged = {fg = challenger_deeper.blue};
         --diffOldFile = {fg = challenger_deeper.yellow};
         --diffNewFile = {fg = challenger_deeper.orange};
         --diffFile    = {fg = challenger_deeper.aqua};
         --diffLine    = {fg = challenger_deeper.grey};
         --diffIndexLine = {fg = challenger_deeper.violet};
 
-        DiffAdd = { fg = challenger_deeper.green };
-        DiffDelete = { fg = challenger_deeper.red };
-        DiffChange = { fg = challenger_deeper.dark_yellow };
-        DiffText = { fg = challenger_deeper.dark_blue };
+        diffAdd = { bg = challenger_deeper.green, fg = challenger_deeper.black };
+        diffAdded = { bg = challenger_deeper.green, fg = challenger_deeper.black };
+        diffDelete = { bg = challenger_deeper.red, fg = challenger_deeper.black };
+        diffRemoved = { bg = challenger_deeper.red, fg = challenger_deeper.black };
+        diffChange = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
+        diffChanged = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
+        diffText = { bg = challenger_deeper.yellow, fg = challenger_deeper.black };
+
         SignColumn = { fg = challenger_deeper.green };
 
         --gitcommitSummary = {fg = challenger_deeper.red};

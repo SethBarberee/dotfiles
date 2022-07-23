@@ -66,26 +66,36 @@ vim.cmd([[augroup vimrcEx
 augroup END]])
 
 -- Line numbers
+-- List of filetypes to ignore my relativenumber/number settings
 local number_ftToIgnore = {'Trouble', 'vista', 'vista_kind', 'qf'};
+
+-- check if the filetype is in my ignore list
+local function in_ignoreList(filetype)
+    for _, value in pairs(number_ftToIgnore) do
+        if value == filetype then
+            return true
+        end
+    end
+    return false
+end
+
 vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
     pattern = {"*"},
     callback = function()
-        for index, value in ipairs(number_ftToIgnore) do
-            --print(vim.bo.filetype)
-            if(value ~= vim.bo.filetype) then
-                vim.opt.relativenumber = true
-            end
+        if not in_ignoreList(vim.bo.filetype) then
+            vim.opt.relativenumber = true
+        else
+            vim.opt.number = false
+            vim.opt.relativenumber = false
         end
     end
 })
 vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
     pattern = {"*"},
     callback = function()
-        for index, value in ipairs(number_ftToIgnore) do
-            if(value ~= vim.bo.filetype) then
-                vim.opt.relativenumber = false
-                vim.opt.number = true
-            end
+        if not in_ignoreList(vim.bo.filetype) then
+            vim.opt.relativenumber = false
+            vim.opt.number = true
         end
     end
 })
@@ -93,17 +103,6 @@ vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
 -- Set colorscheme
 --vim.opt.termguicolors = true -- already set by colorscheme
 require('seth.challenger_deep')
-if vim.g.colors_name == 'challenger_deep' then
-    vim.cmd([[
-        " These overrides were taken from https://github.com/skbolton/titan/blob/master/states/nvim/nvim/plugin/themes.vim
-        hi DiffAdd guibg=#62d196 guifg=black
-        hi DiffDelete guibg=#ff5458 guifg=black
-        hi DiffChange guibg=#ffb378 guifg=black
-        hi DiffText guibg=#ffe9aa guifg=black
-    ]])
-    vim.g.challenger_deep_terminal_italics = 1
-end
-
 
 require('seth.mappings')
 require('seth.plugins')
