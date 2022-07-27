@@ -1,6 +1,6 @@
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded'}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'rounded' }),
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
+    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
 }
 
 -- Get capabilities from nvim-cmp
@@ -82,32 +82,32 @@ local enabled_lsp = {
 
     sumneko_lua = {
         settings = {
-          Lua = {
-            diagnostics = {
-              globals = {
-                -- vim
-                "vim",
+            Lua = {
+                diagnostics = {
+                    globals = {
+                        -- vim
+                        "vim",
 
-                -- Busted
-                "describe",
-                "it",
-                "before_each",
-                "after_each",
-                "teardown",
-                "pending",
-                "clear",
+                        -- Busted
+                        "describe",
+                        "it",
+                        "before_each",
+                        "after_each",
+                        "teardown",
+                        "pending",
+                        "clear",
 
-                -- Custom
-                "RELOAD",
-              },
-            },
+                        -- Custom
+                        "RELOAD",
+                    },
+                },
 
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+            }
         }
-    }
     }
 }
 
@@ -194,7 +194,6 @@ cmp.setup({
             { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
         ),
     }),
-
     -- Buffer only gets showed when no other source is available
     sources = cmp.config.sources(
         {
@@ -204,10 +203,10 @@ cmp.setup({
             { name = 'nvim_lsp' },
             { name = 'ultisnips' }, -- For ultisnips users.
             { name = 'nvim_lua' },
-            { name = 'tags' },
+            { name = 'tags', keyword_length = 3 },
         },
         {
-            { name = 'buffer' },
+            { name = 'buffer', keyword_length = 5 },
         })
 })
 
