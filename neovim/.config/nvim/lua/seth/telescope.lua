@@ -33,6 +33,7 @@ wk.register({
     t = {
         name = "telescope",
         m = { '<cmd>Telescope<cr>', 'main-menu' },
+        d = { '<cmd>Telescope diagnostics<cr>', 'diagnostics' },
         s = { '<cmd>lua require("telescope.builtin").find_files({hidden=true})<cr>', 'telescope-file' },
         g = { '<cmd>Telescope live_grep<cr>', 'grep' },
         h = { '<cmd>Telescope help_tags<cr>', 'help-tags' },

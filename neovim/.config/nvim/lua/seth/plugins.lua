@@ -124,7 +124,9 @@ vim.g.clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
 require('seth.lsp')
 require("seth.treesitter")
 require("seth.which_key")
+require("seth.indent-blankline")
 require('fidget').setup()
+require("nvim-gps").setup()
 --require('lspsaga').init_lsp_saga()
 
 if vim.fn.has('nvim-0.8') == 1 then

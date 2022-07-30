@@ -67,7 +67,17 @@ null_ls.setup {
 -- Tables within are the additional config that is passed to lspconfig
 local enabled_lsp = {
     pylsp = true,
-    rust_tools = true,
+    rust_tools = {
+        tools = {
+            hover_actions = {
+                auto_focus = true,
+            },
+        },
+        -- Pass our custom attach function here so rust_analyzer gets nvim-navic and other stuff
+        server = {
+            on_attach = custom_setup,
+        },
+    },
     vimls = true,
     clangd = {
         cmd = {
