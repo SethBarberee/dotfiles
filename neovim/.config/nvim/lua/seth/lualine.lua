@@ -14,7 +14,7 @@ local function lualine_tags()
 end
 
 -- Don't show gitInfo and filetype for these filetypes
-local ftBlacklist = { 'help', 'vista', 'vista_kind', 'qf', 'dapui_watches', 'dapui_scopes', 'dapui_breakpoints', 'dapui_stacks', 'dap-repl', 'dapui_console' };
+local ftBlacklist = { 'help', 'vista', 'vista_kind', 'qf', 'dapui_watches', 'dapui_scopes', 'dapui_breakpoints', 'dapui_stacks', 'dap-repl', 'dapui_console', 'checkhealth' };
 
 -- Check whether the filetype is in our ftBlacklist
 local function ftInBlackList(filetype)

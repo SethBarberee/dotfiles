@@ -34,7 +34,41 @@ require('nvim-treesitter.configs').setup {
         highlight_definitions = {
             enable = true,
         }
-    }
+    },
+    textobjects = {
+        select = {
+            enable = true,
+
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ["ac"] =  "@conditional.outer",
+                ["ic"] =  "@conditional.inner",
+                ["af"] =  "@function.outer",
+                ["if"] =  "@function.inner",
+                ["al"] =  "@loop.outer",
+                ["il"] =  "@loop.inner",
+                ["av"] = "@variable.outer",
+                ["iv"] = "@variable.inner",
+            },
+            -- You can choose the select mode (default is charwise 'v')
+            selection_modes = {
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V', -- linewise
+                ['@class.outer'] = '<c-v>', -- blockwise
+            },
+        },
+        --lsp_interop = {
+        --    enable = true,
+        --    border = 'rounded',
+        --    peek_definition_code = {
+        --        ["<leader>df"] = "@function.outer",
+        --        ["<leader>dF"] = "@class.outer",
+        --    },
+        --},
+    },
 }
 
 require('treesitter-context').setup {
