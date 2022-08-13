@@ -49,11 +49,13 @@ local lspconfig = require('lspconfig')
 local null_ls = require('null-ls')
 local nls_diags = null_ls.builtins.diagnostics
 local nls_format = null_ls.builtins.formatting
+local nls_codeActions = null_ls.builtins.code_actions
 
 null_ls.setup {
     sources = {
         nls_diags.vint.with({ extra_args = { "--enable-neovim" } }), -- use vint for vim files and enable neovim syntax
         nls_format.trim_whitespace,
+        nls_codeActions.gitsigns,
     },
 }
 
@@ -114,7 +116,7 @@ local enabled_lsp = {
 
                 workspace = {
                     -- Make the server aware of Neovim runtime files
-                    library = vim.api.nvim_get_runtime_file("", true),
+                    library = vim.api.nvim_get_runtime_file('', true),
                 },
             }
         }

@@ -16,8 +16,8 @@ wk.register({
         -- Labeling mappings from after/plugins/gitgutter.vim
         name = "Git",
         d = { 'git-diff' },
-        n = { 'next-git-hunk' },
-        p = { 'prev-git-hunk' },
+        n = { '<cmd>Gitsigns next_hunk<cr>', 'next-git-hunk' },
+        p = { '<cmd>Gitsigns prev_hunk<cr>', 'prev-git-hunk' },
         s = { '<cmd>Git status<cr>', 'git-status' },
         b = { 'git-blame' },
     },

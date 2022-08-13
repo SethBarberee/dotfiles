@@ -73,7 +73,7 @@ Plug 'liuchengxu/vista.vim'
 
 -- Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- Snippets
 Plug 'SirVer/ultisnips'
@@ -103,6 +103,7 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'ii14/emmylua-nvim' -- NVIM Lua documentation/completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -139,3 +140,4 @@ require('seth.lualine')
 require('seth.navic')
 require('seth.diagnostic')
 require('seth.telescope')
+require('gitsigns').setup()
