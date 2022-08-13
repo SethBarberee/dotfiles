@@ -66,6 +66,7 @@ Plug('rrethy/vim-hexokinase', { ['do'] = vim.fn['make hexokinase'] }) -- TODO ch
 
 -- Utils
 Plug 'airblade/vim-rooter' -- auto cd to base dir of project
+Plug 'numToStr/Comment.nvim'
 
 -- Tags
 Plug 'ludovicchabant/vim-gutentags' --tag management
@@ -76,8 +77,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
 -- Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'sgur/vim-editorconfig' -- to honor editorconfig
 
@@ -107,8 +108,8 @@ Plug 'ii14/emmylua-nvim' -- NVIM Lua documentation/completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-tags'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'onsails/lspkind.nvim'
 
 vim.call('plug#end')
@@ -141,3 +142,4 @@ require('seth.navic')
 require('seth.diagnostic')
 require('seth.telescope')
 require('gitsigns').setup()
+require('Comment').setup()
