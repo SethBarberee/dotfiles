@@ -3,14 +3,14 @@ vim.g.maplocalleader = ',' -- Change localleader to ,
 
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'no need for ex mode' })
 
-vim.keymap.set('n', 'yy', '"+yy', { desc = 'system clipboard' })
-vim.keymap.set('n', 'dd', '"+dd', { desc = 'system clipboard' })
-vim.keymap.set('n', 'p', '"+gP', { desc = 'system clipboard' })
+vim.keymap.set('n', 'yy', '"+yy', { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', 'dd', '"+dd', { desc = 'Delete and copy to system clipboard' })
+vim.keymap.set('n', 'p', '"+gP', { desc = 'Paste from system clipboard' })
 
-vim.keymap.set('n', '<C-c>', '"+yy', { desc = 'system clipboard' })
-vim.keymap.set('v', '<C-c>', '"+y', { desc = 'system clipboard' })
-vim.keymap.set('n', '<C-x>', '"+dd', { desc = 'system clipboard' })
-vim.keymap.set('v', '<C-x>', '"+d', { desc = 'system clipboard' })
+vim.keymap.set('n', '<C-c>', '"+yy', { desc = 'Copy to system clipboard' })
+vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Copy to system clipboard' })
+vim.keymap.set('n', '<C-x>', '"+dd', { desc = 'Cut to system clipboard' })
+vim.keymap.set('v', '<C-x>', '"+d', { desc = 'Cut to system clipboard' })
 
 vim.keymap.set('n', '<Right>', ':bnext<CR>', { desc = 'move to next buffer' })
 vim.keymap.set('n', '<Left>', ':bprev<CR>', { desc = 'move to previous buffer' })

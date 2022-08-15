@@ -38,14 +38,18 @@ Plug 'lewis6991/impatient.nvim'
 
 -- TODO: port local challenger-deep lua theme to plugin..
 Plug('challenger-deep-theme/vim', { as = 'challenger-deep' })
-Plug 'lewis6991/satellite.nvim' -- add Scrollbar to side of NVIM
 Plug 'j-hui/fidget.nvim' -- Lsp status notifications
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'thaerkh/vim-indentguides'
+Plug 'nvim-lualine/lualine.nvim' -- statusline
+Plug 'edkolev/tmuxline.vim' -- tmux statusline based on statusline
+Plug 'SmiteshP/nvim-gps'
+Plug 'SmiteshP/nvim-navic'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
-Plug 'bfrg/vim-cpp-modern' -- enhanced C and C++ highlighting
+-- Better folding (using LSP and treesitter)
+Plug 'kevinhwang91/promise-async' -- needed for nvim-ufo
+Plug 'kevinhwang91/nvim-ufo'
+
 Plug 'simrat39/rust-tools.nvim'
 
 -- Nvim DAP
@@ -91,11 +95,8 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'SmiteshP/nvim-gps'
-Plug 'lukas-reineke/indent-blankline.nvim'
 
 -- LSP Plugins
-Plug 'SmiteshP/nvim-navic'
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'glepnir/lspsaga.nvim'
@@ -132,10 +133,6 @@ require('fidget').setup()
 require("nvim-gps").setup()
 --require('lspsaga').init_lsp_saga()
 
-if vim.fn.has('nvim-0.8') == 1 then
-    require('satellite').setup()
-end
-
 require('seth.dap')
 require('seth.lualine')
 require('seth.navic')
@@ -143,3 +140,4 @@ require('seth.diagnostic')
 require('seth.telescope')
 require('gitsigns').setup()
 require('Comment').setup()
+require('seth.ufo')

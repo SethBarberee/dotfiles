@@ -177,7 +177,7 @@ function challenger_deeper.load_syntax()
         Visual = { bg = challenger_deeper.visual };
         WarningMsg = { fg = challenger_deeper.yellow };
         WildMenu = { fg = challenger_deeper.bg_subtle, bg = challenger_deeper.cyan };
-        Folded = { fg = challenger_deeper.bg_subtle, bg = challenger_deeper.purple };
+        Folded = {link = 'PmenuSbar'};
         FoldColumn = { fg = challenger_deeper.yellow };
         Pmenu = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle };
         PmenuSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
@@ -337,6 +337,7 @@ function challenger_deeper.load_plugin_syntax()
         NavicIconsTypeParameter = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.blue };
         NavicText = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
         NavicSeparator = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
+
     }
     return plugin_syntax
 end

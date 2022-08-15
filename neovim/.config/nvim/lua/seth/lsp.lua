@@ -6,6 +6,13 @@ local handlers = {
 -- Get capabilities from nvim-cmp
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Tell the server the capability of foldingRange,
+-- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
 -- Set up our lsp clients with the right options..
 local lsp_setup = function(client, bufnr)
     local caps = client.server_capabilities
