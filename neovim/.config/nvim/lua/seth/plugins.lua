@@ -115,29 +115,21 @@ Plug 'onsails/lspkind.nvim'
 
 vim.call('plug#end')
 
-
 -- For nvim-cmp
 vim.g.completeopt = { 'menu', 'menuone', 'noselect' }
 
--- for hexokinase
-vim.g.Hexokinase_highlighters = { 'backgroundfull' }
-
-vim.g.clap_no_matches_msg = 'OOPSIE WOOPSIE NO MATCHES FOR YOU'
-
--- Load our lua plugin config files
+require('seth.hexokinase')
 require('seth.lsp')
-require("seth.treesitter")
-require("seth.which_key")
-require("seth.indent-blankline")
-require('fidget').setup()
-require("nvim-gps").setup()
---require('lspsaga').init_lsp_saga()
-
+require('seth.treesitter')
+require('seth.which_key')
+require('seth.indent-blankline')
+require('seth.fidget')
+require('seth.gps')
 require('seth.dap')
 require('seth.lualine')
 require('seth.navic')
 require('seth.diagnostic')
 require('seth.telescope')
-require('gitsigns').setup()
-require('Comment').setup()
+require('seth.gitsigns')
+require('seth.comment')
 require('seth.ufo')

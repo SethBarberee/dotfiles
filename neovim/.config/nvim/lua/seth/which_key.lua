@@ -32,7 +32,7 @@ wk.register({
         j         = { '<cmd>lua vim.diagnostic.goto_next()<cr>', 'lsp-diag-next' },
         k         = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'lsp-diag-prev' },
         f         = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'lsp-formatting' },
-        h         = { '<cmd>lua vim.lsp.buf.hover()<cr>', 'lsp-hover' },
+        h         = { 'lsp-hover' }, -- defined in ufo.lua
         i         = { '<cmd>lua vim.lsp.buf.implementation()<cr>', 'lsp-implemenation' },
         ["<c-k>"] = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'lsp-sighelp' },
         t         = { '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'lsp-typedef' },

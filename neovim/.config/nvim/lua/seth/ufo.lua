@@ -1,3 +1,5 @@
+local wk = require("which-key")
+
 -- Allow to override the LSP -> indent normal routine.. 
 -- We could use treesitter -> indent if we really wanted to
 local ftMap = {
@@ -51,8 +53,20 @@ require('ufo').setup({
 
 -- We have to override the normal bindings with UFOs because these don't override the foldlevel like the
 -- normal ones do
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
-vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+wk.register({
+    z = {
+        R = {'<cmd>lua ufo.openAllFolds()'},
+        M = {'<cmd>lua ufo.closeAllFolds()'},
+        r = {'<cmd>lua ufo.openFoldsExceptKinds()'},
+        m = {'<cmd>lua ufo.closeFoldsWith()'}, -- closeAllFolds == closeFoldsWith(0)
+    },
+})
 
+-- TODO: figure out how to add this to which-key so we can keep the conflict detection
+vim.keymap.set('n', '<leader>lh', function()
+    local winid = require('ufo').peekFoldedLinesUnderCursor()
+    if not winid then
+        -- nvimlsp
+        vim.lsp.buf.hover()
+    end
+end)
