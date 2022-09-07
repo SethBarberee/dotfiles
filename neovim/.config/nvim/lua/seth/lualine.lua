@@ -4,9 +4,9 @@ local gps = require("nvim-gps")
 
 -- Format my lualine tag data
 local function lualine_tags()
-    if navic.is_available() and vim.bo.filetype ~= 'python' then
+    if navic.is_available()  then
         return navic.get_location()
-    elseif gps.is_available() then
+    elseif gps.is_available()  then
         return gps.get_location()
     else
         return vim.b.vista_nearest_or_function or ''

@@ -45,6 +45,7 @@ Plug 'edkolev/tmuxline.vim' -- tmux statusline based on statusline
 Plug 'SmiteshP/nvim-gps'
 Plug 'SmiteshP/nvim-navic'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'rrethy/vim-illuminate'
 
 -- Better folding (using LSP and treesitter)
 Plug 'kevinhwang91/promise-async' -- needed for nvim-ufo
@@ -95,6 +96,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 -- LSP Plugins
 Plug 'neovim/nvim-lspconfig'
@@ -120,6 +122,7 @@ vim.g.completeopt = { 'menu', 'menuone', 'noselect' }
 
 require('seth.hexokinase')
 require('seth.lsp')
+require('seth.cmp')
 require('seth.treesitter')
 require('seth.which_key')
 require('seth.indent-blankline')

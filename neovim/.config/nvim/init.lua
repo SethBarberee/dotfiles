@@ -42,6 +42,7 @@ vim.opt.foldmethod = 'syntax'
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 
+vim.opt.signcolumn = 'auto:3'
 
 vim.g.python_host_prog = '/usr/bin/python2'
 vim.g.python3_host_prog = '/usr/bin/python3'
