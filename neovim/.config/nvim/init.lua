@@ -27,7 +27,7 @@ vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.opt.mouse = 'a'
 vim.opt.encoding = 'UTF-8'
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3 -- I've finally converted to global statusline
 vim.opt.showtabline = 2
 vim.opt.backspace = { 'indent', 'eol', 'start' }
 --syntax on

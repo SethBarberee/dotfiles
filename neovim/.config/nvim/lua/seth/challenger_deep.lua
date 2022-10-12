@@ -220,7 +220,7 @@ function challenger_deeper.load_plugin_syntax()
         --TSPunctBracket = {fg=challenger_deeper.bracket};
 
         --vimCommentTitle = {fg=challenger_deeper.grey,gui='bold'};
-        --vimLet = {fg=challenger_deeper.orange};
+        --vimLet = {fg=challenger_deeper.yellow};
         --vimVar = {fg=challenger_deeper.cyan};
         --vimFunction = {fg=challenger_deeper.redwine};
         --vimIsCommand = {fg=challenger_deeper.fg};
@@ -230,7 +230,7 @@ function challenger_deeper.load_plugin_syntax()
         --vimFuncName= {fg=challenger_deeper.yellow,gui='bold'};
 
         --diffOldFile = {fg = challenger_deeper.yellow};
-        --diffNewFile = {fg = challenger_deeper.orange};
+        --diffNewFile = {fg = challenger_deeper.yellow};
         --diffFile    = {fg = challenger_deeper.aqua};
         --diffLine    = {fg = challenger_deeper.grey};
         --diffIndexLine = {fg = challenger_deeper.violet};
@@ -255,7 +255,7 @@ function challenger_deeper.load_plugin_syntax()
         --gitcommitFile  = {fg = challenger_deeper.dark_green};
 
         --VistaBracket = {fg=challenger_deeper.grey};
-        --VistaChildrenNr = {fg=challenger_deeper.orange};
+        --VistaChildrenNr = {fg=challenger_deeper.yellow};
         --VistaKind = {fg=challenger_deeper.purpl};
         --VistaScope = {fg=challenger_deeper.red};
         --VistaScopeKind = {fg=challenger_deeper.blue};
@@ -297,9 +297,29 @@ function challenger_deeper.load_plugin_syntax()
         --TelescopeMultiSelection = {fg=challenger_deeper.teal};
 
         -- nvim-cmp
-        CmpItemAbbrMatchFuzzy = { fg = challenger_deeper.dark_cyan };
-        CmpItemAbbrMatch = { fg = challenger_deeper.dark_cyan };
+        -- TODO: Maybe use the TS Highlight groups?
+        -- Currently, doing a VSCode style
+        CmpItemAbbrMatchFuzzy = {bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
+        CmpItemAbbrMatch = {bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
 
+        CmpItemKindFunction = {fg = challenger_deeper.purple };
+        CmpItemKindMethod = { link = 'CmpItemKindFunction' };
+        
+        CmpItemKindModule = {fg = challenger_deeper.yellow };
+        CmpItemKindClass = { link = 'CmpItemKindModule' };
+        CmpItemKindProperty = { link = 'CmpItemKindModule' };
+        CmpItemKindField = { link = 'CmpItemKindModule' };
+        CmpItemKindStruct = { link = 'CmpItemKindModule' };
+        CmpItemKindInterface = { link = 'CmpItemKindModule' };
+        CmpItemKindConstructor = { link = 'CmpItemKindModule' };
+        CmpItemKindNamespace = { link = 'CmpItemKindModule' };
+        CmpItemKindFile = { link = 'CmpItemKindModule' };
+
+        CmpItemKindValue = {fg = challenger_deeper.dark_cyan };
+
+        CmpItemKindVariable = {fg = challenger_deeper.blue };
+        CmpItemKindTypeParameter = { link = 'CmpItemKindVariable' };
+        
         -- nvim-scrollbar
         ScrollbarWarn = { fg = challenger_deeper.dark_yellow };
         ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow };
@@ -309,35 +329,35 @@ function challenger_deeper.load_plugin_syntax()
         ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green };
         ScrollbarHandle = { bg = challenger_deeper.bg_dark };
 
-        NavicIconsFile = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsModule = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsNamespace = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsPackage = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsClass = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.blue };
-        NavicIconsMethod = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsProperty = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsField = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsConstructor = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsEnum = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsInterface = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsFunction = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.purple };
-        NavicIconsVariable = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsConstant = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.yellow };
-        NavicIconsString = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.yellow };
-        NavicIconsNumber = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_yellow };
-        NavicIconsBoolean = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_yellow };
-        NavicIconsArray = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsObject = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsKey = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsNull = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsEnumMember = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsStruct = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsEvent = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicIconsOperator = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
-        NavicIconsTypeParameter = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.blue };
-        NavicText = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-        NavicSeparator = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.white };
-
+        -- nvim-navic
+        NavicIconsFile = { link = 'CmpItemKindFile' };
+        NavicIconsModule = { link = 'CmpItemKindModule' };
+        NavicIconsNamespace = { link = 'CmpItemKindNamespace' };
+        NavicIconsPackage = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow };
+        NavicIconsClass = { link = 'CmpItemKindClass' };
+        NavicIconsMethod = { link = 'CmpItemKindMethod' };
+        NavicIconsProperty = { link = 'CmpItemKindProperty' };
+        NavicIconsField = { link = 'CmpItemKindField' };
+        NavicIconsConstructor = { 'CmpItemKindConstructor' };
+        NavicIconsEnum = { link = 'CmpItemKindEnum' };
+        NavicIconsEnumMember = { link = 'CmpItemKindEnumMember' };
+        NavicIconsInterface = { link = 'CmpItemKindInterface' };
+        NavicIconsFunction = { link = 'CmpItemKindFunction' };
+        NavicIconsVariable = { link = 'CmpItemKindVariable' };
+        NavicIconsConstant = { link = 'CmpItemKindConstant' };
+        NavicIconsString = { link = 'CmpItemKindValue' };
+        NavicIconsNumber = {  link = 'CmpItemKindValue' };
+        NavicIconsBoolean = { link = 'CmpItemKindValue' };
+        NavicIconsArray = {  link = 'CmpItemKindValue' };
+        NavicIconsObject = { link = 'CmpItemKindValue' };
+        NavicIconsKey = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow };
+        NavicIconsNull = { link = 'CmpItemKindValue' };
+        NavicIconsStruct = { link = 'CmpItemKindStruct'};
+        NavicIconsEvent = { link = 'CmpItemKindEvent' };
+        NavicIconsOperator = { link = 'CmpItemKindValue' };
+        NavicIconsTypeParameter = { link = 'CmpItemKindTypeParameter' };
+        NavicText = { link = 'Normal' };
+        NavicSeparator = { bg = challenger_deeper.bg, fg = challenger_deeper.white };
     }
     return plugin_syntax
 end
