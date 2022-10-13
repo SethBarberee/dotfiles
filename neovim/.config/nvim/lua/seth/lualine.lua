@@ -4,9 +4,9 @@ local gps = require("nvim-gps")
 
 -- Format my lualine tag data
 local function lualine_tags()
-    if navic.is_available()  then
+    if navic.is_available() then
         return navic.get_location()
-    elseif gps.is_available()  then
+    elseif gps.is_available() then
         -- TODO: format this with a pretty highlight so I can left align it?
         return gps.get_location()
     else
@@ -15,7 +15,7 @@ local function lualine_tags()
 end
 
 -- Don't show gitInfo and filetype for these filetypes
-local ftBlacklist = { 'help', 'vista', 'vista_kind', 'qf', 'checkhealth'};
+local ftBlacklist = { 'help', 'vista', 'vista_kind', 'qf', 'checkhealth' };
 
 -- Check whether the filetype is in our ftBlacklist
 local function ftInBlackList(filetype)
@@ -63,6 +63,17 @@ local function lualine_filename(str)
     return str
 end
 
+local function diff_source()
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+        return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed
+        }
+    end
+end
+
 lualine.setup {
     options = {
         icons_enabled = true,
@@ -71,18 +82,19 @@ lualine.setup {
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
             statusline = {},
-            winbar = {'qf'},
+            winbar = { 'qf' },
         },
         always_divide_middle = true,
         globalstatus = true, -- NOTE: this overrides vim.opt.laststatus
     },
     sections = {
         lualine_a = { { 'mode', fmt = lualine_mode } },
-        lualine_b = { { 'branch', cond = lualine_mini }, { 'diff', colored = false },
+        lualine_b = { { 'b:gitsigns_head', cond = lualine_mini, icon = '' },
+            { 'diff', colored = false, source = diff_source },
             { 'diagnostics', colored = false } },
         lualine_c = { { 'filename', cond = lualine_filename_cond, fmt = lualine_filename } },
-        lualine_x = {{ 'encoding', cond = lualine_mini }, { 'fileformat', cond = lualine_mini },
-            {'filetype', cond = lualine_mini } },
+        lualine_x = { { 'encoding', cond = lualine_mini }, { 'fileformat', cond = lualine_mini },
+            { 'filetype', cond = lualine_mini } },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },
@@ -102,13 +114,12 @@ lualine.setup {
         lualine_y = { 'tabs' },
         lualine_z = { "os.date('%H:%M')" }
     },
-    -- Use the x component so we have a normal BG and not the light blue background like the mode indicator
-    -- However, I sacrifice the left alignment for the right alignment
+    -- Use the c component so we have a normal BG and not the light blue background like the mode indicator
     winbar = {
-        lualine_x = { {lualine_tags} },
+        lualine_c = { { lualine_tags } },
     },
     inactive_winbar = {
-        lualine_a = { {'filename', fmt = lualine_filename}},
+        lualine_a = { { 'filename', fmt = lualine_filename } },
         lualine_b = { '' },
         lualine_c = { '' },
         lualine_x = { '' },
@@ -116,7 +127,7 @@ lualine.setup {
         lualine_z = { '' }
     },
 
-    extensions = {'nvim-dap-ui'}
+    extensions = { 'nvim-dap-ui' }
 }
 
 vim.api.nvim_set_keymap('n', '1', [[<Cmd>LualineBuffersJump! 1 <CR>]], { noremap = true, silent = true })

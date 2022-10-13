@@ -17,17 +17,8 @@ capabilities.textDocument.foldingRange = {
 local lsp_setup = function(client, bufnr)
     local caps = client.server_capabilities
 
-    if caps.completionProvider then
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    end
-    -- Use LSP for formatexpr
-    if caps.documentFormattingProvider then
-        vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-    end
-
     require("nvim-navic").attach(client, bufnr)
 end
-
 
 local custom_setup = function(client)
     local bufnr = vim.api.nvim_get_current_buf()

@@ -49,26 +49,24 @@ vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.g.vimpath = vim.fn.fnamemodify(vim.env.MYVIMRC, ":p:h")
 
--- Put these in an autocmd group, so that we can delete them easily.
-vim.cmd([[augroup vimrcEx
-    autocmd!
+-- Create an augroup to group all of our commands
+local group_id = vim.api.nvim_create_augroup("init.lua", {}) -- defaults to clear = true
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    autocmd BufReadPost *
-                \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-                \   execute "normal! g`\"" |
-                \ endif
-
-    " Close any automatically opened scratch-buffers 
-    " " once completion popup the is closed
-    "autocmd CompleteDone * pclose
-
-augroup END]])
+--  When editing a file, always jump to the last known cursor position.
+--  Don't do it when the position is invalid or when inside an event handler
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+    pattern = { "*" },
+    group = group_id,
+    callback = function()
+        if vim.fn.line("'\"") >= 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.cmd.normal { "g`\"", bang = true }
+        end
+    end
+})
 
 -- Line numbers
 -- List of filetypes to ignore my relativenumber/number settings
-local number_ftToIgnore = {'Trouble', 'vista', 'vista_kind', 'qf'};
+local number_ftToIgnore = { 'Trouble', 'vista', 'vista_kind', 'qf' };
 
 -- check if the filetype is in my ignore list
 local function in_ignoreList(filetype)
@@ -80,8 +78,9 @@ local function in_ignoreList(filetype)
     return false
 end
 
-vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
-    pattern = {"*"},
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+    pattern = { "*" },
+    group = group_id,
     callback = function()
         if not in_ignoreList(vim.bo.filetype) then
             vim.opt.relativenumber = true
@@ -91,8 +90,9 @@ vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
         end
     end
 })
-vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
-    pattern = {"*"},
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+    pattern = { "*" },
+    group = group_id,
     callback = function()
         if not in_ignoreList(vim.bo.filetype) then
             vim.opt.relativenumber = false
@@ -124,18 +124,23 @@ if vim.fn.exists(':DiffOrig') == 0 then
     ]])
 end
 
-
 vim.g.default_path = vim.fn.escape(vim.g.path, '\\ ')
 
 -- Always add the current file's directory to the path and tags list if not
 -- already there. Add it to the beginning to speed up searches.
---
-vim.cmd([[autocmd BufRead *
-      \ let s:tempPath=finddir('.git/..', expand('%:p:h').';') |
-      \ exec "set path-=".s:tempPath |
-      \ exec "set path-=".g:default_path |
-      \ exec "set path^=".s:tempPath |
-      \ exec "set path^=".g:default_path]])
+
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    pattern = { "*" },
+    group = group_id,
+    callback = function()
+        tempPath = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h') .. ';')
+        vim.cmd.set("path-=" .. tempPath)
+        vim.cmd.set("path-=" .. vim.g.default_path)
+        vim.cmd.set("path^=" .. tempPath)
+        vim.cmd.set("path^=" .. vim.g.default_path)
+    end
+})
+
 
 --"" TODO figure out how to move this
 vim.g.gutentags_ctags_exclude = {
@@ -201,8 +206,9 @@ vim.g.gutentags_ctags_extra_args = {
     '--fields=+ailmnS',
 }
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-    pattern = {"*.inc"},
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = { "*.inc" },
+    group = group_id,
     callback = function()
         vim.bo.filetype = 'asm'
     end
