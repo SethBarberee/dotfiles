@@ -16,7 +16,6 @@ capabilities.textDocument.foldingRange = {
 -- Set up our lsp clients with the right options..
 local lsp_setup = function(client, bufnr)
     local caps = client.server_capabilities
-
     require("nvim-navic").attach(client, bufnr)
 end
 
@@ -81,10 +80,10 @@ local enabled_lsp = {
         cmd = {
             "clangd",
             "--background-index",
-            "--suggest-missing-includes",
             "--clang-tidy",
             "--header-insertion=iwyu",
             "--offset-encoding=utf-16",
+            "--limit-results=0",
         },
     },
 

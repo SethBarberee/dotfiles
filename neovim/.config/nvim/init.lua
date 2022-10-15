@@ -203,11 +203,3 @@ vim.g.gutentags_ctags_extra_args = {
     '--tag-relative=yes',
     '--fields=+ailmnS',
 }
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    pattern = { "*.inc" },
-    group = group_id,
-    callback = function()
-        vim.bo.filetype = 'asm'
-    end
-})
