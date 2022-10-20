@@ -118,7 +118,7 @@ vim.opt.diffopt:append('indent-heuristic')
 -- Only define it when not defined already.
 --
 if vim.fn.exists(':DiffOrig') == 0 then
-    command = 'vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis| wincmd p | diffthis' 
+    local command = 'vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis| wincmd p | diffthis'
     vim.api.nvim_create_user_command('DiffOrig', command, {desc = 'Check difference between current buffer and file it was loaded from'})
 end
 
@@ -131,7 +131,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
     pattern = { "*" },
     group = group_id,
     callback = function()
-        tempPath = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h') .. ';')
+        local tempPath = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h') .. ';')
         vim.cmd.set("path-=" .. tempPath)
         vim.cmd.set("path-=" .. vim.g.default_path)
         vim.cmd.set("path^=" .. tempPath)

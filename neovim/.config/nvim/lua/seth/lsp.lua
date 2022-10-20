@@ -4,7 +4,7 @@ local handlers = {
 }
 
 -- Get capabilities from nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Tell the server the capability of foldingRange,
 -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
@@ -40,6 +40,9 @@ local function overwrite_config(config)
 end
 
 local lspconfig = require('lspconfig')
+
+-- Add rounded border to all LSP windows
+require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 local null_ls = require('null-ls')
 local nls_diags = null_ls.builtins.diagnostics
@@ -82,7 +85,7 @@ local enabled_lsp = {
             "--background-index",
             "--clang-tidy",
             "--header-insertion=iwyu",
-            "--offset-encoding=utf-16",
+            "--offset-encoding=utf-16", -- needed for null-ls
             "--limit-results=0",
         },
     },
@@ -143,3 +146,26 @@ end
 for server, config in pairs(enabled_lsp) do
     setup_server(server, config)
 end
+
+-- Make sure we don't set tagfunc C/C++ stuff when clangd is working since I want ctags over LSP tags
+local group_id = vim.api.nvim_create_augroup("Custom LSP", {}) -- defaults to clear = true
+
+local wk = require("which-key")
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
+    pattern = { "*.c", "*.h", "*.cpp" },
+    group = group_id,
+    callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        -- I want to use Ctags over the LSP stuff for PMD decomp since I
+        -- also have assembly files with tags that are referenced.
+        -- TODO: create a better detection to do this for PMD?
+        vim.bo[bufnr].tagfunc = ""
+
+        -- Register this custom command we get from Clangd LSP
+        wk.register({
+            la = { '<cmd>ClangdSwitchSourceHeader<CR>', 'lsp-switch-header/src' },
+        }, { prefix = "<leader>" })
+    end
+})
