@@ -35,7 +35,6 @@ vim.opt.regexpengine = 0
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.lazyredraw = true
 vim.opt.shortmess = 'FaWc'
 
 vim.opt.foldmethod = 'syntax'
@@ -66,7 +65,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 
 -- Line numbers
 -- List of filetypes to ignore my relativenumber/number settings
-local number_ftToIgnore = { 'Trouble', 'vista', 'vista_kind', 'qf' };
+local number_ftToIgnore = { 'Trouble', 'vista', 'vista_kind', 'help' };
 
 -- check if the filetype is in my ignore list
 local function in_ignoreList(filetype)

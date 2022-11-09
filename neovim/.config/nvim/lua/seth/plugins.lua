@@ -64,6 +64,7 @@ Plug 'jbyuki/one-small-step-for-vimkind'
 -- Telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'benfowler/telescope-luasnip.nvim'
 
 Plug 'folke/which-key.nvim'
 Plug 'kyazdani42/nvim-web-devicons'

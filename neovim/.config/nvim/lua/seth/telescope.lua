@@ -28,6 +28,7 @@ require("telescope").setup {
 -- load_extension, somewhere after setup function:
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("dap")
+require("telescope").load_extension("luasnip")
 
 wk.register({
     t = {
@@ -38,6 +39,7 @@ wk.register({
         g = { '<cmd>Telescope live_grep<cr>', 'grep' },
         h = { '<cmd>Telescope help_tags<cr>', 'help-tags' },
         l = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'telescope-line' },
+        n = { '<cmd>Telescope luasnip<cr>', 'telescope-luasnip' },
         t = { '<cmd>Telescope tags<cr>', 'project-tags' },
     },
 }, { prefix = '<leader>' })
