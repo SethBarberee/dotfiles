@@ -6,6 +6,7 @@ local ftMap = {
     --vim = 'indent',
     --python = {'indent'},
     --git = ''
+    asm = 'treesitter',
 }
 
 -- From the README to add a arrow with number of lines folded to the line
@@ -59,14 +60,12 @@ wk.register({
         M = {'<cmd>lua ufo.closeAllFolds()'},
         r = {'<cmd>lua ufo.openFoldsExceptKinds()'},
         m = {'<cmd>lua ufo.closeFoldsWith()'}, -- closeAllFolds == closeFoldsWith(0)
+        h = {function()
+                local winid = require('ufo').peekFoldedLinesUnderCursor()
+                if not winid then
+                    -- nvimlsp
+                    vim.lsp.buf.hover()
+                end
+            end, "See folded lines"}
     },
 })
-
--- TODO: figure out how to add this to which-key so we can keep the conflict detection
-vim.keymap.set('n', '<leader>lh', function()
-    local winid = require('ufo').peekFoldedLinesUnderCursor()
-    if not winid then
-        -- nvimlsp
-        vim.lsp.buf.hover()
-    end
-end)

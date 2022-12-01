@@ -1,3 +1,16 @@
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.asm = {
+  install_info = {
+    url = "~/tree-sitter-asm", -- local path or git repo
+    files = {"src/parser.c"},
+    -- optional entries:
+    --branch = "main", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+  filetype = "asm", -- if filetype does not match the parser name
+}
+
 require('nvim-treesitter.configs').setup {
     -- Make sure these are installed
     ensure_installed = "all",
@@ -50,8 +63,8 @@ require('nvim-treesitter.configs').setup {
                 ["if"] =  "@function.inner",
                 ["al"] =  "@loop.outer",
                 ["il"] =  "@loop.inner",
-                ["av"] = "@variable.outer",
-                ["iv"] = "@variable.inner",
+                ["av"] =  "@parameter.outer",
+                ["iv"] =  "@parameter.inner",
             },
             -- You can choose the select mode (default is charwise 'v')
             selection_modes = {

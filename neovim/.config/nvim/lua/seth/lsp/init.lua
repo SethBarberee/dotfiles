@@ -1,42 +1,63 @@
-local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
-}
+local handlers = require "seth.lsp.handlers"
 
 -- Get capabilities from nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local updated_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Tell the server the capability of foldingRange,
 -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
-capabilities.textDocument.foldingRange = {
+updated_capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
 }
 
+local augroup_format = vim.api.nvim_create_augroup("Custom LSP Format", {}) -- defaults to clear = true
+
+local autocmd_format = function(async, filter)
+  vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = 0,
+    callback = function()
+      vim.lsp.buf.format { async = async, filter = filter }
+    end,
+  })
+end
+
+local wk = require("which-key")
+local filetype_attach = setmetatable({
+
+  python = function()
+    autocmd_format(false)
+  end,
+
+  c = function()
+        -- I want to use Ctags over the LSP stuff for PMD decomp since I
+        -- also have assembly files with tags that are referenced.
+        -- TODO: create a better detection to do this for PMD?
+        vim.bo.tagfunc = ""
+
+        -- Register this custom command we get from Clangd LSP
+        wk.register({
+            la = { '<cmd>ClangdSwitchSourceHeader<CR>', 'lsp-switch-header/src' },
+        }, { prefix = "<leader>" })
+
+  end,
+
+}, {
+  __index = function()
+    return function() end
+  end,
+})
+
 -- Set up our lsp clients with the right options..
-local lsp_setup = function(client, bufnr)
-    local caps = client.server_capabilities
-    require("nvim-navic").attach(client, bufnr)
-end
-
-local custom_setup = function(client)
+local custom_attach = function(client)
     local bufnr = vim.api.nvim_get_current_buf()
-    lsp_setup(client, bufnr)
-end
 
--- Made this a function so I can re-use for luadev/sumneko_lua
-local function overwrite_config(config)
-    -- Add in our updated capabilities and handler/attach setup function
-    config = vim.tbl_deep_extend("force", {
-        on_attach = custom_setup,
-        capabilities = capabilities,
-        handlers = handlers,
-        --flags = {
-        --  debounce_text_changes = nil,
-        --},
-    }, config)
+    require("nvim-navic").attach(client, bufnr)
 
-    return config
+    local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+
+    filetype_attach[filetype](client)
+
 end
 
 local lspconfig = require('lspconfig')
@@ -44,18 +65,6 @@ local lspconfig = require('lspconfig')
 -- Add rounded border to all LSP windows
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
-local null_ls = require('null-ls')
-local nls_diags = null_ls.builtins.diagnostics
-local nls_format = null_ls.builtins.formatting
-local nls_codeActions = null_ls.builtins.code_actions
-
-null_ls.setup {
-    sources = {
-        nls_diags.vint.with({ extra_args = { "--enable-neovim" } }), -- use vint for vim files and enable neovim syntax
-        nls_format.trim_whitespace,
-        nls_codeActions.gitsigns,
-    },
-}
 
 -- Stolen from TJ DeVries and his glorious dotfiles
 --
@@ -75,7 +84,8 @@ local enabled_lsp = {
         },
         -- Pass our custom attach function here so rust_analyzer gets nvim-navic and other stuff
         server = {
-            on_attach = custom_setup,
+            on_attach = custom_attach,
+            capabilities = updated_capabilities,
         },
     },
     vimls = true,
@@ -85,8 +95,11 @@ local enabled_lsp = {
             "--background-index",
             "--clang-tidy",
             "--header-insertion=iwyu",
-            "--offset-encoding=utf-16", -- needed for null-ls
+            "--offset-encoding=utf-16", -- defaults to utf-16
             "--limit-results=0",
+        },
+        init_options = {
+          clangdFileStatus = true,
         },
     },
 
@@ -133,7 +146,15 @@ local setup_server = function(server, config)
         config = {}
     end
 
-    config = overwrite_config(config)
+    -- Add in our updated capabilities and handler/attach setup function
+    config = vim.tbl_deep_extend("force", {
+        on_attach = custom_attach,
+        capabilities = updated_capabilities,
+        handlers = handlers,
+        --flags = {
+        --  debounce_text_changes = nil,
+        --},
+    }, config)
 
     -- Run each setup
     if server ~= "rust_tools" then
@@ -147,25 +168,19 @@ for server, config in pairs(enabled_lsp) do
     setup_server(server, config)
 end
 
--- Make sure we don't set tagfunc C/C++ stuff when clangd is working since I want ctags over LSP tags
-local group_id = vim.api.nvim_create_augroup("Custom LSP", {}) -- defaults to clear = true
 
-local wk = require("which-key")
-vim.api.nvim_create_autocmd({ "LspAttach" }, {
-    pattern = { "*.c", "*.h", "*.cpp" },
-    group = group_id,
-    callback = function(args)
-        local bufnr = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
+-- NULL LS
 
-        -- I want to use Ctags over the LSP stuff for PMD decomp since I
-        -- also have assembly files with tags that are referenced.
-        -- TODO: create a better detection to do this for PMD?
-        vim.bo[bufnr].tagfunc = ""
+local null_ls = require('null-ls')
+local nls_diags = null_ls.builtins.diagnostics
+local nls_format = null_ls.builtins.formatting
+local nls_codeActions = null_ls.builtins.code_actions
 
-        -- Register this custom command we get from Clangd LSP
-        wk.register({
-            la = { '<cmd>ClangdSwitchSourceHeader<CR>', 'lsp-switch-header/src' },
-        }, { prefix = "<leader>" })
-    end
-})
+null_ls.setup {
+    sources = {
+        nls_diags.vint.with({ extra_args = { "--enable-neovim" } }), -- use vint for vim files and enable neovim syntax
+        nls_format.trim_whitespace,
+        nls_codeActions.gitsigns,
+        nls_format.black,
+    },
+}
