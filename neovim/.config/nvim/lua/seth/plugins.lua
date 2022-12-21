@@ -51,7 +51,8 @@ return {
     },
 
     'folke/which-key.nvim',
-    'rrethy/vim-hexokinase',
+
+    'NvChad/nvim-colorizer.lua',
 
     -- Utils
     'airblade/vim-rooter', -- auto cd to base dir of project

@@ -24,7 +24,7 @@ require("lazy").setup("seth.plugins", {
 vim.g.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- TODO move these to seth.plugins so we can abuse lua cache for lazy
-require('seth.hexokinase')
+require('seth.colorizer')
 require('seth.lsp')
 require('seth.cmp')
 require('seth.treesitter')
