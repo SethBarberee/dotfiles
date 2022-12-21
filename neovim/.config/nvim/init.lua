@@ -101,12 +101,12 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 })
 
 -- Set colorscheme
---vim.opt.termguicolors = true -- already set by colorscheme
 require('seth.challenger_deep')
 
 require('seth.mappings')
-require('seth.plugins')
-require('seth.impatient-config')
+
+-- Load plugins w/ lazy package manager
+require('seth.lazy')
 
 -- Better diff (https://vimways.org/2018/the-power-of-diff)
 vim.opt.diffopt:append('algorithm:patience')
@@ -118,7 +118,8 @@ vim.opt.diffopt:append('indent-heuristic')
 --
 if vim.fn.exists(':DiffOrig') == 0 then
     local command = 'vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis| wincmd p | diffthis'
-    vim.api.nvim_create_user_command('DiffOrig', command, {desc = 'Check difference between current buffer and file it was loaded from'})
+    vim.api.nvim_create_user_command('DiffOrig', command,
+        { desc = 'Check difference between current buffer and file it was loaded from' })
 end
 
 vim.g.default_path = vim.fn.escape(vim.g.path, '\\ ')

@@ -1,141 +1,121 @@
--- vim-plug in Lua!
--- Thanks to this blog post:
--- https://dev.to/vonheikemen/neovim-using-vim-plug-in-lua-3oom
+return {
 
--- Vim Plug Settings
--- Check if VimPlug exists. If not, download it
+    -- Looks/UI
 
-vim.g.plugpath = vim.fn.expand('<sfile>:p:h') .. '/autoload/plug.vim'
-vim.g.plugurl = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    -- TODO: port local challenger-deep lua theme to plugin..
+    { "challenger-deep-theme/vim", name = "challenger-deep" },
+    'nvim-lua/plenary.nvim',
+    'nvim-lualine/lualine.nvim', -- statusline
+    'edkolev/tmuxline.vim', -- tmux statusline based on statusline
+    'lukas-reineke/indent-blankline.nvim',
+    'rrethy/vim-illuminate',
+    'nvim-tree/nvim-web-devicons',
+    'folke/lazy.nvim',
 
-if vim.fn.filereadable(vim.g.plugpath) == 0 then
-    if vim.fn.executable('curl') == 1 then
-        vim.cmd([[
-            call system('curl -fLo ' . shellescape(g:plugpath) . ' --create-dirs ' . g:plugurl)
-        ]])
-        if vim.v.shell_error ~= 0 then
-            vim.fn.echom("Error downloading vim-plug. Please install it manually.\n")
-            vim.fn.exit()
-        end
-    else
-        vim.fn.echom("vim-plug not installed. Please install it manually or install curl.\n")
-        vim.fn.exit()
-    end
-end
+    {
+        'nvim-neo-tree/neo-tree.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim', -- for neotree
+        },
+    },
 
-local Plug = vim.fn['plug#']
+    -- Better folding (using LSP and treesitter)
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies = {
+            'kevinhwang91/promise-async',
+        },
+    },
 
-vim.call('plug#begin', '~/.local/share/nvim/plugged')
+    'simrat39/rust-tools.nvim',
 
--- Check if we have plugins installed and install if we don't
-vim.cmd([[if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-    autocmd VimEnter * PlugInstall | q
-endif]])
+    -- Nvim DAP
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = {
+            'mfussenegger/nvim-dap-python',
+            'theHamsta/nvim-dap-virtual-text',
+            'rcarriga/nvim-dap-ui',
+            'nvim-telescope/telescope-dap.nvim',
+            'jbyuki/one-small-step-for-vimkind',
+        }
+    },
 
-Plug 'lewis6991/impatient.nvim'
+    -- Telescope
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = {
+            'nvim-telescope/telescope-ui-select.nvim',
+            'benfowler/telescope-luasnip.nvim',
+        }
+    },
 
--- Looks/UI
+    'folke/which-key.nvim',
+    'rrethy/vim-hexokinase',
 
--- TODO: port local challenger-deep lua theme to plugin..
-Plug('challenger-deep-theme/vim', { as = 'challenger-deep' })
-Plug 'j-hui/fidget.nvim' -- Lsp status notifications
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim' -- statusline
-Plug 'edkolev/tmuxline.vim' -- tmux statusline based on statusline
-Plug 'SmiteshP/nvim-gps'
-Plug 'SmiteshP/nvim-navic'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'rrethy/vim-illuminate'
-Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'MunifTanjim/nui.nvim' -- for neotree
+    -- Utils
+    'airblade/vim-rooter', -- auto cd to base dir of project
+    'numToStr/Comment.nvim',
 
--- Better folding (using LSP and treesitter)
-Plug 'kevinhwang91/promise-async' -- needed for nvim-ufo
-Plug 'kevinhwang91/nvim-ufo'
+    -- Tags
+    'ludovicchabant/vim-gutentags', --tag management
+    'liuchengxu/vista.vim',
 
-Plug 'simrat39/rust-tools.nvim'
+    -- Git
+    'tpope/vim-fugitive',
+    'lewis6991/gitsigns.nvim',
 
--- Nvim DAP
-Plug 'mfussenegger/nvim-dap'
-Plug 'mfussenegger/nvim-dap-python'
-Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'nvim-telescope/telescope-dap.nvim'
-Plug 'jbyuki/one-small-step-for-vimkind'
+    -- Snippets
+    {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+        }
+    },
 
--- Telescope
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'benfowler/telescope-luasnip.nvim'
+    'sgur/vim-editorconfig', -- to honor editorconfig
 
-Plug 'folke/which-key.nvim'
-Plug('rrethy/vim-hexokinase', { ['do'] = vim.fn['make hexokinase'] }) -- TODO check out nvim-colorizer
+    -- Markdown Rendering
+    { 'iamcco/markdown-preview.nvim', ft = "markdown" },
 
--- Utils
-Plug 'airblade/vim-rooter' -- auto cd to base dir of project
-Plug 'numToStr/Comment.nvim'
+    -- Treesitter Plugins
+    {
+        'nvim-treesitter/nvim-treesitter',
+        dependencies = {
+            'nvim-treesitter/playground',
+            'nvim-treesitter/nvim-treesitter-refactor',
+            'nvim-treesitter/nvim-treesitter-context',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            'SmiteshP/nvim-gps',
+        }
+    },
 
--- Tags
-Plug 'ludovicchabant/vim-gutentags' --tag management
-Plug 'liuchengxu/vista.vim'
+    -- LSP Plugins
+    {
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            'glepnir/lspsaga.nvim',
+            "j-hui/fidget.nvim", -- Lsp status notifications
+            'SmiteshP/nvim-navic',
+        }
+    },
+    'jose-elias-alvarez/null-ls.nvim',
 
--- Git
-Plug 'tpope/vim-fugitive'
-Plug 'lewis6991/gitsigns.nvim'
 
--- Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
-
-Plug 'sgur/vim-editorconfig' -- to honor editorconfig
-
--- Markdown Rendering
-Plug('iamcco/markdown-preview.nvim', { ['do'] = vim.fn['cd app & yarn install'], ['for'] = 'markdown' })
-
--- Treesitter Plugins
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = vim.fn[':TSUpdate'] })
-Plug 'nvim-treesitter/playground'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-
--- LSP Plugins
-Plug 'neovim/nvim-lspconfig'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'glepnir/lspsaga.nvim'
-
--- NVIM cmp / autocomplete
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'ii14/emmylua-nvim' -- NVIM Lua documentation/completion
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'quangnguyen30192/cmp-nvim-tags'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'onsails/lspkind.nvim'
-
-vim.call('plug#end')
-
--- For nvim-cmp
-vim.g.completeopt = { 'menu', 'menuone', 'noselect' }
-
-require('seth.hexokinase')
-require('seth.lsp')
-require('seth.cmp')
-require('seth.treesitter')
-require('seth.which_key')
-require('seth.indent-blankline')
-require('seth.fidget')
-require('seth.gps')
-require('seth.dap')
-require('seth.lualine')
-require('seth.navic')
-require('seth.diagnostic')
-require('seth.telescope')
-require('seth.gitsigns')
-require('seth.comment')
-require('seth.ufo')
+    -- NVIM cmp / autocomplete
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            'quangnguyen30192/cmp-nvim-tags',
+            'saadparwaiz1/cmp_luasnip',
+        }
+    },
+    'ii14/emmylua-nvim',
+    'onsails/lspkind.nvim',
+}
