@@ -84,11 +84,11 @@ function challenger_deeper.highlight(group, color)
 
     local ctermfg = 'ctermfg=NONE'
     local ctermbg = 'ctermbg=NONE'
-    local bg = 'guibg=NONE'
-    local fg = 'guifg=NONE'
-    local sp  = 'guisp=NONE'
-    local gui  = 'gui=NONE'
-    local cterm = 'cterm=NONE'
+    local bg      = 'guibg=NONE'
+    local fg      = 'guifg=NONE'
+    local sp      = 'guisp=NONE'
+    local gui     = 'gui=NONE'
+    local cterm   = 'cterm=NONE'
 
     if color.fg ~= nil then
         fg = color.fg.gui and 'guifg=' .. color.fg.gui
@@ -177,7 +177,7 @@ function challenger_deeper.load_syntax()
         Visual = { bg = challenger_deeper.visual };
         WarningMsg = { fg = challenger_deeper.yellow };
         WildMenu = { fg = challenger_deeper.bg_subtle, bg = challenger_deeper.cyan };
-        Folded = {link = 'PmenuSbar'};
+        Folded = { link = 'PmenuSbar' };
         FoldColumn = { fg = challenger_deeper.yellow };
         Pmenu = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle };
         PmenuSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
@@ -271,6 +271,12 @@ function challenger_deeper.load_plugin_syntax()
         GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
 
 
+        NeoTreeGitAdded = { fg = challenger_deeper.green };
+        NeoTreeGitModified = { fg = challenger_deeper.yellow };
+        NeoTreeGitDeleted = { fg = challenger_deeper.red };
+        NeoTreeDotfile = { fg = challenger_deeper.white };
+
+
         --LspDiagnosticsSignError = {fg=challenger_deeper.red};
         --LspDiagnosticsSignWarning = {fg=challenger_deeper.yellow};
         --LspDiagnosticsSignInformation = {fg=challenger_deeper.blue};
@@ -299,13 +305,13 @@ function challenger_deeper.load_plugin_syntax()
         -- nvim-cmp
         -- TODO: Maybe use the TS Highlight groups?
         -- Currently, doing a VSCode style
-        CmpItemAbbrMatchFuzzy = {bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
-        CmpItemAbbrMatch = {bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
+        CmpItemAbbrMatchFuzzy = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
+        CmpItemAbbrMatch = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
 
-        CmpItemKindFunction = {fg = challenger_deeper.purple };
+        CmpItemKindFunction = { fg = challenger_deeper.purple };
         CmpItemKindMethod = { link = 'CmpItemKindFunction' };
-        
-        CmpItemKindModule = {fg = challenger_deeper.yellow };
+
+        CmpItemKindModule = { fg = challenger_deeper.yellow };
         CmpItemKindClass = { link = 'CmpItemKindModule' };
         CmpItemKindProperty = { link = 'CmpItemKindModule' };
         CmpItemKindField = { link = 'CmpItemKindModule' };
@@ -315,11 +321,11 @@ function challenger_deeper.load_plugin_syntax()
         CmpItemKindNamespace = { link = 'CmpItemKindModule' };
         CmpItemKindFile = { link = 'CmpItemKindModule' };
 
-        CmpItemKindValue = {fg = challenger_deeper.dark_cyan };
+        CmpItemKindValue = { fg = challenger_deeper.dark_cyan };
 
-        CmpItemKindVariable = {fg = challenger_deeper.blue };
+        CmpItemKindVariable = { fg = challenger_deeper.blue };
         CmpItemKindTypeParameter = { link = 'CmpItemKindVariable' };
-        
+
         -- nvim-scrollbar
         ScrollbarWarn = { fg = challenger_deeper.dark_yellow };
         ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow };
@@ -346,18 +352,23 @@ function challenger_deeper.load_plugin_syntax()
         NavicIconsVariable = { link = 'CmpItemKindVariable' };
         NavicIconsConstant = { link = 'CmpItemKindConstant' };
         NavicIconsString = { link = 'CmpItemKindValue' };
-        NavicIconsNumber = {  link = 'CmpItemKindValue' };
+        NavicIconsNumber = { link = 'CmpItemKindValue' };
         NavicIconsBoolean = { link = 'CmpItemKindValue' };
-        NavicIconsArray = {  link = 'CmpItemKindValue' };
+        NavicIconsArray = { link = 'CmpItemKindValue' };
         NavicIconsObject = { link = 'CmpItemKindValue' };
         NavicIconsKey = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow };
         NavicIconsNull = { link = 'CmpItemKindValue' };
-        NavicIconsStruct = { link = 'CmpItemKindStruct'};
+        NavicIconsStruct = { link = 'CmpItemKindStruct' };
         NavicIconsEvent = { link = 'CmpItemKindEvent' };
         NavicIconsOperator = { link = 'CmpItemKindValue' };
         NavicIconsTypeParameter = { link = 'CmpItemKindTypeParameter' };
         NavicText = { link = 'Normal' };
         NavicSeparator = { bg = challenger_deeper.bg, fg = challenger_deeper.white };
+
+        -- Link up Null-LS windows to be like LspInfo
+        NullLsInfoTitle = { link = 'LspInfoTitle' };
+        NullLsInfoBorder = { link = 'LspInfoBorder' };
+        NullLsInfoSources = { link = 'Type' };
     }
     return plugin_syntax
 end

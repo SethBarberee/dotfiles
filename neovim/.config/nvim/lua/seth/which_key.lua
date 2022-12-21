@@ -4,6 +4,7 @@ wk.setup {
     window = {
         border = "rounded",
     },
+    disable = { filetypes = { "neo-tree" } },
 }
 
 wk.register({

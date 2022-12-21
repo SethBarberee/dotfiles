@@ -1,14 +1,14 @@
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.asm = {
-  install_info = {
-    url = "~/tree-sitter-asm", -- local path or git repo
-    files = {"src/parser.c"},
-    -- optional entries:
-    --branch = "main", -- default branch in case of git repo if different from master
-    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-  },
-  filetype = "asm", -- if filetype does not match the parser name
+    install_info = {
+        url = "~/tree-sitter-asm", -- local path or git repo
+        files = { "src/parser.c" },
+        -- optional entries:
+        --branch = "main", -- default branch in case of git repo if different from master
+        generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+        requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+    },
+    filetype = "asm", -- if filetype does not match the parser name
 }
 
 require('nvim-treesitter.configs').setup {
@@ -17,9 +17,11 @@ require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true, -- false will disable the whole extension
         additional_vim_regex_highlighting = "vim",
-        disable = function(lang, bufnr) -- Disable in large C buffers (found that 2000 lines is a good limit)
-            return lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 6000
-        end,
+
+        -- Seems like treesitter is a lot better now so let's enable it for every c file again
+        --disable = function(lang, bufnr) -- Disable in large C buffers
+        --    return lang == "c" and vim.api.nvim_buf_line_count(bufnr) > 8000
+        --end,
     },
     indent = {
         enable = true,
@@ -57,14 +59,14 @@ require('nvim-treesitter.configs').setup {
 
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
-                ["ac"] =  "@conditional.outer",
-                ["ic"] =  "@conditional.inner",
-                ["af"] =  "@function.outer",
-                ["if"] =  "@function.inner",
-                ["al"] =  "@loop.outer",
-                ["il"] =  "@loop.inner",
-                ["av"] =  "@parameter.outer",
-                ["iv"] =  "@parameter.inner",
+                ["ac"] = "@conditional.outer",
+                ["ic"] = "@conditional.inner",
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["al"] = "@loop.outer",
+                ["il"] = "@loop.inner",
+                ["av"] = "@parameter.outer",
+                ["iv"] = "@parameter.inner",
             },
             -- You can choose the select mode (default is charwise 'v')
             selection_modes = {

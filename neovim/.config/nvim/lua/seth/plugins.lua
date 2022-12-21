@@ -46,6 +46,9 @@ Plug 'SmiteshP/nvim-gps'
 Plug 'SmiteshP/nvim-navic'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'rrethy/vim-illuminate'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim' -- for neotree
 
 -- Better folding (using LSP and treesitter)
 Plug 'kevinhwang91/promise-async' -- needed for nvim-ufo
@@ -67,7 +70,6 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'benfowler/telescope-luasnip.nvim'
 
 Plug 'folke/which-key.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug('rrethy/vim-hexokinase', { ['do'] = vim.fn['make hexokinase'] }) -- TODO check out nvim-colorizer
 
 -- Utils

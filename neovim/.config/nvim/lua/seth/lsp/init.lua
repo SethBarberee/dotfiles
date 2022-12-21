@@ -13,23 +13,27 @@ updated_capabilities.textDocument.foldingRange = {
 local augroup_format = vim.api.nvim_create_augroup("Custom LSP Format", {}) -- defaults to clear = true
 
 local autocmd_format = function(async, filter)
-  vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    buffer = 0,
-    callback = function()
-      vim.lsp.buf.format { async = async, filter = filter }
-    end,
-  })
+    vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = 0,
+        callback = function()
+            vim.lsp.buf.format { async = async, filter = filter }
+        end,
+    })
 end
 
 local wk = require("which-key")
 local filetype_attach = setmetatable({
 
-  python = function()
-    autocmd_format(false)
-  end,
+    python = function()
+        autocmd_format(false)
+    end,
 
-  c = function()
+    lua = function()
+        autocmd_format(false)
+    end,
+
+    c = function()
         -- I want to use Ctags over the LSP stuff for PMD decomp since I
         -- also have assembly files with tags that are referenced.
         -- TODO: create a better detection to do this for PMD?
@@ -40,12 +44,12 @@ local filetype_attach = setmetatable({
             la = { '<cmd>ClangdSwitchSourceHeader<CR>', 'lsp-switch-header/src' },
         }, { prefix = "<leader>" })
 
-  end,
+    end,
 
 }, {
-  __index = function()
-    return function() end
-  end,
+    __index = function()
+        return function() end
+    end,
 })
 
 -- Set up our lsp clients with the right options..
@@ -95,13 +99,14 @@ local enabled_lsp = {
             "--background-index",
             "--clang-tidy",
             "--header-insertion=iwyu",
-            "--offset-encoding=utf-16", -- defaults to utf-16
+            --"--offset-encoding=utf-32", -- defaults to utf-16
             "--limit-results=0",
         },
         init_options = {
-          clangdFileStatus = true,
+            clangdFileStatus = true,
         },
     },
+    --ccls = true,
 
     sumneko_lua = {
         settings = {
@@ -183,4 +188,17 @@ null_ls.setup {
         nls_codeActions.gitsigns,
         nls_format.black,
     },
+    on_init = function(new_client, _)
+        --local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+    end,
+    should_attach = function(bufnr)
+        local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+
+        -- I don't want null-ls to on when using clangd/ccls and messing with offset-encoding
+        if filetype == 'c' or filetype == "cpp" then
+            return false
+        end
+        return true
+    end,
+    border = 'rounded',
 }

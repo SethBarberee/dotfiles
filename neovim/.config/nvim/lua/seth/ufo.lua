@@ -1,6 +1,6 @@
 local wk = require("which-key")
 
--- Allow to override the LSP -> indent normal routine.. 
+-- Allow to override the LSP -> indent normal routine..
 -- We could use treesitter -> indent if we really wanted to
 local ftMap = {
     --vim = 'indent',
@@ -24,7 +24,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         else
             chunkText = truncate(chunkText, targetWidth - curWidth)
             local hlGroup = chunk[2]
-            table.insert(newVirtText, {chunkText, hlGroup})
+            table.insert(newVirtText, { chunkText, hlGroup })
             chunkWidth = vim.fn.strdisplaywidth(chunkText)
             -- str width returned from truncate() may less than 2nd argument, need padding
             if curWidth + chunkWidth < targetWidth then
@@ -34,7 +34,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         end
         curWidth = curWidth + chunkWidth
     end
-    table.insert(newVirtText, {suffix, 'MoreMsg'})
+    table.insert(newVirtText, { suffix, 'PreProc' }) -- set the highlighting of the folded line count
     return newVirtText
 end
 
@@ -56,16 +56,16 @@ require('ufo').setup({
 -- normal ones do
 wk.register({
     z = {
-        R = {'<cmd>lua ufo.openAllFolds()'},
-        M = {'<cmd>lua ufo.closeAllFolds()'},
-        r = {'<cmd>lua ufo.openFoldsExceptKinds()'},
-        m = {'<cmd>lua ufo.closeFoldsWith()'}, -- closeAllFolds == closeFoldsWith(0)
-        h = {function()
-                local winid = require('ufo').peekFoldedLinesUnderCursor()
-                if not winid then
-                    -- nvimlsp
-                    vim.lsp.buf.hover()
-                end
-            end, "See folded lines"}
+        R = { '<cmd>lua ufo.openAllFolds()' },
+        M = { '<cmd>lua ufo.closeAllFolds()' },
+        r = { '<cmd>lua ufo.openFoldsExceptKinds()' },
+        m = { '<cmd>lua ufo.closeFoldsWith()' }, -- closeAllFolds == closeFoldsWith(0)
+        h = { function()
+            local winid = require('ufo').peekFoldedLinesUnderCursor()
+            if not winid then
+                -- nvimlsp
+                vim.lsp.buf.hover()
+            end
+        end, "See folded lines" }
     },
 })
