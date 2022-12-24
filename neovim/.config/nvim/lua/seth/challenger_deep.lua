@@ -295,7 +295,7 @@ function challenger_deeper.load_plugin_syntax()
         --NvimTreeFolderName = {fg=challenger_deeper.blue};
         --NvimTreeRootFolder = {fg=challenger_deeper.red,gui='bold'};
         --NvimTreeSpecialFile = {fg=challenger_deeper.fg, bg=challenger_deeper.none,stryle='NONE'};
-        --TelescopeBorder = {fg=challenger_deeper.teal};
+        TelescopeBorder = { link = 'LspInfoBorder' };
         --TelescopePromptBorder = {fg=challenger_deeper.blue};
         --TelescopeMatching = {fg=challenger_deeper.teal};
         --TelescopeSelection = {fg=challenger_deeper.yellow, bg=challenger_deeper.bg_highlight,gui= 'bold'};
