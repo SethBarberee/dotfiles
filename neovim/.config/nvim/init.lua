@@ -42,6 +42,7 @@ vim.opt.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 
 vim.opt.signcolumn = 'auto:3'
+vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.g.python_host_prog = '/usr/bin/python2'
 vim.g.python3_host_prog = '/usr/bin/python3'
@@ -102,7 +103,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 
 -- Set colorscheme
 require('seth.challenger_deep')
-
+require('seth.diagnostic')
 require('seth.mappings')
 
 -- Load plugins w/ lazy package manager

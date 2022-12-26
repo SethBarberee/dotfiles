@@ -1,3 +1,0 @@
-require("nvim-gps").setup {
-
-}

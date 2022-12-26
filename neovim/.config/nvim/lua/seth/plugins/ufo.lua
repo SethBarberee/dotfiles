@@ -1,4 +1,9 @@
-local wk = require("which-key")
+local M = {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+        'kevinhwang91/promise-async',
+    },
+}
 
 -- Allow to override the LSP -> indent normal routine..
 -- We could use treesitter -> indent if we really wanted to
@@ -38,34 +43,41 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
-require('ufo').setup({
-    fold_virt_text_handler = handler,
-    provider_selector = function(bufnr, filetype, buftype)
-        -- return a string type use internal providers
-        -- return a string in a table like a string type
-        -- return empty string '' will disable any providers
-        -- return `nil` will use default value {'lsp', 'indent'}
+function M.config()
+    require('ufo').setup({
+        fold_virt_text_handler = handler,
+        provider_selector = function(bufnr, filetype, buftype)
+            -- return a string type use internal providers
+            -- return a string in a table like a string type
+            -- return empty string '' will disable any providers
+            -- return `nil` will use default value {'lsp', 'indent'}
 
-        -- if you prefer treesitter provider rather than lsp,
-        -- return ftMap[filetype] or {'treesitter', 'indent'}
-        return ftMap[filetype]
-    end
-})
+            -- if you prefer treesitter provider rather than lsp,
+            -- return ftMap[filetype] or {'treesitter', 'indent'}
+            return ftMap[filetype]
+        end
+    })
 
--- We have to override the normal bindings with UFOs because these don't override the foldlevel like the
--- normal ones do
-wk.register({
-    z = {
-        R = { '<cmd>lua ufo.openAllFolds()' },
-        M = { '<cmd>lua ufo.closeAllFolds()' },
-        r = { '<cmd>lua ufo.openFoldsExceptKinds()' },
-        m = { '<cmd>lua ufo.closeFoldsWith()' }, -- closeAllFolds == closeFoldsWith(0)
-        h = { function()
-            local winid = require('ufo').peekFoldedLinesUnderCursor()
-            if not winid then
-                -- nvimlsp
-                vim.lsp.buf.hover()
-            end
-        end, "See folded lines" }
-    },
-})
+    local wk = require("which-key")
+
+    -- We have to override the normal bindings with UFOs because these don't override the foldlevel like the
+    -- normal ones do
+    wk.register({
+        z = {
+            R = { '<cmd>lua ufo.openAllFolds()' },
+            M = { '<cmd>lua ufo.closeAllFolds()' },
+            r = { '<cmd>lua ufo.openFoldsExceptKinds()' },
+            m = { '<cmd>lua ufo.closeFoldsWith()' }, -- closeAllFolds == closeFoldsWith(0)
+            h = { function()
+                local winid = require('ufo').peekFoldedLinesUnderCursor()
+                if not winid then
+                    -- nvimlsp
+                    vim.lsp.buf.hover()
+                end
+            end, "See folded lines" }
+        },
+    })
+
+end
+
+return M
