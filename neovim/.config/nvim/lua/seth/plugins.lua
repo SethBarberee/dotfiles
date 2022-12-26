@@ -4,6 +4,7 @@ return {
 
     -- TODO: port local challenger-deep lua theme to plugin..
     { "challenger-deep-theme/vim", name = "challenger-deep" },
+    'folke/neodev.nvim',
     'nvim-lua/plenary.nvim',
     'nvim-lualine/lualine.nvim', -- statusline
     'edkolev/tmuxline.vim', -- tmux statusline based on statusline
@@ -11,6 +12,8 @@ return {
     'rrethy/vim-illuminate',
     'nvim-tree/nvim-web-devicons',
     'folke/lazy.nvim',
+    'folke/which-key.nvim',
+    'NvChad/nvim-colorizer.lua',
 
     {
         'nvim-neo-tree/neo-tree.nvim',
@@ -50,10 +53,6 @@ return {
         }
     },
 
-    'folke/which-key.nvim',
-
-    'NvChad/nvim-colorizer.lua',
-
     -- Utils
     'airblade/vim-rooter', -- auto cd to base dir of project
     'numToStr/Comment.nvim',
@@ -69,9 +68,10 @@ return {
     -- Snippets
     {
         'L3MON4D3/LuaSnip',
-        dependencies = {
-            'rafamadriz/friendly-snippets',
-        }
+        config = function()
+            require("luasnip").setup({})
+            require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+        end,
     },
 
     'sgur/vim-editorconfig', -- to honor editorconfig
@@ -82,6 +82,9 @@ return {
     -- Treesitter Plugins
     {
         'nvim-treesitter/nvim-treesitter',
+        build = function()
+            vim.cmd('TSUpdate')
+        end,
         dependencies = {
             'nvim-treesitter/playground',
             'nvim-treesitter/nvim-treesitter-refactor',

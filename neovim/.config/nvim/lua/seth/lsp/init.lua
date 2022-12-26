@@ -64,7 +64,11 @@ local custom_attach = function(client)
 
 end
 
+-- NOTE: has to be setup before lspconfig
+require("neodev").setup({})
+
 local lspconfig = require('lspconfig')
+
 
 -- Add rounded border to all LSP windows
 require('lspconfig.ui.windows').default_options.border = 'rounded'

@@ -42,4 +42,8 @@ wk.register({
         ["0"]     = { '<cmd>lua vim.lsp.buf.document_symbol()<cr>', 'lsp-docsymbol' },
         W         = { '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>', 'lsp-workspacesymbol' },
     },
+    s = {
+        name = "luasnip",
+        e    = { '<cmd>lua require("luasnip.loaders").edit_snippet_files()<cr>', 'luasnip-edit' },
+    },
 }, { prefix = "<leader>" })
