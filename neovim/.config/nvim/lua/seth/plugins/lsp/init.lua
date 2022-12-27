@@ -5,7 +5,6 @@ local M = {
         { "j-hui/fidget.nvim", config = true }, -- Lsp status notifications
         { 'SmiteshP/nvim-navic', config = { highlight = true } },
         { 'folke/neodev.nvim', config = true },
-        'simrat39/rust-tools.nvim',
     }
 }
 
@@ -93,18 +92,7 @@ function M.config()
     -- Tables within are the additional config that is passed to lspconfig
     local enabled_lsp = {
         pylsp = true,
-        rust_tools = {
-            tools = {
-                hover_actions = {
-                    auto_focus = true,
-                },
-            },
-            -- Pass our custom attach function here so rust_analyzer gets nvim-navic and other stuff
-            server = {
-                on_attach = custom_attach,
-                capabilities = updated_capabilities,
-            },
-        },
+        rust_analyzer = true,
         vimls = true,
         clangd = {
             cmd = {
@@ -180,11 +168,7 @@ function M.config()
         }, config)
 
         -- Run each setup
-        if server ~= "rust_tools" then
-            lspconfig[server].setup(config)
-        else
-            require('rust-tools').setup(config)
-        end
+        lspconfig[server].setup(config)
     end
 
     for server, config in pairs(enabled_lsp) do
