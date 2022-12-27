@@ -3,6 +3,7 @@
   "LuaSnip": { "branch": "master", "commit": "5570fd797eae0790affb54ea669a150cad76db5d" },
   "challenger-deep": { "branch": "master", "commit": "e3d5b7d9711c7ebbf12c63c2345116985656da0d" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
+  "cmp-dap": { "branch": "master", "commit": "d16f14a210cd28988b97ca8339d504533b7e09a4" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "59224771f91b86d1de12570b4070fe4ad7cd1eeb" },
   "cmp-nvim-lsp-signature-help": { "branch": "main", "commit": "d2768cb1b83de649d57d967085fe73c5e01f8fd7" },
   "cmp-nvim-lua": { "branch": "main", "commit": "d276254e7198ab7d00f117e88e223b4bd8c02d21" },

@@ -3,7 +3,25 @@ local M = {
     dependencies = {
         'mfussenegger/nvim-dap-python',
         { 'rcarriga/nvim-dap-ui', config = function()
-            require("dapui").setup()
+            require("dapui").setup({
+                expand_lines = vim.fn.has("nvim-0.7") == 1,
+                controls = {
+                    -- Needs at least nvim 0.8
+                    enabled = vim.fn.has("nvim-0.8") == 1,
+                    -- Display controls in this element
+                    element = "repl",
+                    icons = {
+                        pause = "",
+                        play = "",
+                        step_into = "",
+                        step_over = "",
+                        step_out = "",
+                        step_back = "",
+                        run_last = "",
+                        terminate = "",
+                    },
+                },
+            })
         end },
         { 'theHamsta/nvim-dap-virtual-text', config = true },
         'nvim-telescope/telescope-dap.nvim',
@@ -15,40 +33,48 @@ function M.config()
     local dap = require('dap')
     local wk = require("which-key")
 
+
+    -- cpp - c - rust
+    dap.adapters.lldb = {
+        name = 'lldb',
+        type = 'executable',
+        command = '/usr/bin/lldb-vscode',
+    }
+
     dap.configurations.cpp = {
         {
-            name = 'Launch',
-            type = 'rt_lldb',
+            name = "Launch file",
+            type = "lldb",
             request = "launch",
             program = function()
-                return vim.fn.input(
-                    "Path to executable: ",
-                    vim.fn.getcwd() .. "/",
-                    "file"
-                )
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
             end,
             cwd = '${workspaceFolder}',
-            stopOnEntry = false,
-            args = {},
-
-            -- 💀
-            -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-            --
-            --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-            --
-            -- Otherwise you might get the following error:
-            --
-            --    Error on launch: Failed to attach to the target process
-            --
-            -- But you should be aware of the implications:
-            -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-            -- runInTerminal = false,
+            stopAtEntry = false,
         },
     }
 
-    -- If you want to use this for Rust and C, add something like this:
+    -- Reuse cpp config for C
     dap.configurations.c = dap.configurations.cpp
-    dap.configurations.rust = dap.configurations.cpp
+
+    dap.configurations.rust = {
+        {
+            name = "Launch file",
+            type = "lldb",
+            request = "launch",
+
+            -- Taken from @rcarriga where it automatically figures out the debug file
+            program = function()
+                local metadata_json = vim.fn.system("cargo metadata --format-version 1 --no-deps")
+                local metadata = vim.fn.json_decode(metadata_json)
+                local target_name = metadata.packages[1].targets[1].name
+                local target_dir = metadata.target_directory
+                return target_dir .. "/debug/" .. target_name
+            end,
+            cwd = '${workspaceFolder}',
+        },
+    }
+
 
     dap.configurations.lua = {
         {
@@ -88,8 +114,21 @@ function M.config()
             -- TODO: also add functionality to close REPL console too
             t    = { '<cmd>lua require("dapui").toggle()<cr>', 'dap-ui toggle' },
             r    = { '<cmd>lua require("dap").continue()<cr>', 'dap run' },
+            l    = { '<cmd>lua require("dap").run_last()<cr>', 'dap run last' },
         }
     }, { prefix = '<leader>' })
+
+
+    local dap, dapui = require("dap"), require("dapui")
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
 end
 
 return M

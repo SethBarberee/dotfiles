@@ -8,6 +8,7 @@ local M = {
         'hrsh7th/cmp-nvim-lsp-signature-help',
         'quangnguyen30192/cmp-nvim-tags',
         'saadparwaiz1/cmp_luasnip',
+        'rcarriga/cmp-dap',
     }
 }
 
@@ -102,6 +103,12 @@ function M.config()
                 { name = 'buffer', keyword_length = 5 },
             }
         )
+    })
+
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+            { name = "dap" },
+        }
     })
 end
 
