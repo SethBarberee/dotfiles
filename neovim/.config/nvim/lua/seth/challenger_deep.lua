@@ -2,381 +2,311 @@
 -- Name:        challenger_deeper
 -- Version:     1.0
 -- Maintainer:  https://github.com/SethBarberee
--- Based On:    challenger_deep (https://www.github.com/challenger-deep-theme/vim)
+-- Based On:    challenger_deep (https://www.github.com/challenger-deep-theme/vim) and zephyr (https://www.github.com/glepnir/zephyr-nvim)
 --
--- This is mainly a port of challenger_deep to Lua to test the new APIs of Neovim
--- Still waiting for highlight linking to clean up some of this
-
 local challenger_deeper = {
 
     -- Colors
-    black         = { gui = '#212121', cterm = '0' };
-    medium_gray   = { gui = '#767676', cterm = '243' };
-    white         = { gui = '#F3F3F3', cterm = '15' };
-    actual_white  = { gui = '#FFFFFF', cterm = '231' };
-    light_black   = { gui = '#424242', cterm = '8' };
-    lighter_black = { gui = '#545454', cterm = '240' };
+    black         = '#212121',
+    medium_gray   = '#767676',
+    white         = '#F3F3F3',
+    actual_white  = '#FFFFFF',
+    light_black   = '#424242',
+    lighter_black = '#545454',
 
     -- lighter shadows and darker grays
-    subtle_black = { gui = '#303030', cterm = '236' };
-    light_gray   = { gui = '#B2B2B2', cterm = '249' };
-    lighter_gray = { gui = '#C6C6C6', cterm = '251' };
+    subtle_black = '#303030',
+    light_gray   = '#B2B2B2',
+    lighter_gray = '#C6C6C6',
 
-    bg      = { gui = '#1E1C31', cterm = '233' };
-    asphalt = { gui = '#1E1C31', cterm = '233' };
+    bg      = '#1E1C31',
+    asphalt = '#1E1C31',
 
-    asphalt_subtle = { gui = '#100E23', cterm = '232' };
-    bg_subtle      = { gui = '#100E23', cterm = '232' };
+    asphalt_subtle = '#100E23',
+    bg_subtle      = '#100E23',
 
-    dark_asphalt = { gui = '#565575', cterm = '236' };
-    bg_dark      = { gui = '#565575', cterm = '236' };
-    visual       = { gui = '#565575', cterm = '236' };
+    dark_asphalt = '#565575',
+    bg_dark      = '#565575',
+    visual       = '#565575',
 
-    red      = { gui = '#ff8080', cterm = '204' };
-    dark_red = { gui = '#ff5458', cterm = '203' };
+    red      = '#ff8080',
+    dark_red = '#ff5458',
 
-    green      = { gui = '#95ffa4', cterm = '120' };
-    dark_green = { gui = '#62d196', cterm = '119' };
+    green      = '#95ffa4',
+    dark_green = '#62d196',
 
-    yellow      = { gui = '#ffe9aa', cterm = '228' };
-    dark_yellow = { gui = '#ffb378', cterm = '215' };
+    yellow      = '#ffe9aa',
+    dark_yellow = '#ffb378',
 
-    blue      = { gui = '#91ddff', cterm = '159' };
-    dark_blue = { gui = '#65b2ff', cterm = '75' };
+    blue      = '#91ddff',
+    dark_blue = '#65b2ff',
 
-    purple      = { gui = '#c991e1', cterm = '141' };
-    dark_purple = { gui = '#906cff', cterm = '135' };
+    purple      = '#c991e1',
+    dark_purple = '#906cff',
 
-    cyan      = { gui = '#aaffe4', cterm = '122' };
-    dark_cyan = { gui = '#63f2f1', cterm = '121' };
+    cyan      = '#aaffe4',
+    dark_cyan = '#63f2f1',
 
-    clouds = { gui = '#cbe3e7', cterm = '253' };
-    norm   = { gui = '#cbe3e7', cterm = '253' };
+    clouds = '#cbe3e7',
+    norm   = '#cbe3e7',
 
-    dark_clouds = { gui = '#a6b3cc', cterm = '252' };
-    norm_subtle = { gui = '#a6b3cc', cterm = '252' };
+    dark_clouds = '#a6b3cc',
+    norm_subtle = '#a6b3cc',
 
-    fg = { gui = '#cbe3e7', cterm = '253' };
+    fg = '#cbe3e7',
 
-    none = 'NONE';
+    none = "NONE",
 }
 
 function challenger_deeper.terminal_color()
-    vim.g.terminal_color_0 = challenger_deeper.bg_dark.gui
-    vim.g.terminal_color_1 = challenger_deeper.red.gui
-    vim.g.terminal_color_2 = challenger_deeper.green.gui
-    vim.g.terminal_color_3 = challenger_deeper.yellow.gui
-    vim.g.terminal_color_4 = challenger_deeper.blue.gui
-    vim.g.terminal_color_5 = challenger_deeper.purple.gui
-    vim.g.terminal_color_6 = challenger_deeper.cyan.gui
-    vim.g.terminal_color_7 = challenger_deeper.clouds.gui
-    vim.g.terminal_color_8 = challenger_deeper.bg_subtle.gui
-    vim.g.terminal_color_9 = challenger_deeper.dark_red.gui
-    vim.g.terminal_color_10 = challenger_deeper.dark_green.gui
-    vim.g.terminal_color_11 = challenger_deeper.dark_yellow.gui
-    vim.g.terminal_color_12 = challenger_deeper.dark_blue.gui
-    vim.g.terminal_color_13 = challenger_deeper.dark_purple.gui
-    vim.g.terminal_color_14 = challenger_deeper.dark_cyan.gui
-    vim.g.terminal_color_15 = challenger_deeper.dark_clouds.gui
+    vim.g.terminal_color_0 = challenger_deeper.bg_dark
+    vim.g.terminal_color_1 = challenger_deeper.red
+    vim.g.terminal_color_2 = challenger_deeper.green
+    vim.g.terminal_color_3 = challenger_deeper.yellow
+    vim.g.terminal_color_4 = challenger_deeper.blue
+    vim.g.terminal_color_5 = challenger_deeper.purple
+    vim.g.terminal_color_6 = challenger_deeper.cyan
+    vim.g.terminal_color_7 = challenger_deeper.clouds
+    vim.g.terminal_color_8 = challenger_deeper.bg_subtle
+    vim.g.terminal_color_9 = challenger_deeper.dark_red
+    vim.g.terminal_color_10 = challenger_deeper.dark_green
+    vim.g.terminal_color_11 = challenger_deeper.dark_yellow
+    vim.g.terminal_color_12 = challenger_deeper.dark_blue
+    vim.g.terminal_color_13 = challenger_deeper.dark_purple
+    vim.g.terminal_color_14 = challenger_deeper.dark_cyan
+    vim.g.terminal_color_15 = challenger_deeper.dark_clouds
 end
 
-function challenger_deeper.highlight(group, color)
+local syntax = {
+    Normal = { fg = challenger_deeper.fg, bg = challenger_deeper.bg },
+    Cursor = { fg = challenger_deeper.bg_dark, bg = challenger_deeper.blue },
+    Comment = { fg = challenger_deeper.medium_gray, italic = true },
+    Constant = { fg = challenger_deeper.yellow },
+    String = { link = 'Constant' },
+    Character = { link = 'Constant' },
+    Number = { fg = challenger_deeper.dark_yellow },
+    Boolean = { fg = challenger_deeper.dark_yellow },
+    Float = { fg = challenger_deeper.dark_yellow },
+    Identifier = { fg = challenger_deeper.purple },
+    Function = { fg = challenger_deeper.purple },
+    Label = { fg = challenger_deeper.dark_blue },
+    Operator = { fg = challenger_deeper.dark_cyan },
+    Repeat = { fg = challenger_deeper.dark_cyan },
+    PreProc = { fg = challenger_deeper.green },
+    Include = { link = 'PreProc' },
+    Define = { link = 'PrePrec' },
+    Macro = { link = 'PreProc' },
+    PreCondit = { link = 'PreProc' },
+    Keyword = { fg = challenger_deeper.red },
+    Statement = { fg = challenger_deeper.red },
+    Conditional = { fg = challenger_deeper.red },
+    Exception = { fg = challenger_deeper.red },
+    Type = { fg = challenger_deeper.blue },
+    StorageClass = { fg = challenger_deeper.blue },
+    Structure = { fg = challenger_deeper.blue },
+    Typedef = { fg = challenger_deeper.blue },
+    Special = { fg = challenger_deeper.cyan },
+    SpecialChar = { fg = challenger_deeper.cyan },
+    Tag = { fg = challenger_deeper.cyan },
+    Delimiter = { fg = challenger_deeper.cyan },
+    SpecialComment = { fg = challenger_deeper.cyan },
+    Debug = { fg = challenger_deeper.cyan },
+    Ignore = { fg = challenger_deeper.dark_red, bg = challenger_deeper.bg_subtle, bold = true },
+    Underlined = { fg = challenger_deeper.norm, underline = true },
+    Error = { fg = challenger_deeper.dark_red, bg = challenger_deeper.bg_subtle, bold = true },
+    Todo = { fg = challenger_deeper.dark_yellow, bg = challenger_deeper.bg_subtle, bold = true },
+    SpecialKey = { fg = challenger_deeper.blue },
+    NonText = { fg = challenger_deeper.bg_dark },
+    Directory = { fg = challenger_deeper.purple },
+    ErrorMsg = { fg = challenger_deeper.dark_red },
+    IncSearch = { fg = challenger_deeper.clouds, bg = challenger_deeper.red },
+    Search = { bg = challenger_deeper.bg_dark },
+    MoreMsg = { fg = challenger_deeper.medium_gray, bold = true },
+    ModeMsg = { fg = challenger_deeper.medium_gray, bold = true },
+    LineNr = { fg = challenger_deeper.dark_asphalt, bg = challenger_deeper.bg_subtle },
+    CursorLineNr = { fg = challenger_deeper.blue, bg = challenger_deeper.bg_subtle, bold = true },
+    Question = { fg = challenger_deeper.red },
+    StatusLine = { bg = challenger_deeper.bg_dark },
+    Conceal = { fg = challenger_deeper.norm },
+    StatusLineNC = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.medium_gray },
+    VertSplit = { fg = challenger_deeper.bg_subtle },
+    Title = { fg = challenger_deeper.dark_blue },
+    Visual = { bg = challenger_deeper.visual },
+    WarningMsg = { fg = challenger_deeper.yellow },
+    WildMenu = { fg = challenger_deeper.bg_subtle, bg = challenger_deeper.cyan },
+    Folded = { link = 'PmenuSbar' },
+    FoldColumn = { fg = challenger_deeper.yellow },
+    Pmenu = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle },
+    PmenuSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark },
+    PmenuSbar = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark },
+    PmenuThumb = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark },
+    TabLine = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark },
+    TabLineSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle, bold = true },
+    TabLineFill = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark },
+    CursorColumn = { bg = challenger_deeper.bg_subtle },
+    CursorLine = { bg = challenger_deeper.bg_subtle },
+    ColorColumn = { bg = challenger_deeper.bg_subtle },
+    MatchParen = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.purple, bold = true },
+    qfLineNr = { fg = challenger_deeper.medium_gray },
+    SpellBad = { fg = challenger_deeper.dark_red, sp = challenger_deeper.dark_red,
+        underline = true },
+    SpellCap = { fg = challenger_deeper.green, sp = challenger_deeper.green, underline = true },
+    SpellRare = { fg = challenger_deeper.red, sp = challenger_deeper.red, underline = true },
+    SpellLocal = { fg = challenger_deeper.dark_green, sp = challenger_deeper.dark_green,
+        underline = true },
 
-    local ctermfg = 'ctermfg=NONE'
-    local ctermbg = 'ctermbg=NONE'
-    local bg      = 'guibg=NONE'
-    local fg      = 'guifg=NONE'
-    local sp      = 'guisp=NONE'
-    local gui     = 'gui=NONE'
-    local cterm   = 'cterm=NONE'
+    -- NVIM floating window theming
+    NormalFloat = { fg = challenger_deeper.fg, bg = challenger_deeper.bg },
+    FloatBorder = { fg = challenger_deeper.white, bg = challenger_deeper.bg },
 
-    if color.fg ~= nil then
-        fg = color.fg.gui and 'guifg=' .. color.fg.gui
-    end
+}
 
-    if color.bg ~= nil then
-        bg = color.bg.gui and 'guibg=' .. color.bg.gui
-    end
+local plugin_syntax = {
+    TreesitterContext = { bg = challenger_deeper.bg_dark },
 
-    if color.sp ~= nil then
-        sp = color.sp.gui and 'guisp=' .. color.sp.gui
-    end
-
-    if color.gui ~= nil then
-        gui = color.gui and 'gui=' .. color.gui
-    end
-
-    if color.cterm ~= nil then
-        cterm = color.cterm and 'cterm=' .. color.cterm
-    end
-
-    if color.link ~= nil then
-        vim.api.nvim_command('highlight! link ' .. group .. " " .. color.link)
-    else
-        vim.api.nvim_command('highlight ' .. group .. ' ' .. gui .. ' ' .. fg ..
-            ' ' .. bg .. ' ' .. cterm .. ' ' .. ctermfg .. ' ' .. ctermbg .. ' ' .. sp)
-    end
-
-end
-
-function challenger_deeper.load_syntax()
-    local syntax = {
-        Normal = { fg = challenger_deeper.fg, bg = challenger_deeper.bg };
-        Cursor = { fg = challenger_deeper.bg_dark, bg = challenger_deeper.blue };
-        Comment = { fg = challenger_deeper.medium_gray, gui = 'italic', cterm = 'italic' };
-        Constant = { fg = challenger_deeper.yellow };
-        String = { link = 'Constant' };
-        Character = { link = 'Constant' };
-        Number = { fg = challenger_deeper.dark_yellow };
-        Boolean = { fg = challenger_deeper.dark_yellow };
-        Float = { fg = challenger_deeper.dark_yellow };
-        Identifier = { fg = challenger_deeper.purple };
-        Function = { fg = challenger_deeper.purple };
-        Label = { fg = challenger_deeper.dark_blue };
-        Operator = { fg = challenger_deeper.dark_cyan };
-        Repeat = { fg = challenger_deeper.dark_cyan };
-        PreProc = { fg = challenger_deeper.green };
-        Include = { link = 'PreProc' };
-        Define = { link = 'PrePrec' };
-        Macro = { link = 'PreProc' };
-        PreCondit = { link = 'PreProc' };
-        Keyword = { fg = challenger_deeper.red };
-        Statement = { fg = challenger_deeper.red };
-        Conditional = { fg = challenger_deeper.red };
-        Exception = { fg = challenger_deeper.red };
-        Type = { fg = challenger_deeper.blue };
-        StorageClass = { fg = challenger_deeper.blue };
-        Structure = { fg = challenger_deeper.blue };
-        Typedef = { fg = challenger_deeper.blue };
-        Special = { fg = challenger_deeper.cyan };
-        SpecialChar = { fg = challenger_deeper.cyan };
-        Tag = { fg = challenger_deeper.cyan };
-        Delimiter = { fg = challenger_deeper.cyan };
-        SpecialComment = { fg = challenger_deeper.cyan };
-        Debug = { fg = challenger_deeper.cyan };
-        Ignore = { fg = challenger_deeper.dark_red, bg = challenger_deeper.bg_subtle, gui = 'bold' };
-        Underlined = { fg = challenger_deeper.norm, gui = 'underline', cterm = 'underline' };
-        Error = { fg = challenger_deeper.dark_red, bg = challenger_deeper.bg_subtle, gui = 'bold', cterm = 'bold' };
-        Todo = { fg = challenger_deeper.dark_yellow, bg = challenger_deeper.bg_subtle, gui = 'bold', cterm = 'bold' };
-        SpecialKey = { fg = challenger_deeper.blue };
-        NonText = { fg = challenger_deeper.bg_dark };
-        Directory = { fg = challenger_deeper.purple };
-        ErrorMsg = { fg = challenger_deeper.dark_red };
-        IncSearch = { fg = challenger_deeper.clouds, bg = challenger_deeper.red };
-        Search = { bg = challenger_deeper.bg_dark };
-        MoreMsg = { fg = challenger_deeper.medium_gray, gui = 'bold', cterm = 'bold' };
-        ModeMsg = { fg = challenger_deeper.medium_gray, gui = 'bold', cterm = 'bold' };
-        LineNr = { fg = challenger_deeper.dark_asphalt, bg = challenger_deeper.bg_subtle };
-        CursorLineNr = { fg = challenger_deeper.blue, bg = challenger_deeper.bg_subtle, gui = 'bold' };
-        Question = { fg = challenger_deeper.red };
-        StatusLine = { bg = challenger_deeper.bg_dark };
-        Conceal = { fg = challenger_deeper.norm };
-        StatusLineNC = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.medium_gray };
-        VertSplit = { fg = challenger_deeper.bg_subtle };
-        Title = { fg = challenger_deeper.dark_blue };
-        Visual = { bg = challenger_deeper.visual };
-        WarningMsg = { fg = challenger_deeper.yellow };
-        WildMenu = { fg = challenger_deeper.bg_subtle, bg = challenger_deeper.cyan };
-        Folded = { link = 'PmenuSbar' };
-        FoldColumn = { fg = challenger_deeper.yellow };
-        Pmenu = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle };
-        PmenuSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
-        PmenuSbar = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
-        PmenuThumb = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
-        TabLine = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
-        TabLineSel = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_subtle, gui = 'bold', cterm = 'bold' };
-        TabLineFill = { fg = challenger_deeper.norm, bg = challenger_deeper.bg_dark };
-        CursorColumn = { bg = challenger_deeper.bg_subtle };
-        CursorLine = { bg = challenger_deeper.bg_subtle };
-        ColorColumn = { bg = challenger_deeper.bg_subtle };
-        MatchParen = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.purple, gui = 'bold', cterm = 'bold' };
-        qfLineNr = { fg = challenger_deeper.medium_gray };
-        SpellBad = { fg = challenger_deeper.dark_red, sp = challenger_deeper.dark_red, cterm = 'underline',
-            gui = 'underline' };
-        SpellCap = { fg = challenger_deeper.green, sp = challenger_deeper.green, cterm = 'underline', gui = 'underline' };
-        SpellRare = { fg = challenger_deeper.red, sp = challenger_deeper.red, cterm = 'underline', gui = 'underline' };
-        SpellLocal = { fg = challenger_deeper.dark_green, sp = challenger_deeper.dark_gren, cterm = 'underline',
-            gui = 'underline' };
-
-        -- NVIM floating window theming
-        NormalFloat = { fg = challenger_deeper.fg, bg = challenger_deeper.bg };
-        FloatBorder = { fg = challenger_deeper.white, bg = challenger_deeper.bg };
-
-    }
-    return syntax
-end
-
-function challenger_deeper.load_plugin_syntax()
-    local plugin_syntax = {
-        TreesitterContext = { bg = challenger_deeper.bg_dark };
-        --TreesitterContextLineNumber = {bg=challenger_deeper.bg_dark};
-
-        --TSFunction = {fg=challenger_deeper.cyan};
-        --TSMethod = {fg=challenger_deeper.cyan};
-        --TSKeywordFunction = {fg=challenger_deeper.red};
-        --TSProperty = {fg=challenger_deeper.yellow};
-        --TSType = {fg=challenger_deeper.teal};
-        --TSVariable = {fg=challenger_deeper.blue};
-        --TSPunctBracket = {fg=challenger_deeper.bracket};
-
-        --vimCommentTitle = {fg=challenger_deeper.grey,gui='bold'};
-        --vimLet = {fg=challenger_deeper.yellow};
-        --vimVar = {fg=challenger_deeper.cyan};
-        --vimFunction = {fg=challenger_deeper.redwine};
-        --vimIsCommand = {fg=challenger_deeper.fg};
-        --vimCommand = {fg=challenger_deeper.blue};
-        --vimNotFunc = {fg=challenger_deeper.violet,gui='bold'};
-        --vimUserFunc = {fg=challenger_deeper.yellow,gui='bold'};
-        --vimFuncName= {fg=challenger_deeper.yellow,gui='bold'};
-
-        --diffOldFile = {fg = challenger_deeper.yellow};
-        --diffNewFile = {fg = challenger_deeper.yellow};
-        --diffFile    = {fg = challenger_deeper.aqua};
-        --diffLine    = {fg = challenger_deeper.grey};
-        --diffIndexLine = {fg = challenger_deeper.violet};
-
-        DiffAdd = { bg = challenger_deeper.green, fg = challenger_deeper.black };
-        DiffAdded = { bg = challenger_deeper.green, fg = challenger_deeper.black };
-        DiffDelete = { bg = challenger_deeper.red, fg = challenger_deeper.black };
-        DiffRemoved = { bg = challenger_deeper.red, fg = challenger_deeper.black };
-        DiffChange = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
-        DiffChanged = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
-        DiffText = { bg = challenger_deeper.yellow, fg = challenger_deeper.black };
+    DiffAdd = { bg = challenger_deeper.green, fg = challenger_deeper.black },
+    DiffAdded = { bg = challenger_deeper.green, fg = challenger_deeper.black },
+    DiffDelete = { bg = challenger_deeper.red, fg = challenger_deeper.black },
+    DiffRemoved = { bg = challenger_deeper.red, fg = challenger_deeper.black },
+    DiffChange = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black },
+    DiffChanged = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black },
+    DiffText = { bg = challenger_deeper.yellow, fg = challenger_deeper.black },
 
 
-        GitSignsAdd = { fg = challenger_deeper.green };
-        GitSignsAdded = { fg = challenger_deeper.green };
-        GitSignsDelete = { fg = challenger_deeper.red };
-        GitSignsRemoved = { fg = challenger_deeper.red };
-        GitSignsChange = { fg = challenger_deeper.dark_yellow };
-        GitSignsChanged = { fg = challenger_deeper.dark_yellow };
+    GitSignsAdd = { fg = challenger_deeper.green },
+    GitSignsAdded = { fg = challenger_deeper.green },
+    GitSignsDelete = { fg = challenger_deeper.red },
+    GitSignsRemoved = { fg = challenger_deeper.red },
+    GitSignsChange = { fg = challenger_deeper.dark_yellow },
+    GitSignsChanged = { fg = challenger_deeper.dark_yellow },
 
 
-        SignColumn = { fg = challenger_deeper.green };
+    SignColumn = { fg = challenger_deeper.green },
 
-        GitGutterAdd = { fg = challenger_deeper.green, bg = challenger_deeper.bg_subtle };
-        GitGutterDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
-        GitGutterChange = { fg = challenger_deeper.yellow, bg = challenger_deeper.bg_subtle };
-        GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
+    GitGutterAdd = { fg = challenger_deeper.green, bg = challenger_deeper.bg_subtle },
+    GitGutterDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle },
+    GitGutterChange = { fg = challenger_deeper.yellow, bg = challenger_deeper.bg_subtle },
+    GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle },
 
 
-        NeoTreeGitAdded = { fg = challenger_deeper.green };
-        NeoTreeGitModified = { fg = challenger_deeper.yellow };
-        NeoTreeGitDeleted = { fg = challenger_deeper.red };
-        NeoTreeDotfile = { fg = challenger_deeper.white };
+    NeoTreeGitAdded = { fg = challenger_deeper.green },
+    NeoTreeGitModified = { fg = challenger_deeper.yellow },
+    NeoTreeGitDeleted = { fg = challenger_deeper.red },
+    NeoTreeDotfile = { fg = challenger_deeper.white },
 
-        --VistaBracket = {fg=challenger_deeper.grey};
-        --VistaChildrenNr = {fg=challenger_deeper.yellow};
-        --VistaKind = {fg=challenger_deeper.purpl};
-        --VistaScope = {fg=challenger_deeper.red};
-        --VistaScopeKind = {fg=challenger_deeper.blue};
-        --VistaTag = {fg=challenger_deeper.magenta,gui='bold'};
-        --VistaPrefix = {fg=challenger_deeper.grey};
-        --VistaColon = {fg=challenger_deeper.magenta};
-        --VistaIcon = {fg=challenger_deeper.yellow};
-        --VistaLineNr = {fg=challenger_deeper.fg};
+    --VistaBracket = {fg=challenger_deeper.grey},
+    --VistaChildrenNr = {fg=challenger_deeper.yellow},
+    --VistaKind = {fg=challenger_deeper.purpl},
+    --VistaScope = {fg=challenger_deeper.red},
+    --VistaScopeKind = {fg=challenger_deeper.blue},
+    --VistaTag = {fg=challenger_deeper.magenta,gui='bold'},
+    --VistaPrefix = {fg=challenger_deeper.grey},
+    --VistaColon = {fg=challenger_deeper.magenta},
+    --VistaIcon = {fg=challenger_deeper.yellow},
+    --VistaLineNr = {fg=challenger_deeper.fg},
 
 
 
-        --LspDiagnosticsSignError = {fg=challenger_deeper.red};
-        --LspDiagnosticsSignWarning = {fg=challenger_deeper.yellow};
-        --LspDiagnosticsSignInformation = {fg=challenger_deeper.blue};
-        --LspDiagnosticsSignHint = {fg=challenger_deeper.cyan};
-        --LspDiagnosticsVirtualTextError = {fg=challenger_deeper.red};
-        --LspDiagnosticsVirtualTextWarning= {fg=challenger_deeper.yellow};
-        --LspDiagnosticsVirtualTextInformation = {fg=challenger_deeper.blue};
-        --LspDiagnosticsVirtualTextHint = {fg=challenger_deeper.cyan};
-        --LspDiagnosticsUnderlineError = {gui="undercurl",sp=challenger_deeper.red};
-        --LspDiagnosticsUnderlineWarning = {gui="undercurl",sp=challenger_deeper.yellow};
-        --LspDiagnosticsUnderlineInformation = {gui="undercurl",sp=challenger_deeper.blue};
-        --LspDiagnosticsUnderlineHint = {gui="undercurl",sp=challenger_deeper.cyan};
+    --LspDiagnosticsSignError = {fg=challenger_deeper.red},
+    --LspDiagnosticsSignWarning = {fg=challenger_deeper.yellow},
+    --LspDiagnosticsSignInformation = {fg=challenger_deeper.blue},
+    --LspDiagnosticsSignHint = {fg=challenger_deeper.cyan},
+    --LspDiagnosticsVirtualTextError = {fg=challenger_deeper.red},
+    --LspDiagnosticsVirtualTextWarning= {fg=challenger_deeper.yellow},
+    --LspDiagnosticsVirtualTextInformation = {fg=challenger_deeper.blue},
+    --LspDiagnosticsVirtualTextHint = {fg=challenger_deeper.cyan},
+    --LspDiagnosticsUnderlineError = {gui="undercurl",sp=challenger_deeper.red},
+    --LspDiagnosticsUnderlineWarning = {gui="undercurl",sp=challenger_deeper.yellow},
+    --LspDiagnosticsUnderlineInformation = {gui="undercurl",sp=challenger_deeper.blue},
+    --LspDiagnosticsUnderlineHint = {gui="undercurl",sp=challenger_deeper.cyan},
 
-        TelescopeBorder = { link = 'LspInfoBorder' };
-        --TelescopePromptBorder = {fg=challenger_deeper.blue};
-        --TelescopeMatching = {fg=challenger_deeper.teal};
-        --TelescopeSelection = {fg=challenger_deeper.yellow, bg=challenger_deeper.bg_highlight,gui= 'bold'};
-        --TelescopeSelectionCaret = {fg=challenger_deeper.yellow};
-        --TelescopeMultiSelection = {fg=challenger_deeper.teal};
+    TelescopeBorder = { link = 'LspInfoBorder' },
+    --TelescopePromptBorder = {fg=challenger_deeper.blue},
+    --TelescopeMatching = {fg=challenger_deeper.teal},
+    --TelescopeSelection = {fg=challenger_deeper.yellow, bg=challenger_deeper.bg_highlight,gui= 'bold'},
+    --TelescopeSelectionCaret = {fg=challenger_deeper.yellow},
+    --TelescopeMultiSelection = {fg=challenger_deeper.teal},
 
-        -- nvim-cmp
-        -- TODO: Maybe use the TS Highlight groups?
-        -- Currently, doing a VSCode style
-        CmpItemAbbrMatchFuzzy = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
-        CmpItemAbbrMatch = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan };
+    -- nvim-cmp
+    -- TODO: Maybe use the TS Highlight groups?
+    -- Currently, doing a VSCode style
+    CmpItemAbbrMatchFuzzy = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan },
+    CmpItemAbbrMatch = { bg = challenger_deeper.bg_subtle, fg = challenger_deeper.dark_cyan },
 
-        CmpItemKindFunction = { fg = challenger_deeper.purple };
-        CmpItemKindMethod = { link = 'CmpItemKindFunction' };
+    CmpItemKindFunction = { fg = challenger_deeper.purple },
+    CmpItemKindMethod = { link = 'CmpItemKindFunction' },
 
-        CmpItemKindModule = { fg = challenger_deeper.yellow };
-        CmpItemKindClass = { link = 'CmpItemKindModule' };
-        CmpItemKindProperty = { link = 'CmpItemKindModule' };
-        CmpItemKindField = { link = 'CmpItemKindModule' };
-        CmpItemKindStruct = { link = 'CmpItemKindModule' };
-        CmpItemKindInterface = { link = 'CmpItemKindModule' };
-        CmpItemKindConstructor = { link = 'CmpItemKindModule' };
-        CmpItemKindNamespace = { link = 'CmpItemKindModule' };
-        CmpItemKindFile = { link = 'CmpItemKindModule' };
+    CmpItemKindModule = { fg = challenger_deeper.yellow },
+    CmpItemKindClass = { link = 'CmpItemKindModule' },
+    CmpItemKindProperty = { link = 'CmpItemKindModule' },
+    CmpItemKindField = { link = 'CmpItemKindModule' },
+    CmpItemKindStruct = { link = 'CmpItemKindModule' },
+    CmpItemKindInterface = { link = 'CmpItemKindModule' },
+    CmpItemKindConstructor = { link = 'CmpItemKindModule' },
+    CmpItemKindNamespace = { link = 'CmpItemKindModule' },
+    CmpItemKindFile = { link = 'CmpItemKindModule' },
 
-        CmpItemKindValue = { fg = challenger_deeper.dark_cyan };
+    CmpItemKindValue = { fg = challenger_deeper.dark_cyan },
 
-        CmpItemKindVariable = { fg = challenger_deeper.blue };
-        CmpItemKindTypeParameter = { link = 'CmpItemKindVariable' };
+    CmpItemKindVariable = { fg = challenger_deeper.blue },
+    CmpItemKindTypeParameter = { link = 'CmpItemKindVariable' },
 
-        -- nvim-scrollbar
-        ScrollbarWarn = { fg = challenger_deeper.dark_yellow };
-        ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow };
-        ScrollbarError = { fg = challenger_deeper.red };
-        ScrollbarErrorHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.red };
-        ScrollbarHint = { fg = challenger_deeper.green };
-        ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green };
-        ScrollbarHandle = { bg = challenger_deeper.bg_dark };
+    ---- nvim-scrollbar
+    --ScrollbarWarn = { fg = challenger_deeper.dark_yellow },
+    --ScrollbarWarnHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.dark_yellow },
+    --ScrollbarError = { fg = challenger_deeper.red },
+    --ScrollbarErrorHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.red },
+    --ScrollbarHint = { fg = challenger_deeper.green },
+    --ScrollbarHintHandle = { bg = challenger_deeper.bg_dark, fg = challenger_deeper.green },
+    --ScrollbarHandle = { bg = challenger_deeper.bg_dark },
 
-        -- nvim-navic
-        NavicIconsFile = { link = 'CmpItemKindFile' };
-        NavicIconsModule = { link = 'CmpItemKindModule' };
-        NavicIconsNamespace = { link = 'CmpItemKindNamespace' };
-        NavicIconsPackage = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow };
-        NavicIconsClass = { link = 'CmpItemKindClass' };
-        NavicIconsMethod = { link = 'CmpItemKindMethod' };
-        NavicIconsProperty = { link = 'CmpItemKindProperty' };
-        NavicIconsField = { link = 'CmpItemKindField' };
-        NavicIconsConstructor = { 'CmpItemKindConstructor' };
-        NavicIconsEnum = { link = 'CmpItemKindEnum' };
-        NavicIconsEnumMember = { link = 'CmpItemKindEnumMember' };
-        NavicIconsInterface = { link = 'CmpItemKindInterface' };
-        NavicIconsFunction = { link = 'CmpItemKindFunction' };
-        NavicIconsVariable = { link = 'CmpItemKindVariable' };
-        NavicIconsConstant = { link = 'CmpItemKindConstant' };
-        NavicIconsString = { link = 'CmpItemKindValue' };
-        NavicIconsNumber = { link = 'CmpItemKindValue' };
-        NavicIconsBoolean = { link = 'CmpItemKindValue' };
-        NavicIconsArray = { link = 'CmpItemKindValue' };
-        NavicIconsObject = { link = 'CmpItemKindValue' };
-        NavicIconsKey = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow };
-        NavicIconsNull = { link = 'CmpItemKindValue' };
-        NavicIconsStruct = { link = 'CmpItemKindStruct' };
-        NavicIconsEvent = { link = 'CmpItemKindEvent' };
-        NavicIconsOperator = { link = 'CmpItemKindValue' };
-        NavicIconsTypeParameter = { link = 'CmpItemKindTypeParameter' };
-        NavicText = { link = 'Normal' };
-        NavicSeparator = { bg = challenger_deeper.bg, fg = challenger_deeper.white };
+    -- nvim-navic
+    NavicIconsFile = { link = 'CmpItemKindFile' },
+    NavicIconsModule = { link = 'CmpItemKindModule' },
+    NavicIconsNamespace = { link = 'CmpItemKindNamespace' },
+    NavicIconsPackage = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow },
+    NavicIconsClass = { link = 'CmpItemKindClass' },
+    NavicIconsMethod = { link = 'CmpItemKindMethod' },
+    NavicIconsProperty = { link = 'CmpItemKindProperty' },
+    NavicIconsField = { link = 'CmpItemKindField' },
+    NavicIconsConstructor = { link = 'CmpItemKindConstructor' },
+    NavicIconsEnum = { link = 'CmpItemKindEnum' },
+    NavicIconsEnumMember = { link = 'CmpItemKindEnumMember' },
+    NavicIconsInterface = { link = 'CmpItemKindInterface' },
+    NavicIconsFunction = { link = 'CmpItemKindFunction' },
+    NavicIconsVariable = { link = 'CmpItemKindVariable' },
+    NavicIconsConstant = { link = 'CmpItemKindConstant' },
+    NavicIconsString = { link = 'CmpItemKindValue' },
+    NavicIconsNumber = { link = 'CmpItemKindValue' },
+    NavicIconsBoolean = { link = 'CmpItemKindValue' },
+    NavicIconsArray = { link = 'CmpItemKindValue' },
+    NavicIconsObject = { link = 'CmpItemKindValue' },
+    NavicIconsKey = { bg = challenger_deeper.bg, fg = challenger_deeper.yellow },
+    NavicIconsNull = { link = 'CmpItemKindValue' },
+    NavicIconsStruct = { link = 'CmpItemKindStruct' },
+    NavicIconsEvent = { link = 'CmpItemKindEvent' },
+    NavicIconsOperator = { link = 'CmpItemKindValue' },
+    NavicIconsTypeParameter = { link = 'CmpItemKindTypeParameter' },
+    NavicText = { link = 'Normal' },
+    NavicSeparator = { bg = challenger_deeper.bg, fg = challenger_deeper.white },
 
-        -- Link up Null-LS windows to be like LspInfo
-        NullLsInfoTitle = { link = 'LspInfoTitle' };
-        NullLsInfoBorder = { link = 'LspInfoBorder' };
-        NullLsInfoSources = { link = 'Type' };
-    }
-    return plugin_syntax
-end
+    -- Link up Null-LS windows to be like LspInfo
+    NullLsInfoTitle = { link = 'LspInfoTitle' },
+    NullLsInfoBorder = { link = 'LspInfoBorder' },
+    NullLsInfoSources = { link = 'Type' },
+}
 
 local async_load_plugin
 
+local set_hl = function(tbl)
+    for group, conf in pairs(tbl) do
+        vim.api.nvim_set_hl(0, group, conf)
+    end
+end
+
 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
     challenger_deeper.terminal_color()
-    local syntax = challenger_deeper.load_plugin_syntax()
-    for group, colors in pairs(syntax) do
-        challenger_deeper.highlight(group, colors)
-    end
+    set_hl(plugin_syntax)
     async_load_plugin:close()
 end))
 
@@ -388,10 +318,7 @@ function challenger_deeper.colorscheme()
     vim.o.background = 'dark'
     vim.o.termguicolors = true
     vim.g.colors_name = 'challenger_deep'
-    local syntax = challenger_deeper.load_syntax()
-    for group, colors in pairs(syntax) do
-        challenger_deeper.highlight(group, colors)
-    end
+    set_hl(syntax)
     async_load_plugin:send()
 end
 
