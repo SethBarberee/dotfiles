@@ -1,5 +1,6 @@
 return {
     'lukas-reineke/indent-blankline.nvim',
+    event = "BufReadPre",
     config = function()
         require("indent_blankline").setup {
             use_treesitter = true,
@@ -30,6 +31,5 @@ return {
                 "^struct",
             },
         }
-
     end
 }

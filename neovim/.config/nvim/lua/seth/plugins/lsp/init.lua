@@ -1,11 +1,11 @@
 local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
-        'glepnir/lspsaga.nvim',
         { "j-hui/fidget.nvim", config = true }, -- Lsp status notifications
         { 'SmiteshP/nvim-navic', config = { highlight = true } },
         { 'folke/neodev.nvim', config = true },
-    }
+    },
+    event = "BufReadPre",
 }
 
 function M.config()

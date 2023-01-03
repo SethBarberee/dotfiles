@@ -34,17 +34,13 @@ function M.config()
     end
 
     -- Don't show gitInfo and filetype for these filetypes
-    local ftBlacklist = { 'help', 'vista', 'vista_kind', 'qf', 'checkhealth' };
-
-    -- Check whether the filetype is in our ftBlacklist
-    local function ftInBlackList(filetype)
-        for _, value in pairs(ftBlacklist) do
-            if value == filetype then
-                return true
-            end
-        end
-        return false
-    end
+    local ftBlacklist = {
+        ['help'] = true,
+        ['vista'] = true,
+        ['vista_kind'] = true,
+        ['qf'] = true,
+        ['checkhealth'] = true,
+    }
 
     -- Using the blacklist, we take out a few compenents on certain filetypes:
     -- git branch
@@ -52,12 +48,12 @@ function M.config()
     -- fileformat
     -- filetype
     local function lualine_mini()
-        return not ftInBlackList(vim.bo.filetype)
+        return not ftBlacklist[vim.bo.filetype]
     end
 
     -- Determine when we show the filename
     local function lualine_filename_cond()
-        return vim.bo.filetype == 'help' or not ftInBlackList(vim.bo.filetype)
+        return vim.bo.filetype == 'help' or not ftBlacklist[vim.bo.filetype]
     end
 
     --- Change the mode based on the filetype

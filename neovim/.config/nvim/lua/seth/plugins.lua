@@ -6,7 +6,6 @@ return {
     { "challenger-deep-theme/vim", name = "challenger-deep" },
     'nvim-lua/plenary.nvim',
     'edkolev/tmuxline.vim', -- tmux statusline based on statusline
-    'rrethy/vim-illuminate',
     'nvim-tree/nvim-web-devicons',
     'folke/lazy.nvim',
 
@@ -16,6 +15,8 @@ return {
     -- Tags
     'ludovicchabant/vim-gutentags', --tag management
     'liuchengxu/vista.vim',
+
+    'dstein64/vim-startuptime',
 
     -- Git
     'tpope/vim-fugitive',

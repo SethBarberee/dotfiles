@@ -1,5 +1,12 @@
 local M = {
     'mfussenegger/nvim-dap',
+    ft = {
+        "python",
+        "rust",
+        "c",
+        "cpp",
+        "lua"
+    },
     dependencies = {
         'mfussenegger/nvim-dap-python',
         { 'rcarriga/nvim-dap-ui', config = function()

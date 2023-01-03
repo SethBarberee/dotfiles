@@ -235,24 +235,35 @@ function challenger_deeper.load_plugin_syntax()
         --diffLine    = {fg = challenger_deeper.grey};
         --diffIndexLine = {fg = challenger_deeper.violet};
 
-        diffAdd = { bg = challenger_deeper.green, fg = challenger_deeper.black };
-        diffAdded = { bg = challenger_deeper.green, fg = challenger_deeper.black };
-        diffDelete = { bg = challenger_deeper.red, fg = challenger_deeper.black };
-        diffRemoved = { bg = challenger_deeper.red, fg = challenger_deeper.black };
-        diffChange = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
-        diffChanged = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
-        diffText = { bg = challenger_deeper.yellow, fg = challenger_deeper.black };
+        DiffAdd = { bg = challenger_deeper.green, fg = challenger_deeper.black };
+        DiffAdded = { bg = challenger_deeper.green, fg = challenger_deeper.black };
+        DiffDelete = { bg = challenger_deeper.red, fg = challenger_deeper.black };
+        DiffRemoved = { bg = challenger_deeper.red, fg = challenger_deeper.black };
+        DiffChange = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
+        DiffChanged = { bg = challenger_deeper.dark_yellow, fg = challenger_deeper.black };
+        DiffText = { bg = challenger_deeper.yellow, fg = challenger_deeper.black };
+
+
+        GitSignsAdd = { fg = challenger_deeper.green };
+        GitSignsAdded = { fg = challenger_deeper.green };
+        GitSignsDelete = { fg = challenger_deeper.red };
+        GitSignsRemoved = { fg = challenger_deeper.red };
+        GitSignsChange = { fg = challenger_deeper.dark_yellow };
+        GitSignsChanged = { fg = challenger_deeper.dark_yellow };
+
 
         SignColumn = { fg = challenger_deeper.green };
 
-        --gitcommitSummary = {fg = challenger_deeper.red};
-        --gitcommitUntracked = {fg = challenger_deeper.grey};
-        --gitcommitDiscarded = {fg = challenger_deeper.grey};
-        --gitcommitSelected = { fg=challenger_deeper.grey};
-        --gitcommitUnmerged = { fg=challenger_deeper.grey};
-        --gitcommitOnBranch = { fg=challenger_deeper.grey};
-        --gitcommitArrow  = {fg = challenger_deeper.grey};
-        --gitcommitFile  = {fg = challenger_deeper.dark_green};
+        GitGutterAdd = { fg = challenger_deeper.green, bg = challenger_deeper.bg_subtle };
+        GitGutterDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
+        GitGutterChange = { fg = challenger_deeper.yellow, bg = challenger_deeper.bg_subtle };
+        GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
+
+
+        NeoTreeGitAdded = { fg = challenger_deeper.green };
+        NeoTreeGitModified = { fg = challenger_deeper.yellow };
+        NeoTreeGitDeleted = { fg = challenger_deeper.red };
+        NeoTreeDotfile = { fg = challenger_deeper.white };
 
         --VistaBracket = {fg=challenger_deeper.grey};
         --VistaChildrenNr = {fg=challenger_deeper.yellow};
@@ -265,16 +276,6 @@ function challenger_deeper.load_plugin_syntax()
         --VistaIcon = {fg=challenger_deeper.yellow};
         --VistaLineNr = {fg=challenger_deeper.fg};
 
-        GitGutterAdd = { fg = challenger_deeper.green, bg = challenger_deeper.bg_subtle };
-        GitGutterDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
-        GitGutterChange = { fg = challenger_deeper.yellow, bg = challenger_deeper.bg_subtle };
-        GitGutterChangeDelete = { fg = challenger_deeper.red, bg = challenger_deeper.bg_subtle };
-
-
-        NeoTreeGitAdded = { fg = challenger_deeper.green };
-        NeoTreeGitModified = { fg = challenger_deeper.yellow };
-        NeoTreeGitDeleted = { fg = challenger_deeper.red };
-        NeoTreeDotfile = { fg = challenger_deeper.white };
 
 
         --LspDiagnosticsSignError = {fg=challenger_deeper.red};
@@ -290,11 +291,6 @@ function challenger_deeper.load_plugin_syntax()
         --LspDiagnosticsUnderlineInformation = {gui="undercurl",sp=challenger_deeper.blue};
         --LspDiagnosticsUnderlineHint = {gui="undercurl",sp=challenger_deeper.cyan};
 
-        --CursorWord0 = {bg=challenger_deeper.currsor_bg};
-        --CursorWord1 = {bg=challenger_deeper.currsor_bg};
-        --NvimTreeFolderName = {fg=challenger_deeper.blue};
-        --NvimTreeRootFolder = {fg=challenger_deeper.red,gui='bold'};
-        --NvimTreeSpecialFile = {fg=challenger_deeper.fg, bg=challenger_deeper.none,stryle='NONE'};
         TelescopeBorder = { link = 'LspInfoBorder' };
         --TelescopePromptBorder = {fg=challenger_deeper.blue};
         --TelescopeMatching = {fg=challenger_deeper.teal};

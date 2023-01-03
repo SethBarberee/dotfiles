@@ -1,8 +1,19 @@
 return {
     'nvim-neo-tree/neo-tree.nvim',
-    cmd = "Neotree",
+    --cmd = "Neotree",
     dependencies = {
         'MunifTanjim/nui.nvim', -- for neotree
     },
-    config = true,
+    cmd = "Neotree",
+    config = {
+        filesystem = {
+            follow_current_file = true,
+            filtered_items = {
+                hide_dotfiles = false,
+            },
+        },
+        source_selector = {
+            winbar = true,
+        }
+    }
 }

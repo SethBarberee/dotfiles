@@ -44,7 +44,6 @@ vim.opt.foldlevelstart = 99
 vim.opt.signcolumn = 'auto:3'
 vim.opt.completeopt = "menu,menuone,noselect"
 
-vim.g.python_host_prog = '/usr/bin/python2'
 vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.g.vimpath = vim.fn.fnamemodify(vim.env.MYVIMRC, ":p:h")
@@ -66,23 +65,17 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 
 -- Line numbers
 -- List of filetypes to ignore my relativenumber/number settings
-local number_ftToIgnore = { 'Trouble', 'vista', 'vista_kind', 'help' };
-
--- check if the filetype is in my ignore list
-local function in_ignoreList(filetype)
-    for _, value in pairs(number_ftToIgnore) do
-        if value == filetype then
-            return true
-        end
-    end
-    return false
-end
+local number_ftToIgnore = {
+    ['vista'] = true,
+    ['vista_kind'] = true,
+    ['help'] = true,
+}
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
     pattern = { "*" },
     group = group_id,
     callback = function()
-        if not in_ignoreList(vim.bo.filetype) then
+        if not number_ftToIgnore[vim.bo.filetype] then
             vim.opt.relativenumber = true
         else
             vim.opt.number = false
@@ -94,7 +87,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
     pattern = { "*" },
     group = group_id,
     callback = function()
-        if not in_ignoreList(vim.bo.filetype) then
+        if not number_ftToIgnore[vim.bo.filetype] then
             vim.opt.relativenumber = false
             vim.opt.number = true
         end

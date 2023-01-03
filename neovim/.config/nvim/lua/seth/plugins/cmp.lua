@@ -9,7 +9,8 @@ local M = {
         'quangnguyen30192/cmp-nvim-tags',
         'saadparwaiz1/cmp_luasnip',
         'rcarriga/cmp-dap',
-    }
+    },
+    event = "InsertEnter",
 }
 
 function M.config()

@@ -8,6 +8,11 @@ return {
                 border = "rounded",
             },
             disable = { filetypes = { "neo-tree" } },
+            plugins = {
+                spelling = {
+                    enabled = true,
+                },
+            }
         }
 
         wk.register({
