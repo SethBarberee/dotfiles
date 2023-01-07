@@ -40,6 +40,8 @@ function M.config()
         ['vista_kind'] = true,
         ['qf'] = true,
         ['checkhealth'] = true,
+        ['tsplayground'] = true,
+        --['neo-tree'] = true,
     }
 
     -- Using the blacklist, we take out a few compenents on certain filetypes:
@@ -59,9 +61,11 @@ function M.config()
     --- Change the mode based on the filetype
     local custom_mode = {
         help = "HELP",
-        vista_kind = "Vista",
-        tsplayground = "Treesitter",
-        qf = 'Quickfix',
+        vista_kind = "VISTA",
+        tsplayground = "TREESITTER",
+        qf = 'QUICKFIX',
+        --['neo-tree'] = 'NEOTREE',
+        --['neo-tree-popup'] = 'NEOTREE',
     }
 
     --- Format my lualine mode
@@ -97,7 +101,8 @@ function M.config()
             section_separators = { left = '', right = '' },
             disabled_filetypes = {
                 statusline = {},
-                winbar = { 'qf' },
+                -- Neotree and dap-repl have custom winbar so make sure lualine doesn't override it
+                winbar = { 'qf', 'neo-tree', 'dap-repl' },
             },
             always_divide_middle = true,
             globalstatus = true, -- NOTE: this overrides vim.opt.laststatus
@@ -122,7 +127,7 @@ function M.config()
             lualine_z = {}
         },
         tabline = {
-            lualine_a = { 'buffers' },
+            lualine_a = { { 'buffers' } },
             lualine_b = { '' },
             lualine_c = { '' },
             lualine_x = {},
@@ -142,7 +147,7 @@ function M.config()
             lualine_z = { '' }
         },
 
-        extensions = { 'nvim-dap-ui' }
+        extensions = { 'nvim-dap-ui', 'fugitive', 'neo-tree' }
     }
 end
 
