@@ -40,12 +40,25 @@ function M.config()
     local dap = require('dap')
     local wk = require("which-key")
 
+    local codelldb_bin = "/usr/bin/codelldb"
+    local lldb_vscode_bin = "/usr/bin/lldb-vscode"
+    local codelldb_lib = "/usr/lib/codelldb/lldb/lib/liblldb.so"
 
     -- cpp - c - rust
     dap.adapters.lldb = {
         name = 'lldb',
         type = 'executable',
-        command = '/usr/bin/lldb-vscode',
+        command = lldb_vscode_bin,
+    }
+
+    dap.adapters.codelldb = {
+        name = 'codelldb',
+        type = 'server',
+        port = "${port}",
+        executable = {
+            command = codelldb_bin,
+            args = { "--liblldb", codelldb_lib, "--port", "${port}" },
+        },
     }
 
     dap.configurations.cpp = {
@@ -65,9 +78,27 @@ function M.config()
     dap.configurations.c = dap.configurations.cpp
 
     dap.configurations.rust = {
+
+        -- NOTE: not as god as codelldb but we'll keep it commented for now
+        --{
+        --    name = "Launch file",
+        --    type = "lldb",
+        --    request = "launch",
+
+        --    -- Taken from @rcarriga where it automatically figures out the debug file
+        --    program = function()
+        --        local metadata_json = vim.fn.system("cargo metadata --format-version 1 --no-deps")
+        --        local metadata = vim.fn.json_decode(metadata_json)
+        --        local target_name = metadata.packages[1].targets[1].name
+        --        local target_dir = metadata.target_directory
+        --        return target_dir .. "/debug/" .. target_name
+        --    end,
+        --    cwd = '${workspaceFolder}',
+        --},
+
         {
-            name = "Launch file",
-            type = "lldb",
+            name = "Launch file (codelldb)",
+            type = "codelldb",
             request = "launch",
 
             -- Taken from @rcarriga where it automatically figures out the debug file
@@ -80,6 +111,7 @@ function M.config()
             end,
             cwd = '${workspaceFolder}',
         },
+
     }
 
 
