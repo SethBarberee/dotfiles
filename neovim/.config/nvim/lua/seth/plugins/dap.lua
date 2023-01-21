@@ -33,7 +33,8 @@ local M = {
         { 'theHamsta/nvim-dap-virtual-text', config = true },
         'nvim-telescope/telescope-dap.nvim',
         'jbyuki/one-small-step-for-vimkind',
-    }
+    },
+    event = "VeryLazy"
 }
 
 function M.config()
@@ -158,15 +159,17 @@ function M.config()
     }, { prefix = '<leader>' })
 
 
-    local dap, dapui = require("dap"), require("dapui")
+    local dapui = require("dapui")
     dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
     end
     dap.listeners.before.event_terminated["dapui_config"] = function()
         dapui.close()
+        dap.repl.close()
     end
     dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
+        dap.repl.close()
     end
 end
 

@@ -6,7 +6,7 @@ return {
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/nvim-treesitter-context',
         'nvim-treesitter/nvim-treesitter-textobjects',
-        'JoosepAlviste/nvim-ts-context-commentstring',
+        { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
         { 'SmiteshP/nvim-gps', config = true },
     },
     config = function()
@@ -136,5 +136,17 @@ return {
             },
             filetype = "asm", -- if filetype does not match the parser name
         }
+        parser_config.poryscript = {
+            install_info = {
+                url = "~/tree-sitter-poryscript", -- local path or git repo
+                files = { "src/parser.c" },
+                -- optional entries:
+                --branch = "main", -- default branch in case of git repo if different from master
+                generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+                requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+            },
+            filetype = "pory", -- if filetype does not match the parser name
+        }
+
     end,
 }

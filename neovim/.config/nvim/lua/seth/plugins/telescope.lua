@@ -3,7 +3,8 @@ local M = {
     dependencies = {
         'nvim-telescope/telescope-ui-select.nvim',
         'benfowler/telescope-luasnip.nvim',
-    }
+    },
+    event = "VeryLazy"
 }
 
 function M.config()

@@ -67,9 +67,11 @@ function M.config()
     local custom_attach = function(client)
         local bufnr = vim.api.nvim_get_current_buf()
 
-        require("nvim-navic").attach(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+            require("nvim-navic").attach(client, bufnr)
+        end
 
-        local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+        local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
         filetype_attach[filetype](client)
 
@@ -94,6 +96,7 @@ function M.config()
         pylsp = true,
         rust_analyzer = true,
         vimls = true,
+        poryscript_lsp = true,
         clangd = {
             cmd = {
                 "clangd",
@@ -102,6 +105,7 @@ function M.config()
                 "--header-insertion=iwyu",
                 --"--offset-encoding=utf-32", -- defaults to utf-16
                 "--limit-results=0",
+                "--enable-config",
             },
             init_options = {
                 clangdFileStatus = true,
@@ -176,6 +180,7 @@ function M.config()
     end
 
     require("seth.plugins.null-ls").setup()
+
 end
 
 return M

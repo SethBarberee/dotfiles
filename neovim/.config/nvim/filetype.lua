@@ -1,6 +1,5 @@
-
 -- Taken from @gpanders
--- https://github.com/gpanders/dotfiles/blob/master/.config/nvim/filetype.lua 
+-- https://github.com/gpanders/dotfiles/blob/master/.config/nvim/filetype.lua
 vim.filetype.add({
     extension = {
         h = function()
@@ -12,6 +11,7 @@ vim.filetype.add({
             return "c"
         end,
         inc = 'asm', -- for PMD Red data files
+        pory = 'pory',
     },
     --pattern = {
     --    ["*.inc"] = "asm",
