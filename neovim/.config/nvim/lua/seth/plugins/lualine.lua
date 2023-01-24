@@ -4,16 +4,16 @@ local M = {
 }
 
 function M.init()
-    vim.api.nvim_set_keymap('n', '1', [[<Cmd>LualineBuffersJump! 1 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '2', [[<Cmd>LualineBuffersJump! 2 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '3', [[<Cmd>LualineBuffersJump! 3 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '4', [[<Cmd>LualineBuffersJump! 4 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '5', [[<Cmd>LualineBuffersJump! 5 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '6', [[<Cmd>LualineBuffersJump! 6 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '7', [[<Cmd>LualineBuffersJump! 7 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '8', [[<Cmd>LualineBuffersJump! 8 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '9', [[<Cmd>LualineBuffersJump! 9 <CR>]], { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '0', [[<Cmd>LualineBuffersJump! 10 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '1', [[<Cmd>LualineBuffersJump! 1 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '2', [[<Cmd>LualineBuffersJump! 2 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '3', [[<Cmd>LualineBuffersJump! 3 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '4', [[<Cmd>LualineBuffersJump! 4 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '5', [[<Cmd>LualineBuffersJump! 5 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '6', [[<Cmd>LualineBuffersJump! 6 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '7', [[<Cmd>LualineBuffersJump! 7 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '8', [[<Cmd>LualineBuffersJump! 8 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '9', [[<Cmd>LualineBuffersJump! 9 <CR>]], { noremap = true, silent = true })
+    vim.keymap.set('n', '0', [[<Cmd>LualineBuffersJump! 10 <CR>]], { noremap = true, silent = true })
 end
 
 function M.config()

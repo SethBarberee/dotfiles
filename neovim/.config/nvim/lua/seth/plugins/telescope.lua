@@ -8,7 +8,7 @@ local M = {
 }
 
 function M.config()
-    local wk = require("which-key")
+    -- local wk = require("which-key")
     local telescope = require("telescope")
 
     telescope.setup {
@@ -41,19 +41,21 @@ function M.config()
     telescope.load_extension("dap")
     telescope.load_extension("luasnip")
 
-    wk.register({
-        t = {
-            name = "telescope",
-            m = { '<cmd>Telescope<cr>', 'main-menu' },
-            d = { '<cmd>Telescope diagnostics<cr>', 'diagnostics' },
-            s = { '<cmd>lua require("telescope.builtin").find_files({hidden=true})<cr>', 'telescope-file' },
-            g = { '<cmd>Telescope live_grep<cr>', 'grep' },
-            h = { '<cmd>Telescope help_tags<cr>', 'help-tags' },
-            l = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'telescope-line' },
-            n = { '<cmd>Telescope luasnip<cr>', 'telescope-luasnip' },
-            t = { '<cmd>Telescope tags<cr>', 'project-tags' },
-        },
-    }, { prefix = '<leader>' })
+    vim.keymap.set('n', '<leader>tm', '<cmd>Telescope<cr>', { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', '<leader>td', '<cmd>Telescope diagnostics<cr>',
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', '<leader>ts', '<cmd>lua require("telescope.builtin").find_files({hidden=true})<cr>',
+        { silent = true, noremap = true, nowait = false, desc = 'Telescope find hidden files' })
+    vim.keymap.set('n', '<leader>tg', '<cmd>Telescope live_grep<cr>',
+        { silent = true, noremap = true, nowait = false, desc = 'Telescope grep' })
+    vim.keymap.set('n', '<leader>th', '<cmd>Telescope help_tags<cr>',
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', '<leader>tl', '<cmd>Telescope current_buffer_fuzzy_find<cr>',
+        { silent = true, noremap = true, nowait = false, desc = 'Telescope buffer' })
+    vim.keymap.set('n', '<leader>tn', '<cmd>Telescope luasnip<cr>',
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', '<leader>tt', '<cmd>Telescope tags<cr>',
+        { silent = true, noremap = true, nowait = false })
 end
 
 return M

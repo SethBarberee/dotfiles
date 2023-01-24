@@ -136,28 +136,15 @@ function M.config()
     -- Debugpy installed as module of system python
     require("dap-python").setup('/usr/bin/python')
 
-    wk.register({
-        d = {
-            name = "dap",
-            s    = {
-                name = "line-step",
-                o    = { '<cmd>lua require("dap").step_over()<cr>', 'step-over' },
-                i    = { '<cmd>lua require("dap").step_into()<cr>', 'step-into' },
-                b    = { '<cmd>lua require("dap").step_back()<cr>', 'step-back' },
-            },
-            b    = {
-                name = "breakpoints",
-                s    = { '<cmd>lua  require("dap").toggle_breakpoint()<cr>', 'set-breakpoint' },
-                l    = { '<cmd>lua require("dap").list_breakpoints()<cr>', 'list-breakpoints' },
-                c    = { '<cmd>lua require("dap").clear_breakpoints()<cr>', 'list-breakpoints' },
-            },
-            -- TODO: also add functionality to close REPL console too
-            t    = { '<cmd>lua require("dapui").toggle()<cr>', 'dap-ui toggle' },
-            r    = { '<cmd>lua require("dap").continue()<cr>', 'dap run' },
-            l    = { '<cmd>lua require("dap").run_last()<cr>', 'dap run last' },
-        }
-    }, { prefix = '<leader>' })
-
+    vim.keymap.set('n', '<leader>dso', require('dap').step_over, { desc = 'step-over' })
+    vim.keymap.set('n', '<leader>dsi', require('dap').step_into, { desc = 'step-into' })
+    vim.keymap.set('n', '<leader>dsb', require('dap').step_back, { desc = 'step-back' })
+    vim.keymap.set('n', '<leader>dbs', require('dap').toggle_breakpoint, { desc = 'set-breakpoint' })
+    vim.keymap.set('n', '<leader>dbl', require('dap').list_breakpoints, { desc = 'list-breakpoints' })
+    vim.keymap.set('n', '<leader>dbc', require('dap').clear_breakpoints, { desc = 'clear-breakpoints' })
+    vim.keymap.set('n', '<leader>dt', require('dapui').toggle, { desc = 'dap-ui toggle' })
+    vim.keymap.set('n', '<leader>dr', require('dap').continue, { desc = 'dap run' })
+    vim.keymap.set('n', '<leader>dl', require('dap').run_last, { desc = 'dap run last' })
 
     local dapui = require("dapui")
     dap.listeners.after.event_initialized["dapui_config"] = function()

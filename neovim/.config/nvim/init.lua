@@ -94,13 +94,12 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
     end
 })
 
--- Set colorscheme
-require('seth.challenger_deep')
 require('seth.diagnostic')
 require('seth.mappings')
 
 -- Load plugins w/ lazy package manager
 require('seth.lazy')
+vim.cmd.colorscheme "challenger_deep"
 
 -- Better diff (https://vimways.org/2018/the-power-of-diff)
 vim.opt.diffopt:append('algorithm:patience')

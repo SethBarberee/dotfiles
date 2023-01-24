@@ -23,7 +23,7 @@ local function customizeSelector(bufnr)
         end
     end
 
-    return require('ufo').getFolds('lsp', bufnr):catch(function(err)
+    return require('ufo').getFolds(bufnr, 'lsp'):catch(function(err)
         return handleFallbackException(err, 'treesitter')
     end):catch(function(err)
         return handleFallbackException(err, 'indent')
@@ -74,25 +74,24 @@ function M.config()
         end
     })
 
-    local wk = require("which-key")
-
     -- We have to override the normal bindings with UFOs because these don't override the foldlevel like the
     -- normal ones do
-    wk.register({
-        z = {
-            R = { '<cmd>lua ufo.openAllFolds()' },
-            M = { '<cmd>lua ufo.closeAllFolds()' },
-            r = { '<cmd>lua ufo.openFoldsExceptKinds()' },
-            m = { '<cmd>lua ufo.closeFoldsWith()' }, -- closeAllFolds == closeFoldsWith(0)
-            h = { function()
-                local winid = require('ufo').peekFoldedLinesUnderCursor()
-                if not winid then
-                    -- nvimlsp
-                    vim.lsp.buf.hover()
-                end
-            end, "See folded lines" }
-        },
-    })
+
+    vim.keymap.set('n', 'zR', require('ufo').openAllFolds,
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds,
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds,
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith,
+        { silent = true, noremap = true, nowait = false })
+    vim.keymap.set('n', 'zh', function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+            -- nvimlsp
+            vim.lsp.buf.hover()
+        end
+    end, { desc = 'Peek folded lines' })
 
 end
 

@@ -2,8 +2,8 @@ return {
 
     -- Looks/UI
 
-    -- TODO: port local challenger-deep lua theme to plugin..
-    { "challenger-deep-theme/vim", name = "challenger-deep" },
+    --{ "SethBarberee/challenger_deep.nvim", name = "challenger-deep", priority = 1000 },
+    { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     'nvim-lua/plenary.nvim',
     'edkolev/tmuxline.vim', -- tmux statusline based on statusline
     'nvim-tree/nvim-web-devicons',
