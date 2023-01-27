@@ -16,8 +16,9 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.showmode = false
 vim.opt.timeoutlen = 200
+vim.opt.updatetime = 100
 
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
@@ -26,16 +27,14 @@ vim.opt.autoindent = true
 vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.opt.mouse = 'a'
-vim.opt.encoding = 'UTF-8'
 vim.opt.laststatus = 3 -- I've finally converted to global statusline
 vim.opt.showtabline = 2
 vim.opt.backspace = { 'indent', 'eol', 'start' }
---syntax on
-vim.opt.regexpengine = 0
-vim.opt.clipboard:append('unnamedplus')
+vim.opt.clipboard = "unnamedplus"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.shortmess = 'FaWc'
+vim.opt.scrolloff = 8 -- keep at least 8 lines (based off ThePrimagean)
 
 vim.opt.foldmethod = 'syntax'
 vim.opt.foldcolumn = '1'
