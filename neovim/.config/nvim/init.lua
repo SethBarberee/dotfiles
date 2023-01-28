@@ -34,7 +34,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.shortmess = 'FaWc'
-vim.opt.scrolloff = 8 -- keep at least 8 lines (based off ThePrimagean)
+vim.opt.scrolloff = 8 -- keep at least 8 lines (based off @ThePrimeagen)
 
 vim.opt.foldmethod = 'syntax'
 vim.opt.foldcolumn = '1'
@@ -114,7 +114,8 @@ if vim.fn.exists(':DiffOrig') == 0 then
         { desc = 'Check difference between current buffer and file it was loaded from' })
 end
 
-vim.g.default_path = vim.fn.escape(vim.g.path, '\\ ')
+
+vim.g.default_path = vim.fn.escape(vim.g.vimpath, '/')
 
 -- Always add the current file's directory to the path and tags list if not
 -- already there. Add it to the beginning to speed up searches.

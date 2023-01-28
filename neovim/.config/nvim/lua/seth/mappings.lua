@@ -8,7 +8,7 @@ vim.keymap.set('n', 'dd', '"+dd', { desc = 'Delete and copy to system clipboard'
 vim.keymap.set('n', 'p', '"+gP', { desc = 'Paste from system clipboard' })
 
 
--- From ThePrimagean: autocenter the next match on the screen
+-- From @ThePrimeagan: autocenter the next match on the screen
 vim.keymap.set('n', 'n', "nzzzv")
 vim.keymap.set('n', 'N', "Nzzzv")
 
