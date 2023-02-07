@@ -39,7 +39,6 @@ local M = {
 
 function M.config()
     local dap = require('dap')
-    local wk = require("which-key")
 
     local codelldb_bin = "/usr/bin/codelldb"
     local lldb_vscode_bin = "/usr/bin/lldb-vscode"

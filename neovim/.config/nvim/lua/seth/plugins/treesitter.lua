@@ -1,13 +1,14 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ":TSUpdate",
+    event = "BufReadPost",
     dependencies = {
         'nvim-treesitter/playground',
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/nvim-treesitter-context',
         'nvim-treesitter/nvim-treesitter-textobjects',
         { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
-        { 'SmiteshP/nvim-gps', config = true },
+        { 'SmiteshP/nvim-gps',                           config = true },
     },
     config = function()
         require('nvim-treesitter.configs').setup {
@@ -147,6 +148,5 @@ return {
             },
             filetype = "pory", -- if filetype does not match the parser name
         }
-
     end,
 }

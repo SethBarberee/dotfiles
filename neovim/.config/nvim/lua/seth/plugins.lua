@@ -6,7 +6,7 @@ return {
     { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     'nvim-lua/plenary.nvim',
     'edkolev/tmuxline.vim', -- tmux statusline based on statusline
-    'nvim-tree/nvim-web-devicons',
+    { 'nvim-tree/nvim-web-devicons',  lazy = true },
     'folke/lazy.nvim',
 
     -- Utils
@@ -16,7 +16,7 @@ return {
     'ludovicchabant/vim-gutentags', --tag management
     'liuchengxu/vista.vim',
 
-    'dstein64/vim-startuptime',
+    { 'dstein64/vim-startuptime',     cmd = "StartupTime" },
 
     -- Git
     'tpope/vim-fugitive',

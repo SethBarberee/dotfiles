@@ -110,6 +110,7 @@ function M.config()
         rust_analyzer = true,
         vimls = true,
         poryscript_lsp = true,
+        jsonls = true,
         clangd = {
             cmd = {
                 "clangd",
