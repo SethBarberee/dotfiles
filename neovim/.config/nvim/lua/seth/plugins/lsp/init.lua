@@ -1,25 +1,25 @@
 local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
-        { "j-hui/fidget.nvim", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
-        { 'SmiteshP/nvim-navic', config = { highlight = true } },
-        { 'folke/neodev.nvim', config = true },
+        { "j-hui/fidget.nvim",   opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
+        { 'SmiteshP/nvim-navic', opts = { highlight = true } },
+        { 'folke/neodev.nvim',   config = true },
     },
     event = "BufReadPre",
     keys = {
-        { '<leader>lc', vim.lsp.buf.code_action, desc = 'lsp-code_action' },
-        { '<leader>lD', vim.lsp.buf.declaration, desc = 'lsp-declaration' },
-        { '<leader>ld', vim.lsp.buf.definition, desc = 'lsp-definition' },
-        { '<leader>lj', vim.diagnostic.goto_next, desc = 'lsp-diag-next' },
-        { '<leader>lk', vim.diagnostic.goto_prev, desc = 'lsp-diag-prev' },
-        { '<leader>lf', vim.lsp.buf.format, desc = 'lsp-formatting' },
-        { '<leader>lh', vim.lsp.buf.hover, desc = 'lsp-hover' },
-        { '<leader>li', vim.lsp.buf.implementation, desc = 'lsp-implemenation' },
+        { '<leader>lc', vim.lsp.buf.code_action,      desc = 'lsp-code_action' },
+        { '<leader>lD', vim.lsp.buf.declaration,      desc = 'lsp-declaration' },
+        { '<leader>ld', vim.lsp.buf.definition,       desc = 'lsp-definition' },
+        { '<leader>lj', vim.diagnostic.goto_next,     desc = 'lsp-diag-next' },
+        { '<leader>lk', vim.diagnostic.goto_prev,     desc = 'lsp-diag-prev' },
+        { '<leader>lf', vim.lsp.buf.format,           desc = 'lsp-formatting' },
+        { '<leader>lh', vim.lsp.buf.hover,            desc = 'lsp-hover' },
+        { '<leader>li', vim.lsp.buf.implementation,   desc = 'lsp-implemenation' },
         --{ '<leader><c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'lsp-sighelp' },
-        { '<leader>lt', vim.lsp.buf.type_definition, desc = 'lsp-typedef' },
-        { '<leader>lr', vim.lsp.buf.references, desc = 'lsp-references' },
-        { '<leader>lR', vim.lsp.buf.rename, desc = 'lsp-rename' },
-        { '<leader>l0', vim.lsp.buf.document_symbol, desc = 'lsp-docsymbol' },
+        { '<leader>lt', vim.lsp.buf.type_definition,  desc = 'lsp-typedef' },
+        { '<leader>lr', vim.lsp.buf.references,       desc = 'lsp-references' },
+        { '<leader>lR', vim.lsp.buf.rename,           desc = 'lsp-rename' },
+        { '<leader>l0', vim.lsp.buf.document_symbol,  desc = 'lsp-docsymbol' },
         { '<leader>lW', vim.lsp.buf.workspace_symbol, desc = 'lsp-workspacesymbol' },
     },
 }
@@ -50,15 +50,12 @@ function M.config()
     end
 
     local filetype_attach = setmetatable({
-
         python = function()
             autocmd_format(false)
         end,
-
         lua = function()
             autocmd_format(false)
         end,
-
         c = function()
             -- I want to use Ctags over the LSP stuff for PMD decomp since I
             -- also have assembly files with tags that are referenced.
@@ -67,12 +64,11 @@ function M.config()
 
             -- Register this custom command we get from Clangd LSP
             vim.keymap.set('n', '<leader>la', '<cmd>ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
-
         end,
-
     }, {
         __index = function()
-            return function() end
+            return function()
+            end
         end,
     })
 
@@ -87,7 +83,6 @@ function M.config()
         local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
         filetype_attach[filetype](client)
-
     end
 
     local lspconfig = require('lspconfig')
@@ -127,7 +122,7 @@ function M.config()
         },
         --ccls = true,
 
-        sumneko_lua = {
+        lua_ls = {
             settings = {
                 Lua = {
                     runtime = {
@@ -194,7 +189,6 @@ function M.config()
     end
 
     require("seth.plugins.null-ls").setup()
-
 end
 
 return M

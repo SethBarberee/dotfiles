@@ -6,11 +6,11 @@ return {
     },
     cmd = "Neotree",
     keys = {
-        { "<leader>nf", "<cmd>Neotree toggle<cr>", desc = "files" },
-        { "<leader>nb", "<cmd>Neotree buffers<cr>", desc = "buffers" },
+        { "<leader>nf", "<cmd>Neotree toggle<cr>",     desc = "files" },
+        { "<leader>nb", "<cmd>Neotree buffers<cr>",    desc = "buffers" },
         { "<leader>ng", "<cmd>Neotree git_status<cr>", desc = "git" },
     },
-    config = {
+    opts = {
         filesystem = {
             follow_current_file = true,
             filtered_items = {
