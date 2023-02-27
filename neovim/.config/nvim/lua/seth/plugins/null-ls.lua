@@ -12,8 +12,12 @@ function M.setup()
         sources = {
             nls_diags.vint.with({ extra_args = { "--enable-neovim" } }), -- use vint for vim files and enable neovim syntax
             nls_format.trim_whitespace,
+
             nls_codeActions.gitsigns,
+
+            -- Python
             nls_format.black,
+            nls_format.isort,
         },
         on_init = function(new_client, _)
             --local filetype = vim.api.nvim_buf_get_option(0, "filetype")

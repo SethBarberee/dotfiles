@@ -38,4 +38,16 @@ return {
     -- NVIM cmp / autocomplete
     'ii14/emmylua-nvim',
     'onsails/lspkind.nvim',
+    {
+        'echasnovski/mini.starter',
+        config = function()
+            require("mini.starter").setup()
+        end
+    },
+    {
+        'echasnovski/mini.bracketed',
+        config = function()
+            require("mini.bracketed").setup()
+        end
+    }
 }

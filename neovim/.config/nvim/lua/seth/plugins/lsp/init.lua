@@ -51,7 +51,7 @@ function M.config()
 
     local filetype_attach = setmetatable({
         python = function()
-            autocmd_format(false)
+            --autocmd_format(false)
         end,
         lua = function()
             autocmd_format(false)
@@ -101,7 +101,9 @@ function M.config()
     --
     -- Tables within are the additional config that is passed to lspconfig
     local enabled_lsp = {
-        pylsp = true,
+        --pylsp = true,
+        --pyright = true,
+        jedi_language_server = true,
         rust_analyzer = true,
         vimls = true,
         poryscript_lsp = true,
