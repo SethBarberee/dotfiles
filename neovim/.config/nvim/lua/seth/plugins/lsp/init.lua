@@ -114,6 +114,8 @@ function M.config()
                 "--background-index",
                 "--clang-tidy",
                 "--header-insertion=iwyu",
+                "-j=8",
+                "--malloc-trim",
                 --"--offset-encoding=utf-32", -- defaults to utf-16
                 "--limit-results=0",
                 "--enable-config",
@@ -152,7 +154,6 @@ function M.config()
                     hint = {
                         enable = true,
                     },
-
                     workspace = {
                         -- Make the server aware of Neovim runtime files
                         library = vim.api.nvim_get_runtime_file('', true),

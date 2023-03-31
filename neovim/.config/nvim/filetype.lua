@@ -12,8 +12,9 @@ vim.filetype.add({
         end,
         inc = 'asm', -- for PMD Red data files
         pory = 'pory',
+        jsonschema = 'json',
     },
-    --pattern = {
-    --    ["*.inc"] = "asm",
-    --},
+    pattern = {
+        ["ld_script.txt"] = "ld",
+    },
 })
