@@ -5,6 +5,7 @@
 --| | | \ V /| | | | | | |
 --|_| |_|\_/ |_|_| |_| |_|
 
+vim.loader.enable()
 vim.opt.ruler = true
 vim.opt.cursorline = true
 vim.opt.title = true
@@ -18,6 +19,7 @@ vim.opt.showmode = false
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 100
 
+-- Indent
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -43,7 +45,11 @@ vim.opt.foldlevelstart = 99
 vim.opt.signcolumn = 'auto:3'
 vim.opt.completeopt = "menu,menuone,noselect"
 
+-- Providers
 vim.g.python3_host_prog = '/usr/bin/python3'
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
 
 vim.g.vimpath = vim.fn.fnamemodify(vim.env.MYVIMRC, ":p:h")
 

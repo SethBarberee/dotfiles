@@ -14,9 +14,6 @@ local M = {
 }
 
 function M.config()
-
-    vim.o.completeopt = "menu,menuone,noselect"
-
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
     local luasnip = require 'luasnip'
@@ -46,7 +43,6 @@ function M.config()
                     ultisnips = "[UltiSnip]",
                 }),
                 maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-
                 -- The function below will be called before any actual modifications from lspkind
                 -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
                 --before = function (entry, vim_item)
@@ -62,7 +58,6 @@ function M.config()
         experimental = {
             ghost_text = true,
         },
-
         mapping = cmp.mapping.preset.insert({
             ["<C-n>"] = cmp.mapping.select_next_item(),
             ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -80,7 +75,6 @@ function M.config()
                     fallback()
                 end
             end, { "i", "s" }),
-
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if luasnip.jumpable(-1) then
                     luasnip.jump(-1)
@@ -98,7 +92,7 @@ function M.config()
                 { name = 'luasnip' },
                 { name = 'nvim_lsp' },
                 { name = 'nvim_lua' },
-                { name = 'tags', keyword_length = 3 },
+                { name = 'tags',    keyword_length = 3 },
             },
             {
                 { name = 'buffer', keyword_length = 5 },
