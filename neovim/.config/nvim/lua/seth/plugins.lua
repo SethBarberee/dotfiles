@@ -30,7 +30,7 @@ return {
         end,
     },
 
-    'sgur/vim-editorconfig', -- to honor editorconfig
+    --'sgur/vim-editorconfig', -- to honor editorconfig
 
     -- Markdown Rendering
     { 'iamcco/markdown-preview.nvim', ft = "markdown" },

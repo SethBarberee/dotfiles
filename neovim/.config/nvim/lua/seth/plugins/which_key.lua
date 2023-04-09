@@ -39,7 +39,7 @@ return {
                 b = { 'git-blame' },
             },
             h = {
-                g = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'highlight-group' },
+                g = { '<cmd>Inspect<cr>', 'highlight-group' },
             },
             l = {
                 name = "lsp",
@@ -69,6 +69,5 @@ return {
                 name = "telescope",
             },
         }, { prefix = "<leader>" })
-
     end
 }
