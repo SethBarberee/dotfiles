@@ -5,18 +5,17 @@ return {
     --{ "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     'nvim-lua/plenary.nvim',
-    'edkolev/tmuxline.vim', -- tmux statusline based on statusline
     { 'nvim-tree/nvim-web-devicons',  lazy = true },
     'folke/lazy.nvim',
 
     -- Utils
-    'airblade/vim-rooter', -- auto cd to base dir of project
+    'notjedi/nvim-rooter.lua', -- auto cd to base dir of project
 
     -- Tags
     'ludovicchabant/vim-gutentags', --tag management
     'liuchengxu/vista.vim',
 
-    { 'dstein64/vim-startuptime',     cmd = "StartupTime" },
+    { 'dstein64/vim-startuptime', cmd = "StartupTime" },
 
     -- Git
     'tpope/vim-fugitive',
@@ -29,11 +28,6 @@ return {
             require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
         end,
     },
-
-    --'sgur/vim-editorconfig', -- to honor editorconfig
-
-    -- Markdown Rendering
-    { 'iamcco/markdown-preview.nvim', ft = "markdown" },
 
     -- NVIM cmp / autocomplete
     'ii14/emmylua-nvim',
