@@ -9,27 +9,30 @@ local M = {
     },
     dependencies = {
         'mfussenegger/nvim-dap-python',
-        { 'rcarriga/nvim-dap-ui', config = function()
-            require("dapui").setup({
-                expand_lines = vim.fn.has("nvim-0.7") == 1,
-                controls = {
-                    -- Needs at least nvim 0.8
-                    enabled = vim.fn.has("nvim-0.8") == 1,
-                    -- Display controls in this element
-                    element = "repl",
-                    icons = {
-                        pause = "",
-                        play = "",
-                        step_into = "",
-                        step_over = "",
-                        step_out = "",
-                        step_back = "",
-                        run_last = "",
-                        terminate = "",
+        {
+            'rcarriga/nvim-dap-ui',
+            config = function()
+                require("dapui").setup({
+                    expand_lines = vim.fn.has("nvim-0.7") == 1,
+                    controls = {
+                        -- Needs at least nvim 0.8
+                        enabled = vim.fn.has("nvim-0.8") == 1,
+                        -- Display controls in this element
+                        element = "repl",
+                        icons = {
+                            pause = "",
+                            play = "",
+                            step_into = "",
+                            step_over = "",
+                            step_out = "",
+                            step_back = "",
+                            run_last = "",
+                            terminate = "",
+                        },
                     },
-                },
-            })
-        end },
+                })
+            end
+        },
         { 'theHamsta/nvim-dap-virtual-text', config = true },
         'nvim-telescope/telescope-dap.nvim',
         'jbyuki/one-small-step-for-vimkind',
@@ -100,7 +103,6 @@ function M.config()
             name = "Launch file (codelldb)",
             type = "codelldb",
             request = "launch",
-
             -- Taken from @rcarriga where it automatically figures out the debug file
             program = function()
                 local metadata_json = vim.fn.system("cargo metadata --format-version 1 --no-deps")

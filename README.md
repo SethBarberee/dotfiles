@@ -9,10 +9,9 @@ Hi, here's a collection of dotfiles that I have accumulated
 | Program | Description |
 | ------- | ----------- |
 | Sway    | This is my daily config on my Dell XPS 15 2-in-1 |
+| Kitty   | Terminal config |
 | Tmux    | my little delve into tmux |
 | neovim  | my config for neovim with plugins |
-| dunst   | for when I use X11 stuff |
 | libinput-gestures | config for libinput-gestures |
 | rofi    | my rofi setup which load wal colors too |
-| wayland_-environment | variables for wayland environment (like
-.bash_profile) |
+| wayland-environment | variables for wayland environment (like .bash_profile) |

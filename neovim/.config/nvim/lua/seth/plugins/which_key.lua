@@ -32,11 +32,10 @@ return {
                 },
             },
             g = {
-                -- Labeling mappings from after/plugins/gitgutter.vim
                 name = "Git",
-                d = { 'git-diff' },
-                s = { '<cmd>Git status<cr>', 'git-status' },
-                b = { 'git-blame' },
+                d = { '<cmd>Gdiffsplit<cr>', 'git-diff' },
+                s = { '<cmd>Git<cr>', 'git-status' },
+                b = { '<cmd>Git blame<cr>', 'git-blame' },
             },
             h = {
                 g = { '<cmd>Inspect<cr>', 'highlight-group' },

@@ -10,6 +10,7 @@ return {
 
     -- Utils
     'notjedi/nvim-rooter.lua', -- auto cd to base dir of project
+    'fladson/vim-kitty',
 
     -- Tags
     'ludovicchabant/vim-gutentags', --tag management
