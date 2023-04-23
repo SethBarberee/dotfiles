@@ -11,6 +11,11 @@ return {
         { "<leader>ng", "<cmd>Neotree git_status<cr>", desc = "git" },
     },
     opts = {
+        update_cwd = true,
+        update_focused_file = {
+            enable = true,
+            update_cwd = true,
+        },
         filesystem = {
             follow_current_file = true,
             filtered_items = {

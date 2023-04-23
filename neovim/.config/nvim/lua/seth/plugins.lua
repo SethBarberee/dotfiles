@@ -7,9 +7,10 @@ return {
     'nvim-lua/plenary.nvim',
     { 'nvim-tree/nvim-web-devicons',  lazy = true },
     'folke/lazy.nvim',
+    'wadackel/vim-dogrun',
 
     -- Utils
-    'notjedi/nvim-rooter.lua', -- auto cd to base dir of project
+    { 'notjedi/nvim-rooter.lua',  config = true }, -- auto cd to base dir of project
     'fladson/vim-kitty',
 
     -- Tags
@@ -44,5 +45,5 @@ return {
         config = function()
             require("mini.bracketed").setup()
         end
-    }
+    },
 }

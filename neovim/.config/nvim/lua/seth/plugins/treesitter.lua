@@ -4,7 +4,7 @@ return {
         'nvim-treesitter/nvim-treesitter-context',
         event = "BufReadPost",
         opts = {
-            max_lines = 5,     -- How many lines the window should span. Values <= 0 mean no limit.
+            max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
         }
     },
     {
@@ -15,7 +15,7 @@ return {
             'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
             { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
-            { 'SmiteshP/nvim-gps',                           config = true },
+            { 'lmburns/nvim-gps',                            config = true },
         },
         config = function()
             require('nvim-treesitter.configs').setup {

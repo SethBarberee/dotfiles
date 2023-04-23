@@ -1,9 +1,10 @@
 local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
-        { "j-hui/fidget.nvim",   opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
-        { 'SmiteshP/nvim-navic', opts = { highlight = true } },
-        { 'folke/neodev.nvim',   config = true },
+        { "j-hui/fidget.nvim",     opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
+        { 'SmiteshP/nvim-navic',   opts = { highlight = true } },
+        { 'SmiteshP/nvim-navbuddy' },
+        { 'folke/neodev.nvim',     config = true },
     },
     event = "BufReadPre",
     keys = {
@@ -15,6 +16,7 @@ local M = {
         { '<leader>lf', vim.lsp.buf.format,           desc = 'lsp-formatting' },
         { '<leader>lh', vim.lsp.buf.hover,            desc = 'lsp-hover' },
         { '<leader>li', vim.lsp.buf.implementation,   desc = 'lsp-implemenation' },
+        { '<leader>ln', "<cmd>Navbuddy<cr>",          desc = 'lsp-nav' },
         --{ '<leader><c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'lsp-sighelp' },
         { '<leader>lt', vim.lsp.buf.type_definition,  desc = 'lsp-typedef' },
         { '<leader>lr', vim.lsp.buf.references,       desc = 'lsp-references' },
@@ -78,6 +80,7 @@ function M.config()
 
         if client.server_capabilities.documentSymbolProvider then
             require("nvim-navic").attach(client, bufnr)
+            require("nvim-navbuddy").attach(client, bufnr)
         end
 
         local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")

@@ -1,6 +1,6 @@
 local M = {
     'nvim-lualine/lualine.nvim', -- statusline
-    event = "VeryLazy",
+    event = "BufReadPost",       -- Make sure its after BufReadPre for LSP to load. We don't want both gps and navic to show
 }
 
 function M.init()
@@ -23,9 +23,7 @@ function M.config()
 
     -- Format my lualine tag data
     local function lualine_tags()
-        if navic.is_available() then
-            return navic.get_location()
-        elseif gps.is_available() then
+        if gps.is_available() then
             -- TODO: format this with a pretty highlight so I can left align it?
             return gps.get_location()
         else
@@ -136,7 +134,14 @@ function M.config()
         },
         -- Use the c component so we have a normal BG and not the light blue background like the mode indicator
         winbar = {
-            lualine_c = { { lualine_tags } },
+            lualine_c = { { "navic" },
+                {
+                    lualine_tags,
+                    cond = function()
+                        return not navic.is_available()
+                    end
+                }
+            },
         },
         inactive_winbar = {
             lualine_a = { { 'filename', fmt = lualine_filename } },
