@@ -4,7 +4,7 @@ local M = {
         { "j-hui/fidget.nvim",     opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
         { 'SmiteshP/nvim-navic',   opts = { highlight = true } },
         { 'SmiteshP/nvim-navbuddy' },
-        { 'folke/neodev.nvim',     config = true },
+        { "folke/neodev.nvim",     config = true },
     },
     event = "BufReadPre",
     keys = {
@@ -154,12 +154,13 @@ function M.config()
                             "RELOAD",
                         },
                     },
-                    hint = {
-                        enable = true,
+                    completion = {
+                        callSnippet = "Both"
                     },
                     workspace = {
                         -- Make the server aware of Neovim runtime files
-                        library = vim.api.nvim_get_runtime_file('', true),
+                        -- NOTE: neodev is handling this now
+                        --library = vim.api.nvim_get_runtime_file('', true),
                         checkThirdParty = false,
                     },
                 }

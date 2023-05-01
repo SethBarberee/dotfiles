@@ -16,6 +16,7 @@ return {
             'nvim-treesitter/nvim-treesitter-textobjects',
             { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
             { 'lmburns/nvim-gps',                            config = true },
+            "eckon/treesitter-current-functions",
         },
         config = function()
             require('nvim-treesitter.configs').setup {
@@ -99,14 +100,14 @@ return {
             }
             parser_config.poryscript = {
                 install_info = {
-                    url = "~/tree-sitter-poryscript", -- local path or git repo
+                    url = "https://github.com/V-FEXrt/tree-sitter-poryscript",
                     files = { "src/parser.c" },
                     -- optional entries:
-                    --branch = "main", -- default branch in case of git repo if different from master
-                    generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
-                    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+                    branch = "main",                       -- default branch in case of git repo if different from master
+                    generate_requires_npm = false,         -- if stand-alone parser without npm dependencies
+                    requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
                 },
-                filetype = "pory",                          -- if filetype does not match the parser name
+                filetype = "pory",                         -- if filetype does not match the parser name
             }
         end,
     }
