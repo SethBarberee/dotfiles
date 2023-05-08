@@ -2,7 +2,13 @@ local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
         { "j-hui/fidget.nvim",     opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
-        { 'SmiteshP/nvim-navic',   opts = { highlight = true } },
+        {
+            'SmiteshP/nvim-navic',
+            opts = {
+                icons = require('seth.util.icons'),
+                highlight = true
+            }
+        },
         { 'SmiteshP/nvim-navbuddy' },
         { "folke/neodev.nvim",     config = true },
     },

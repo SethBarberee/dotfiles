@@ -1,6 +1,5 @@
 local M = {
     'nvim-lualine/lualine.nvim', -- statusline
-    event = "BufReadPost",       -- Make sure its after BufReadPre for LSP to load. We don't want both gps and navic to show
 }
 
 function M.init()

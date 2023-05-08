@@ -4,10 +4,12 @@ return {
 
     --{ "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
+    'wadackel/vim-dogrun',
+    'felipeagc/fleet-theme-nvim',
+
     'nvim-lua/plenary.nvim',
     { 'nvim-tree/nvim-web-devicons',  lazy = true },
     'folke/lazy.nvim',
-    'wadackel/vim-dogrun',
 
     -- Utils
     { 'notjedi/nvim-rooter.lua',  config = true }, -- auto cd to base dir of project
@@ -33,7 +35,14 @@ return {
 
     -- NVIM cmp / autocomplete
     'ii14/emmylua-nvim',
-    'onsails/lspkind.nvim',
+    {
+        'onsails/lspkind.nvim',
+        config = function()
+            require('lspkind').init({
+                symbol_map = require("seth.util.icons")
+            })
+        end
+    },
     {
         'echasnovski/mini.starter',
         config = function()
