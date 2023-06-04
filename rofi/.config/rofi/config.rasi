@@ -1,7 +1,0 @@
-configuration {
-    theme: "~/.cache/wal/colors-rofi-dark.rasi";
-    modi: "combi,drun,run,window,ssh";
-    fullscreen: false;
-    hide-scrollbar: true;
-    padding: 400;
-}

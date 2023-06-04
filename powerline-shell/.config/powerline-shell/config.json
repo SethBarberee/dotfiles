@@ -11,10 +11,7 @@
     "jobs",
     "root"
   ],
-  "theme": "solarized_dark",
-  "hostname": {
-    "colorize": true
-  },
+  "theme": "~/.config/powerline-shell/challenger_deep.py",
   "cwd": {
     "max_depth": 2
   }
