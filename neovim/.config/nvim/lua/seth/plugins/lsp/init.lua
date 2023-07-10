@@ -29,6 +29,7 @@ local M = {
         { '<leader>lR', vim.lsp.buf.rename,           desc = 'lsp-rename' },
         { '<leader>l0', vim.lsp.buf.document_symbol,  desc = 'lsp-docsymbol' },
         { '<leader>lW', vim.lsp.buf.workspace_symbol, desc = 'lsp-workspacesymbol' },
+        { '<leader>ll', vim.lsp.codelens.run,         desc = 'lsp-codelens-run' },
     },
 }
 
@@ -87,6 +88,16 @@ function M.config()
         if client.server_capabilities.documentSymbolProvider then
             require("nvim-navic").attach(client, bufnr)
             require("nvim-navbuddy").attach(client, bufnr)
+        end
+
+        -- Setup codelens for supported LSPs
+        if client.server_capabilities.codeLensProvider then
+            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                buffer = 0,
+                callback = function()
+                    vim.lsp.codelens.refresh()
+                end,
+            })
         end
 
         local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")

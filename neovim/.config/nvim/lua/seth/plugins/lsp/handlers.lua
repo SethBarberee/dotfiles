@@ -9,7 +9,7 @@ local handlers = {
 
 -- Poryscript needs custom handlers so we do that here
 --if filetype == "pory" then
-handlers["poryscript/getPoryscriptFiles"] = function(_, result, ctx, _)
+handlers["poryscript/getPoryscriptFiles"] = function(_, _, _, _)
     -- search for all *pory files for this request
     -- and return a table of URIs
 
@@ -21,7 +21,7 @@ handlers["poryscript/getPoryscriptFiles"] = function(_, result, ctx, _)
     --print(vim.inspect(files))
 
     local files_array = {}
-    for k, v in pairs(files) do
+    for _, v in pairs(files) do
         local uri_file = vim.uri_from_fname(v)
         table.insert(files_array, uri_file)
     end
@@ -29,13 +29,13 @@ handlers["poryscript/getPoryscriptFiles"] = function(_, result, ctx, _)
     return files_array
 end
 
-handlers["poryscript/getfileuri"] = function(_, result, ctx, _)
+handlers["poryscript/getfileuri"] = function(_, result, _, _)
     print("get file uri")
     print(vim.inspect(result))
     return vim.uri_from_bufnr(0)
 end
 
-handlers["poryscript/readfile"] = function(_, result, ctx, _)
+handlers["poryscript/readfile"] = function(_, result, _, _)
     local bufnr = vim.uri_to_bufnr(result)
     if vim.api.nvim_buf_is_loaded(bufnr) then
         -- NOTE: Read the lines in the buffer and then combine into a string since poryscript-pls expects a string
@@ -46,7 +46,7 @@ handlers["poryscript/readfile"] = function(_, result, ctx, _)
     end
 end
 
-handlers["poryscript/readfs"] = function(_, result, ctx, _)
+handlers["poryscript/readfs"] = function(_, result, _, _)
     local bufnr = vim.uri_to_bufnr(result)
     if vim.api.nvim_buf_is_loaded(bufnr) then
         -- NOTE: Read the lines in the buffer and then combine into a string since poryscript-pls expects a string
