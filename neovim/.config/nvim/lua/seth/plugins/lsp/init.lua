@@ -1,7 +1,8 @@
 local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
-        { "j-hui/fidget.nvim",     opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
+        -- Use legacy tag for fidget until rewrite is done
+        { "j-hui/fidget.nvim",     tag = "legacy", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
         {
             'SmiteshP/nvim-navic',
             opts = {
