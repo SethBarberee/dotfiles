@@ -74,6 +74,7 @@ local number_ftToIgnore = {
     ['vista'] = true,
     ['vista_kind'] = true,
     ['help'] = true,
+    ['Glance'] = true,
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
@@ -189,7 +190,8 @@ vim.g.gutentags_ctags_exclude = {
     '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
 }
 
-vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/vim/ctags/')
+--vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/vim/ctags/')
+
 --
 --" a -> acccess or export of class members
 --" i -> inheritance information

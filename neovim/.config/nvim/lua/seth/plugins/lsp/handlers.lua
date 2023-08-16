@@ -1,6 +1,3 @@
-local bufnr = vim.api.nvim_get_current_buf()
-local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-
 -- Add rounded borders to these handlers on every filetype
 local handlers = {
     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
@@ -14,7 +11,7 @@ handlers["poryscript/getPoryscriptFiles"] = function(_, _, _, _)
     -- and return a table of URIs
 
     -- get all files ending with .pory
-    local files = vim.fs.find(function(name, path)
+    local files = vim.fs.find(function(name, _)
         return name:match('.*%.pory$')
     end, { limit = math.huge, type = 'file' })
 

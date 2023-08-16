@@ -12,25 +12,30 @@ local M = {
         },
         { 'SmiteshP/nvim-navbuddy' },
         { "folke/neodev.nvim",     config = true },
+        { "DNLHC/glance.nvim",     config = true },
     },
     event = "BufReadPre",
     keys = {
-        { '<leader>lc', vim.lsp.buf.code_action,      desc = 'lsp-code_action' },
-        { '<leader>lD', vim.lsp.buf.declaration,      desc = 'lsp-declaration' },
-        { '<leader>ld', vim.lsp.buf.definition,       desc = 'lsp-definition' },
-        { '<leader>lj', vim.diagnostic.goto_next,     desc = 'lsp-diag-next' },
-        { '<leader>lk', vim.diagnostic.goto_prev,     desc = 'lsp-diag-prev' },
-        { '<leader>lf', vim.lsp.buf.format,           desc = 'lsp-formatting' },
-        { '<leader>lh', vim.lsp.buf.hover,            desc = 'lsp-hover' },
-        { '<leader>li', vim.lsp.buf.implementation,   desc = 'lsp-implemenation' },
-        { '<leader>ln', "<cmd>Navbuddy<cr>",          desc = 'lsp-nav' },
-        --{ '<leader><c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'lsp-sighelp' },
-        { '<leader>lt', vim.lsp.buf.type_definition,  desc = 'lsp-typedef' },
-        { '<leader>lr', vim.lsp.buf.references,       desc = 'lsp-references' },
-        { '<leader>lR', vim.lsp.buf.rename,           desc = 'lsp-rename' },
-        { '<leader>l0', vim.lsp.buf.document_symbol,  desc = 'lsp-docsymbol' },
-        { '<leader>lW', vim.lsp.buf.workspace_symbol, desc = 'lsp-workspacesymbol' },
-        { '<leader>ll', vim.lsp.codelens.run,         desc = 'lsp-codelens-run' },
+        { '<leader>lc', vim.lsp.buf.code_action,            desc = 'lsp-code_action' },
+        { '<leader>lD', vim.lsp.buf.declaration,            desc = 'lsp-declaration' },
+        -- { '<leader>ld', vim.lsp.buf.definition,       desc = 'lsp-definition' },
+        { '<leader>ld', "<cmd>Glance definition<cr>",       desc = 'lsp-definition' },
+        { '<leader>lj', vim.diagnostic.goto_next,           desc = 'lsp-diag-next' },
+        { '<leader>lk', vim.diagnostic.goto_prev,           desc = 'lsp-diag-prev' },
+        { '<leader>lf', vim.lsp.buf.format,                 desc = 'lsp-formatting' },
+        { '<leader>lh', vim.lsp.buf.hover,                  desc = 'lsp-hover' },
+        -- { '<leader>li', vim.lsp.buf.implementation,        desc = 'lsp-implemenation' },
+        { '<leader>li', "<cmd>Glance implementations<cr>",  desc = 'lsp-implemenation' },
+        { '<leader>ln', "<cmd>Navbuddy<cr>",                desc = 'lsp-nav' },
+        -- { '<leader><c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'lsp-sighelp' },
+        -- { '<leader>lt', vim.lsp.buf.type_definition,  desc = 'lsp-typedef' },
+        { '<leader>lt', "<cmd>Glance type_definitions<cr>", desc = 'lsp-typedef' },
+        -- { '<leader>lr', vim.lsp.buf.references,       desc = 'lsp-references' },
+        { '<leader>lr', "<cmd>Glance references<cr>",       desc = 'lsp-references' },
+        { '<leader>lR', vim.lsp.buf.rename,                 desc = 'lsp-rename' },
+        { '<leader>l0', vim.lsp.buf.document_symbol,        desc = 'lsp-docsymbol' },
+        { '<leader>lW', vim.lsp.buf.workspace_symbol,       desc = 'lsp-workspacesymbol' },
+        { '<leader>ll', vim.lsp.codelens.run,               desc = 'lsp-codelens-run' },
     },
 }
 
@@ -69,8 +74,12 @@ function M.config()
         c = function()
             -- I want to use Ctags over the LSP stuff for PMD decomp since I
             -- also have assembly files with tags that are referenced.
-            -- TODO: create a better detection to do this for PMD?
-            vim.bo.tagfunc = ""
+            local current_dir = vim.fn.getcwd(-1, -1)
+            local basename = vim.fs.basename(current_dir)
+            --print(basename)
+            if basename == "pmd-red" then
+                vim.bo.tagfunc = ""
+            end
 
             -- Register this custom command we get from Clangd LSP
             vim.keymap.set('n', '<leader>la', '<cmd>ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })

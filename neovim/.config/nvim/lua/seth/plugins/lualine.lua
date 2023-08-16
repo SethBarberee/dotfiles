@@ -61,6 +61,7 @@ function M.config()
         vista_kind = "VISTA",
         tsplayground = "TREESITTER",
         qf = 'QUICKFIX',
+        Glance = 'Glance',
         --['neo-tree'] = 'NEOTREE',
         --['neo-tree-popup'] = 'NEOTREE',
     }
@@ -107,8 +108,8 @@ function M.config()
         sections = {
             lualine_a = { { 'mode', fmt = lualine_mode } },
             lualine_b = { { 'b:gitsigns_head', cond = lualine_mini, icon = '' },
-                { 'diff',            colored = false,     source = diff_source },
-                { 'diagnostics',     colored = false } },
+                { 'diff', colored = false, source = diff_source },
+                { 'diagnostics', colored = false } },
             lualine_c = { { 'filename', cond = lualine_filename_cond, fmt = lualine_filename } },
             lualine_x = { { 'encoding', cond = lualine_mini }, { 'fileformat', cond = lualine_mini },
                 { 'filetype', cond = lualine_mini } },

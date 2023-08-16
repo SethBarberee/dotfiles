@@ -1,6 +1,7 @@
 return {
     'nvim-neo-tree/neo-tree.nvim',
     --cmd = "Neotree",
+    branch = "v3.x",
     dependencies = {
         'MunifTanjim/nui.nvim', -- for neotree
     },
