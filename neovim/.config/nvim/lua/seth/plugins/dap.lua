@@ -11,27 +11,26 @@ local M = {
         'mfussenegger/nvim-dap-python',
         {
             'rcarriga/nvim-dap-ui',
-            config = function()
-                require("dapui").setup({
-                    expand_lines = vim.fn.has("nvim-0.7") == 1,
-                    controls = {
-                        -- Needs at least nvim 0.8
-                        enabled = vim.fn.has("nvim-0.8") == 1,
-                        -- Display controls in this element
-                        element = "repl",
-                        icons = {
-                            pause = "",
-                            play = "",
-                            step_into = "",
-                            step_over = "",
-                            step_out = "",
-                            step_back = "",
-                            run_last = "",
-                            terminate = "",
-                        },
+            main = "dapui",
+            opts = {
+                expand_lines = vim.fn.has("nvim-0.7") == 1,
+                controls = {
+                    -- Needs at least nvim 0.8
+                    enabled = vim.fn.has("nvim-0.8") == 1,
+                    -- Display controls in this element
+                    element = "repl",
+                    icons = {
+                        pause = "",
+                        play = "",
+                        step_into = "",
+                        step_over = "",
+                        step_out = "",
+                        step_back = "",
+                        run_last = "",
+                        terminate = "",
                     },
-                })
-            end
+                },
+            }
         },
         { 'theHamsta/nvim-dap-virtual-text', config = true },
         'nvim-telescope/telescope-dap.nvim',

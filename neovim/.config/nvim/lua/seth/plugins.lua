@@ -4,15 +4,15 @@ return {
 
     --{ "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
     { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
-    'wadackel/vim-dogrun',
-    'felipeagc/fleet-theme-nvim',
+    { 'wadackel/vim-dogrun',          event = "VeryLazy" },
+    { 'felipeagc/fleet-theme-nvim',   event = "VeryLazy" },
 
     'nvim-lua/plenary.nvim',
-    { 'nvim-tree/nvim-web-devicons',  lazy = true },
+    { 'nvim-tree/nvim-web-devicons', lazy = true },
     'folke/lazy.nvim',
 
     -- Utils
-    { 'notjedi/nvim-rooter.lua',  config = true }, -- auto cd to base dir of project
+    { 'notjedi/nvim-rooter.lua',     config = true }, -- auto cd to base dir of project
     'fladson/vim-kitty',
 
     -- Tags
@@ -45,14 +45,10 @@ return {
     },
     {
         'echasnovski/mini.starter',
-        config = function()
-            require("mini.starter").setup()
-        end
+        main = "mini.starter"
     },
     {
         'echasnovski/mini.bracketed',
-        config = function()
-            require("mini.bracketed").setup()
-        end
+        main = "mini.bracketed"
     },
 }

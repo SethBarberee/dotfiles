@@ -1,6 +1,5 @@
 return {
     'nvim-neo-tree/neo-tree.nvim',
-    --cmd = "Neotree",
     branch = "v3.x",
     dependencies = {
         'MunifTanjim/nui.nvim', -- for neotree
@@ -18,7 +17,9 @@ return {
             update_cwd = true,
         },
         filesystem = {
-            follow_current_file = true,
+            follow_current_file = {
+                enabled = true
+            },
             filtered_items = {
                 hide_dotfiles = false,
             },

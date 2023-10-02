@@ -2,7 +2,7 @@ local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
         -- Use legacy tag for fidget until rewrite is done
-        { "j-hui/fidget.nvim",     tag = "legacy", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
+        { "j-hui/fidget.nvim",        tag = "legacy", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
         {
             'SmiteshP/nvim-navic',
             opts = {
@@ -11,8 +11,9 @@ local M = {
             }
         },
         { 'SmiteshP/nvim-navbuddy' },
-        { "folke/neodev.nvim",     config = true },
-        { "DNLHC/glance.nvim",     config = true },
+        { "folke/neodev.nvim",        config = true },
+        { "DNLHC/glance.nvim",        config = true },
+        { "simrat39/rust-tools.nvim", ft = "rust" },
     },
     event = "BufReadPre",
     keys = {
@@ -134,7 +135,7 @@ function M.config()
         --pylsp = true,
         --pyright = true,
         jedi_language_server = true,
-        rust_analyzer = true,
+        --rust_analyzer = true,
         vimls = true,
         poryscript_lsp = true,
         jsonls = true,
@@ -221,6 +222,16 @@ function M.config()
     for server, config in pairs(enabled_lsp) do
         setup_server(server, config)
     end
+
+    -- Initialize rust-tools
+    local rt = require("rust-tools")
+    rt.setup({
+        server = {
+            on_attach = custom_attach,
+            capabilities = updated_capabilities,
+            handlers = handlers,
+        }
+    })
 
     require("seth.plugins.null-ls").setup()
 end

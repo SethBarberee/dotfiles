@@ -16,5 +16,8 @@ vim.filetype.add({
     },
     pattern = {
         ["ld_script.txt"] = "ld",
+        ["sym_ewram.txt"] = "ld",
+        ["sym_ewram2.txt"] = "ld",
+        ["sym_iwram.txt"] = "ld",
     },
 })
