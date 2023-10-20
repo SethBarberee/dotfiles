@@ -15,6 +15,10 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup("seth.plugins", {
     root = vim.fn.stdpath("data") .. "/plugged",
     install = { colorscheme = { "challenger_deep", "habamax" } },
+    dev = {
+        path = "~/nvim-projects", -- repo for nvim projects
+        fallback = true, -- use git when repo doesnt exist locally
+    },
     ui = {
         border = "rounded",
     },
