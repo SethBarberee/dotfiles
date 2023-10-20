@@ -2,8 +2,7 @@ return {
 
     -- Looks/UI
 
-    --{ "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
-    { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
+    { "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000, dev = true },
     { 'wadackel/vim-dogrun',          event = "VeryLazy" },
     { 'felipeagc/fleet-theme-nvim',   event = "VeryLazy" },
 
