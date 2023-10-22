@@ -2,10 +2,9 @@ return {
 
     -- Looks/UI
 
-    --{ "SethBarberee/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
-    { dir = "~/challenger-deep.nvim", name = "challenger-deep", priority = 1000 },
-    { 'wadackel/vim-dogrun',          event = "VeryLazy" },
-    { 'felipeagc/fleet-theme-nvim',   event = "VeryLazy" },
+    { "SethBarberee/challenger-deep.nvim", priority = 1000,   dev = true },
+    { 'wadackel/vim-dogrun',               event = "VeryLazy" },
+    { 'oxfist/night-owl.nvim',             event = "VeryLazy" },
 
     'nvim-lua/plenary.nvim',
     { 'nvim-tree/nvim-web-devicons', lazy = true },
