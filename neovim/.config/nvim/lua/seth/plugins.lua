@@ -1,10 +1,23 @@
 return {
 
     -- Looks/UI
-
-    { "SethBarberee/challenger-deep.nvim", priority = 1000,   dev = true },
-    { 'wadackel/vim-dogrun',               event = "VeryLazy" },
-    { 'oxfist/night-owl.nvim',             event = "VeryLazy" },
+    {
+        "SethBarberee/challenger-deep.nvim",
+        priority = 1000,
+        dev = true,
+        config = function()
+            vim.cmd.colorscheme("challenger-deep")
+        end
+    },
+    { 'wadackel/vim-dogrun',   event = "VeryLazy" },
+    { 'oxfist/night-owl.nvim', event = "VeryLazy" },
+    {
+        'm-demare/hlargs.nvim',
+        opts = {
+            color = "#95ffa4",
+        },
+        event = "VeryLazy",
+    },
 
     'nvim-lua/plenary.nvim',
     { 'nvim-tree/nvim-web-devicons', lazy = true },

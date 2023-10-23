@@ -6,15 +6,12 @@
 --|_| |_|\_/ |_|_| |_| |_|
 
 vim.loader.enable()
-vim.opt.ruler = true
 vim.opt.cursorline = true
 vim.opt.title = true
-vim.opt.showcmd = true
 vim.opt.number = true
 vim.opt.confirm = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
 vim.opt.showmode = false
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 100
@@ -27,11 +24,9 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 
 vim.opt.swapfile = false
-vim.opt.hidden = true
 vim.opt.mouse = 'a'
 vim.opt.laststatus = 3 -- I've finally converted to global statusline
 vim.opt.showtabline = 2
-vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.clipboard = "unnamedplus"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -105,7 +100,6 @@ require('seth.mappings')
 
 -- Load plugins w/ lazy package manager
 require('seth.lazy')
-vim.cmd.colorscheme "challenger_deep"
 
 -- Better diff (https://vimways.org/2018/the-power-of-diff)
 vim.opt.diffopt:append('algorithm:patience')
