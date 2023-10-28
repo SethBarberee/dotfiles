@@ -44,7 +44,14 @@ local symbol_table = {
     Key = ' ',
     Null = ' ',
     --TypeParameter = "",
-    TypeParameter = '  '
-}
+    TypeParameter = '  ',
 
+    -- For diags
+    signs = {
+        Error = " ",
+        Warn = " ",
+        Hint = " ",
+        Info = " "
+    }
+}
 return symbol_table

@@ -119,7 +119,7 @@ function M.config()
 
     local filetype_attach = setmetatable({
         python = function()
-            --autocmd_format(false)
+            autocmd_format(false)
         end,
         lua = function()
             autocmd_format(false)
@@ -262,9 +262,6 @@ function M.config()
             on_attach = custom_attach,
             capabilities = updated_capabilities,
             handlers = handlers,
-            --flags = {
-            --  debounce_text_changes = nil,
-            --},
         }, config)
 
         -- Run each setup

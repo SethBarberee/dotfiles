@@ -1,6 +1,5 @@
 -- Add diag signs in the gutter
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
+for type, icon in pairs(require('seth.util.icons').signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
