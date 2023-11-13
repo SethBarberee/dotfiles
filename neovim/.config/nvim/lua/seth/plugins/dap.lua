@@ -1,17 +1,29 @@
 local M = {
     'mfussenegger/nvim-dap',
-    ft = {
-        "python",
-        "rust",
-        "c",
-        "cpp",
-        "lua"
+    keys = {
+        { '<leader>dso', function() require("dap").step_over() end,         desc = 'step-over' },
+        { '<leader>dsi', function() require("dap").step_into() end,         desc = 'step-into' },
+        { '<leader>dsb', function() require("dap").step_back() end,         desc = 'step-back' },
+        { '<leader>dbs', function() require("dap").toggle_breakpoint() end, desc = 'set-breakpoint' },
+        { '<leader>dbl', function() require("dap").list_breakpoints() end,  desc = 'list-breakpoints' },
+        { '<leader>dbc', function() require("dap").clear_breakpoints() end, desc = 'clear-breakpoints' },
+        { '<leader>dr',  function() require("dap").continue() end,          desc = 'dap run' },
+        { '<leader>dl',  function() require("dap").run_last() end,          desc = 'dap run last' },
     },
     dependencies = {
-        'mfussenegger/nvim-dap-python',
+        {
+            'mfussenegger/nvim-dap-python',
+            config = function()
+                require("dap-python").setup(
+                    "/usr/bin/python")
+            end
+        },
         {
             'rcarriga/nvim-dap-ui',
             main = "dapui",
+            keys = {
+                { '<leader>dt', function() require("dapui").toggle() end, desc = 'dap-ui toggle' },
+            },
             opts = {
                 expand_lines = vim.fn.has("nvim-0.7") == 1,
                 controls = {
@@ -30,13 +42,29 @@ local M = {
                         terminate = "",
                     },
                 },
-            }
+            },
+            config = function(_, opts)
+                local dap = require("dap")
+                local dapui = require("dapui")
+
+                dapui.setup(opts)
+                dap.listeners.after.event_initialized["dapui_config"] = function()
+                    dapui.open()
+                end
+                dap.listeners.before.event_terminated["dapui_config"] = function()
+                    dapui.close()
+                    dap.repl.close()
+                end
+                dap.listeners.before.event_exited["dapui_config"] = function()
+                    dapui.close()
+                    dap.repl.close()
+                end
+            end
         },
         { 'theHamsta/nvim-dap-virtual-text', config = true },
         'nvim-telescope/telescope-dap.nvim',
-        'jbyuki/one-small-step-for-vimkind',
     },
-    event = "VeryLazy"
+    --event = "VeryLazy"
 }
 
 function M.config()
@@ -114,50 +142,6 @@ function M.config()
         },
 
     }
-
-
-    dap.configurations.lua = {
-        {
-            type = 'nlua',
-            request = 'attach',
-            name = "Attach to running Neovim instance",
-        }
-    }
-
-    dap.adapters.nlua = function(callback, config)
-        callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port })
-    end
-
-    -- Define user command to start up DAP for lua
-    vim.api.nvim_create_user_command('DapStartLua', function()
-        require "osv".run_this()
-    end, {})
-
-    -- Debugpy installed as module of system python
-    require("dap-python").setup('/usr/bin/python')
-
-    vim.keymap.set('n', '<leader>dso', require('dap').step_over, { desc = 'step-over' })
-    vim.keymap.set('n', '<leader>dsi', require('dap').step_into, { desc = 'step-into' })
-    vim.keymap.set('n', '<leader>dsb', require('dap').step_back, { desc = 'step-back' })
-    vim.keymap.set('n', '<leader>dbs', require('dap').toggle_breakpoint, { desc = 'set-breakpoint' })
-    vim.keymap.set('n', '<leader>dbl', require('dap').list_breakpoints, { desc = 'list-breakpoints' })
-    vim.keymap.set('n', '<leader>dbc', require('dap').clear_breakpoints, { desc = 'clear-breakpoints' })
-    vim.keymap.set('n', '<leader>dt', require('dapui').toggle, { desc = 'dap-ui toggle' })
-    vim.keymap.set('n', '<leader>dr', require('dap').continue, { desc = 'dap run' })
-    vim.keymap.set('n', '<leader>dl', require('dap').run_last, { desc = 'dap run last' })
-
-    local dapui = require("dapui")
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-        dap.repl.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-        dap.repl.close()
-    end
 end
 
 return M

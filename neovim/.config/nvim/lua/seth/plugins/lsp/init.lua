@@ -196,7 +196,8 @@ function M.config()
                 "--header-insertion=iwyu",
                 "-j=8",
                 "--malloc-trim",
-                --"--offset-encoding=utf-32", -- defaults to utf-16
+                "--completion-style=detailed",
+                "--function-arg-placeholders",
                 "--limit-results=0",
                 "--enable-config",
             },
@@ -269,17 +270,22 @@ function M.config()
         setup_server(server, config)
     end
 
-    -- Initialize rust-tools
-    local rt = require("rust-tools")
-    rt.setup({
-        server = {
-            on_attach = custom_attach,
-            capabilities = updated_capabilities,
-            handlers = handlers,
-        }
-    })
+    -- HACK: only do this require on rust
+    -- TODO: rewrite this in better Lazy-fu
+    local bufnr = vim.api.nvim_get_current_buf()
+    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
-    require("seth.plugins.null-ls").setup()
+    if filetype == "rust" then
+        -- Initialize rust-tools
+        local rt = require("rust-tools")
+        rt.setup({
+            server = {
+                on_attach = custom_attach,
+                capabilities = updated_capabilities,
+                handlers = handlers,
+            }
+        })
+    end
 end
 
 return M
