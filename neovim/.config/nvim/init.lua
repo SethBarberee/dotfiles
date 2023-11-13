@@ -70,6 +70,7 @@ local number_ftToIgnore = {
     ['vista_kind'] = true,
     ['help'] = true,
     ['Glance'] = true,
+    ['Navbuddy'] = true,
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
@@ -132,69 +133,3 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
         vim.cmd.set("path^=" .. vim.g.default_path)
     end
 })
-
-
---"" TODO figure out how to move this
-vim.g.gutentags_ctags_exclude = {
-    '*.git', '*.svg', '*.hg',
-    '*/tests/*',
-    'build',
-    'dist',
-    '*sites/*/files/*',
-    'bin',
-    'node_modules',
-    'bower_components',
-    'cache',
-    'compiled',
-    'docs',
-    'example',
-    'bundle',
-    'vendor',
-    '*.md',
-    '*-lock.json',
-    '*.lock',
-    '*bundle*.js',
-    '*build*.js',
-    '.*rc*',
-    '*.json',
-    '*.min.*',
-    '*.map',
-    '*.bak',
-    '*.zip',
-    '*.pyc',
-    '*.class',
-    '*.sln',
-    '*.Master',
-    '*.csproj',
-    '*.tmp',
-    '*.csproj.user',
-    '*.cache',
-    '*.ccls-cache',
-    '*.pdb',
-    'tags*',
-    'cscope.*',
-    '*.css',
-    '*.less',
-    '*.scss',
-    '*.exe', '*.dll',
-    '*.mp3', '*.ogg', '*.flac',
-    '*.swp', '*.swo',
-    '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-    '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-    '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
-}
-
---vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/vim/ctags/')
-
---
---" a -> acccess or export of class members
---" i -> inheritance information
---" l -> language of input file containing tag
---" m -> implementation information
---" n -> line number of tag definition
---" S -> Signature of routine (prototype or parameter list)
---
-vim.g.gutentags_ctags_extra_args = {
-    '--tag-relative=yes',
-    '--fields=+ailmnS',
-}

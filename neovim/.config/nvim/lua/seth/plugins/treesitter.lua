@@ -1,51 +1,60 @@
 return {
-    { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
-    {
-        'nvim-treesitter/nvim-treesitter-context',
-        event = "BufReadPost",
-        opts = {
-            max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
-        }
-    },
-    {
-        'kiyoon/treesitter-indent-object.nvim',
-        keys = {
-            {
-                "ai",
-                "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer()<CR>",
-                mode = { "x", "o" },
-                desc = "Select context-aware indent (outer)",
-            },
-            {
-                "aI",
-                "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer(true)<CR>",
-                mode = { "x", "o" },
-                desc = "Select context-aware indent (outer, line-wise)",
-            },
-            {
-                "ii",
-                "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner()<CR>",
-                mode = { "x", "o" },
-                desc = "Select context-aware indent (inner, partial range)",
-            },
-            {
-                "iI",
-                "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner(true)<CR>",
-                mode = { "x", "o" },
-                desc = "Select context-aware indent (inner, entire range)",
-            },
-        },
-    },
     {
         'nvim-treesitter/nvim-treesitter',
         build = ":TSUpdate",
-        event = "BufReadPost",
+        event = "VeryLazy",
+        init = function(plugin)
+            -- NOTE: taken from LazyVim
+            -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
+            -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
+            -- no longer trigger the **nvim-treeitter** module to be loaded in time.
+            -- Luckily, the only thins that those plugins need are the custom queries, which we make available
+            -- during startup.
+            require("lazy.core.loader").add_to_rtp(plugin)
+            require("nvim-treesitter.query_predicates")
+        end,
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
             { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
             { 'lmburns/nvim-gps',                            config = true },
             "eckon/treesitter-current-functions",
+            { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
+            {
+                'nvim-treesitter/nvim-treesitter-context',
+                event = "VeryLazy",
+                opts = {
+                    max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
+                },
+            },
+            {
+                'kiyoon/treesitter-indent-object.nvim',
+                keys = {
+                    {
+                        "ai",
+                        "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer()<CR>",
+                        mode = { "x", "o" },
+                        desc = "Select context-aware indent (outer)",
+                    },
+                    {
+                        "aI",
+                        "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer(true)<CR>",
+                        mode = { "x", "o" },
+                        desc = "Select context-aware indent (outer, line-wise)",
+                    },
+                    {
+                        "ii",
+                        "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner()<CR>",
+                        mode = { "x", "o" },
+                        desc = "Select context-aware indent (inner, partial range)",
+                    },
+                    {
+                        "iI",
+                        "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner(true)<CR>",
+                        mode = { "x", "o" },
+                        desc = "Select context-aware indent (inner, entire range)",
+                    },
+                },
+            },
         },
         config = function()
             require('nvim-treesitter.configs').setup {
@@ -139,5 +148,5 @@ return {
                 filetype = "pory",                         -- if filetype does not match the parser name
             }
         end,
-    }
+    },
 }

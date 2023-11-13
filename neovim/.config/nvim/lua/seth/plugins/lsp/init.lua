@@ -50,9 +50,9 @@ local M = {
                 highlight = true
             }
         },
-        { 'SmiteshP/nvim-navbuddy' },
+        { 'SmiteshP/nvim-navbuddy',   lazy = true },
         { "folke/neodev.nvim",        config = true },
-        { "DNLHC/glance.nvim",        config = true },
+        { "DNLHC/glance.nvim",        config = true,  lazy = true },
         { "simrat39/rust-tools.nvim", ft = "rust" },
         {
             "Wansmer/symbol-usage.nvim",
@@ -168,9 +168,6 @@ function M.config()
         filetype_attach[filetype](client)
     end
 
-    local lspconfig = require('lspconfig')
-
-
     -- Add rounded border to all LSP windows
     require('lspconfig.ui.windows').default_options.border = 'rounded'
 
@@ -265,7 +262,7 @@ function M.config()
         }, config)
 
         -- Run each setup
-        lspconfig[server].setup(config)
+        require('lspconfig')[server].setup(config)
     end
 
     for server, config in pairs(enabled_lsp) do

@@ -4,7 +4,45 @@ local M = {
         'nvim-telescope/telescope-ui-select.nvim',
         'benfowler/telescope-luasnip.nvim',
     },
-    event = "VeryLazy"
+    cmd = "Telescope",
+    keys = {
+        { '<leader>tm', '<cmd>Telescope<cr>', desc = "main" },
+        {
+            '<leader>td',
+            '<cmd>Telescope diagnostics<cr>',
+            desc = "diagnostics"
+        },
+        {
+            '<leader>ts',
+            '<cmd>lua require("telescope.builtin").find_files({hidden=true})<cr>',
+            desc = 'Telescope find hidden files'
+        },
+        {
+            '<leader>tg',
+            '<cmd>Telescope live_grep<cr>',
+            desc = 'Telescope grep'
+        },
+        {
+            '<leader>th',
+            '<cmd>Telescope help_tags<cr>',
+            desc = "help tags"
+        },
+        {
+            '<leader>tl',
+            '<cmd>Telescope current_buffer_fuzzy_find<cr>',
+            desc = 'Telescope buffer'
+        },
+        {
+            '<leader>tn',
+            '<cmd>Telescope luasnip<cr>',
+            desc = "luasnip"
+        },
+        {
+            '<leader>tt',
+            '<cmd>Telescope tags<cr>',
+            desc = "tags"
+        },
+    }
 }
 
 function M.config()
@@ -40,22 +78,6 @@ function M.config()
     telescope.load_extension("ui-select")
     telescope.load_extension("dap")
     telescope.load_extension("luasnip")
-
-    vim.keymap.set('n', '<leader>tm', '<cmd>Telescope<cr>', { silent = true, noremap = true, nowait = false })
-    vim.keymap.set('n', '<leader>td', '<cmd>Telescope diagnostics<cr>',
-        { silent = true, noremap = true, nowait = false })
-    vim.keymap.set('n', '<leader>ts', '<cmd>lua require("telescope.builtin").find_files({hidden=true})<cr>',
-        { silent = true, noremap = true, nowait = false, desc = 'Telescope find hidden files' })
-    vim.keymap.set('n', '<leader>tg', '<cmd>Telescope live_grep<cr>',
-        { silent = true, noremap = true, nowait = false, desc = 'Telescope grep' })
-    vim.keymap.set('n', '<leader>th', '<cmd>Telescope help_tags<cr>',
-        { silent = true, noremap = true, nowait = false })
-    vim.keymap.set('n', '<leader>tl', '<cmd>Telescope current_buffer_fuzzy_find<cr>',
-        { silent = true, noremap = true, nowait = false, desc = 'Telescope buffer' })
-    vim.keymap.set('n', '<leader>tn', '<cmd>Telescope luasnip<cr>',
-        { silent = true, noremap = true, nowait = false })
-    vim.keymap.set('n', '<leader>tt', '<cmd>Telescope tags<cr>',
-        { silent = true, noremap = true, nowait = false })
 end
 
 return M
