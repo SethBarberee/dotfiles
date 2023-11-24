@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
     {
         'nvim-treesitter/nvim-treesitter',
@@ -15,8 +16,7 @@ return {
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true },
-            { 'lmburns/nvim-gps',                            config = true },
+            { 'lmburns/nvim-gps', config = true },
             "eckon/treesitter-current-functions",
             {
                 'nvim-treesitter/nvim-treesitter-context',
@@ -92,10 +92,6 @@ return {
                             ['@class.outer'] = '<c-v>', -- blockwise
                         },
                     },
-                },
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false,
                 },
             }
             local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

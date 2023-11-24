@@ -1,9 +1,15 @@
+---@diagnostic disable: missing-fields
 return {
-    'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup {
-            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-        }
-    end,
-    event = "VeryLazy",
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup {
+                pre_hook = function()
+                    return vim.bo.commentstring
+                end
+            }
+        end,
+        event = "VeryLazy",
+    }
 }

@@ -38,11 +38,37 @@ local function text_format(symbol)
     return res
 end
 
+-- Taken from @pseudometapseudo on Reddit
+vim.api.nvim_create_user_command("LspCapabilities", function()
+    local curBuf = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_active_clients { bufnr = curBuf }
+
+    for _, client in pairs(clients) do
+        local capAsList = {}
+        for key, value in pairs(client.server_capabilities) do
+            if value and key:find("Provider") then
+                local capability = key:gsub("Provider$", "")
+                table.insert(capAsList, "- " .. capability)
+            end
+        end
+        table.sort(capAsList) -- sorts alphabetically
+        local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
+        vim.notify(msg, vim.log.levels.TRACE, {
+            on_open = function(win)
+                local buf = vim.api.nvim_win_get_buf(win)
+                vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+            end,
+            timeout = 14000,
+        })
+        vim.fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
+    end
+end, {})
+
 local M = {
     'neovim/nvim-lspconfig',
     dependencies = {
         -- Use legacy tag for fidget until rewrite is done
-        { "j-hui/fidget.nvim",        tag = "legacy", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
+        { "j-hui/fidget.nvim",      tag = "legacy", opts = { sources = { ["null-ls"] = { ignore = true } } } }, -- Lsp status notifications
         {
             'SmiteshP/nvim-navic',
             opts = {
@@ -50,10 +76,9 @@ local M = {
                 highlight = true
             }
         },
-        { 'SmiteshP/nvim-navbuddy',   lazy = true },
-        { "folke/neodev.nvim",        config = true },
-        { "DNLHC/glance.nvim",        config = true,  lazy = true },
-        { "simrat39/rust-tools.nvim", ft = "rust" },
+        { 'SmiteshP/nvim-navbuddy', lazy = true },
+        { "folke/neodev.nvim",      config = true },
+        { "DNLHC/glance.nvim",      config = true,  lazy = true },
         {
             "Wansmer/symbol-usage.nvim",
             event = 'BufReadPre', -- use LspAttach on nvim 0.10
@@ -74,8 +99,10 @@ local M = {
         { '<leader>ld', "<cmd>Glance definition<cr>",       desc = 'lsp-definition' },
         { '<leader>lj', vim.diagnostic.goto_next,           desc = 'lsp-diag-next' },
         { '<leader>lk', vim.diagnostic.goto_prev,           desc = 'lsp-diag-prev' },
+        { '<leader>lF', "<cmd>LspInfo<cr>",                 desc = 'lsp-info' },
         { '<leader>lf', vim.lsp.buf.format,                 desc = 'lsp-formatting' },
         { '<leader>lh', vim.lsp.buf.hover,                  desc = 'lsp-hover' },
+        { '<leader>lI', "<cmd>LspCapabilities<cr>",         desc = 'lsp-capabilities' },
         -- { '<leader>li', vim.lsp.buf.implementation,        desc = 'lsp-implemenation' },
         { '<leader>li', "<cmd>Glance implementations<cr>",  desc = 'lsp-implemenation' },
         { '<leader>ln', "<cmd>Navbuddy<cr>",                desc = 'lsp-nav' },
@@ -148,6 +175,12 @@ function M.config()
     local custom_attach = function(client)
         local bufnr = vim.api.nvim_get_current_buf()
 
+        -- Only enable inlay hints on 0.10
+        if client.server_capabilities.inlayHintProvider and vim.fn.has('nvim-0.10') == 1 then
+            vim.g.inlay_hints_visible = true
+            vim.lsp.inlay_hint(bufnr, true)
+        end
+
         if client.server_capabilities.documentSymbolProvider then
             require("nvim-navic").attach(client, bufnr)
             require("nvim-navbuddy").attach(client, bufnr)
@@ -181,10 +214,10 @@ function M.config()
     --
     -- Tables within are the additional config that is passed to lspconfig
     local enabled_lsp = {
-        --pylsp = true,
+        pylsp = true,
         --pyright = true,
-        jedi_language_server = true,
-        --rust_analyzer = true,
+        --jedi_language_server = true,
+        rust_analyzer = true,
         vimls = true,
         poryscript_lsp = true,
         jsonls = true,
@@ -205,7 +238,6 @@ function M.config()
                 clangdFileStatus = true,
             },
         },
-        --ccls = true,
 
         lua_ls = {
             settings = {
@@ -241,6 +273,10 @@ function M.config()
                         --library = vim.api.nvim_get_runtime_file('', true),
                         checkThirdParty = false,
                     },
+                    hint = {
+                        enable = vim.fn.has('nvim-0.10') == 1,
+                        setType = true
+                    },
                 }
             }
         }
@@ -268,23 +304,6 @@ function M.config()
 
     for server, config in pairs(enabled_lsp) do
         setup_server(server, config)
-    end
-
-    -- HACK: only do this require on rust
-    -- TODO: rewrite this in better Lazy-fu
-    local bufnr = vim.api.nvim_get_current_buf()
-    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-
-    if filetype == "rust" then
-        -- Initialize rust-tools
-        local rt = require("rust-tools")
-        rt.setup({
-            server = {
-                on_attach = custom_attach,
-                capabilities = updated_capabilities,
-                handlers = handlers,
-            }
-        })
     end
 end
 

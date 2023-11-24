@@ -24,12 +24,14 @@ function M.config()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    ---@diagnostic disable-next-line: missing-fields
     cmp.setup({
         snippet = {
             expand = function(args)
                 require 'luasnip'.lsp_expand(args.body)
             end,
         },
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
             format = lspkind.cmp_format({
                 mode = 'symbol_text', -- show only symbol annotations
@@ -97,6 +99,7 @@ function M.config()
         )
     })
 
+    ---@diagnostic disable-next-line: missing-fields
     cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
         sources = {
             { name = "dap" },
