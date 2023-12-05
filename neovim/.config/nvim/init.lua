@@ -37,7 +37,7 @@ vim.opt.foldmethod = 'syntax'
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 
-vim.opt.signcolumn = 'auto:3'
+vim.opt.signcolumn = 'auto:1' -- only keep one column to make things nicier
 vim.opt.completeopt = "menu,menuone,noselect"
 
 -- Providers
@@ -71,6 +71,8 @@ local number_ftToIgnore = {
     ['help'] = true,
     ['Glance'] = true,
     ['Navbuddy'] = true,
+    ['lazy'] = true,
+    ['neo-tree'] = true
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {

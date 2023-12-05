@@ -1,4 +1,9 @@
 return {
     'NvChad/nvim-colorizer.lua',
-    config = true,
+    opts = {
+        filetypes = {
+            "*",         -- highlight all filetypes
+            "!neo-tree", -- neo-tree has # numbers and we don't want that to highlight
+        }
+    }
 }

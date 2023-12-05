@@ -4,11 +4,23 @@ local M = {
         { '<leader>dso', function() require("dap").step_over() end,         desc = 'step-over' },
         { '<leader>dsi', function() require("dap").step_into() end,         desc = 'step-into' },
         { '<leader>dsb', function() require("dap").step_back() end,         desc = 'step-back' },
-        { '<leader>dbs', function() require("dap").toggle_breakpoint() end, desc = 'set-breakpoint' },
-        { '<leader>dbl', function() require("dap").list_breakpoints() end,  desc = 'list-breakpoints' },
+        { '<leader>dbs', function() require("dap").toggle_breakpoint() end, desc = 'toggle-breakpoint' },
+        {
+            '<leader>dbl',
+            function()
+                require("dap").list_breakpoints()
+                local entries = vim.fn.getqflist()
+
+                if #entries > 0 then
+                    vim.cmd.copen()
+                end
+            end,
+            desc = 'list-breakpoints'
+        },
         { '<leader>dbc', function() require("dap").clear_breakpoints() end, desc = 'clear-breakpoints' },
         { '<leader>dr',  function() require("dap").continue() end,          desc = 'dap run' },
         { '<leader>dl',  function() require("dap").run_last() end,          desc = 'dap run last' },
+        { '<leader>dc',  function() require("dap").repl.toggle() end,       desc = 'dap repl' },
     },
     dependencies = {
         {
@@ -23,6 +35,21 @@ local M = {
             main = "dapui",
             keys = {
                 { '<leader>dt', function() require("dapui").toggle() end, desc = 'dap-ui toggle' },
+                {
+                    '<leader>df',
+                    function()
+                        local widgets = require('dap.ui.widgets')
+                        widgets.centered_float(widgets.scopes)
+                    end,
+                    desc = 'dap-ui float scope'
+                },
+                {
+                    '<leader>dh',
+                    function()
+                        require('dap.ui.widgets').hover()
+                    end,
+                    desc = 'dap-ui hover'
+                },
             },
             opts = {
                 expand_lines = vim.fn.has("nvim-0.7") == 1,
@@ -74,6 +101,17 @@ function M.config()
     local lldb_vscode_bin = "/usr/bin/lldb-vscode"
     local codelldb_lib = "/usr/lib/codelldb/lldb/lib/liblldb.so"
 
+    vim.fn.sign_define('DapBreakpoint',
+        { text = 'B', texthl = 'DiagnosticInfo', linehl = '', numhl = 'DiagnosticInfo' })
+
+    vim.fn.sign_define('DapStopped',
+        { text = '→', texthl = 'DiagnosticError', linehl = 'DiagnosticError', numhl = 'DiagnosticError' })
+
+    dap.defaults.fallback.external_terminal = {
+        command = '/usr/bin/kitty',
+        args = { '-e' }
+    }
+
     -- cpp - c - rust
     dap.adapters.lldb = {
         name = 'lldb',
@@ -93,11 +131,29 @@ function M.config()
 
     dap.configurations.cpp = {
         {
-            name = "Launch file",
+            name = "Launch file (lldb)",
             type = "lldb",
             request = "launch",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input({
+                    prompt = 'Path to executable: ',
+                    default = vim.fn.getcwd() .. '/',
+                    completion = 'file'
+                })
+            end,
+            cwd = '${workspaceFolder}',
+            stopAtEntry = false,
+        },
+        {
+            name = "Launch file (codelldb)",
+            type = "codelldb",
+            request = "launch",
+            program = function()
+                return vim.fn.input({
+                    prompt = 'Path to executable: ',
+                    default = vim.fn.getcwd() .. '/',
+                    completion = 'file'
+                })
             end,
             cwd = '${workspaceFolder}',
             stopAtEntry = false,

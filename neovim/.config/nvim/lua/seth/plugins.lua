@@ -95,7 +95,7 @@ return {
                 '--fields=+ailmnS',
             }
         end
-    },     --tag management
+    }, --tag management
     { 'liuchengxu/vista.vim',     cmd = "Vista" },
 
     { 'dstein64/vim-startuptime', cmd = "StartupTime" },
@@ -130,6 +130,12 @@ return {
     {
         'echasnovski/mini.bracketed',
         main = "mini.bracketed",
+        config = true,
+    },
+
+    -- Sticky buffers (for quickfix, neotree, and others)
+    {
+        'stevearc/stickybuf.nvim',
         config = true,
     },
 }
