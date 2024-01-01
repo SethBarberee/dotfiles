@@ -106,6 +106,7 @@ return {
     -- Snippets
     {
         'L3MON4D3/LuaSnip',
+        event  = "InsertEnter",
         config = function()
             require("luasnip").setup({})
             require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
@@ -113,7 +114,7 @@ return {
     },
 
     -- NVIM cmp / autocomplete
-    'ii14/emmylua-nvim',
+    { 'ii14/emmylua-nvim', ft = "lua" },
     {
         'onsails/lspkind.nvim',
         config = function()
