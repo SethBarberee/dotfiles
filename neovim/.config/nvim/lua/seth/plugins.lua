@@ -15,6 +15,7 @@ return {
         'm-demare/hlargs.nvim',
         opts = {
             color = "#95ffa4",
+            hl_priority = 10000,
         },
         event = "VeryLazy",
     },
