@@ -1,5 +1,8 @@
+local sethconfig = require("seth.config")
+
 local M = {
     'mfussenegger/nvim-dap',
+    enabled = sethconfig.dap,
     keys = {
         { '<leader>dso', function() require("dap").step_over() end,         desc = 'step-over' },
         { '<leader>dsi', function() require("dap").step_into() end,         desc = 'step-into' },

@@ -1,14 +1,25 @@
+local sethconfig = require('seth.config')
+
 local M = {
     'hrsh7th/nvim-cmp',
     dependencies = {
-        'hrsh7th/cmp-nvim-lsp',
+        {
+            'hrsh7th/cmp-nvim-lsp',
+            enabled = sethconfig.lsp
+        },
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
+        {
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            enabled = sethconfig.lsp
+        },
         'quangnguyen30192/cmp-nvim-tags',
         'saadparwaiz1/cmp_luasnip',
-        'rcarriga/cmp-dap',
+        {
+            'rcarriga/cmp-dap',
+            enabled = sethconfig.dap
+        }
     },
     event = "InsertEnter",
 }
@@ -100,11 +111,13 @@ function M.config()
     })
 
     ---@diagnostic disable-next-line: missing-fields
-    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-        sources = {
-            { name = "dap" },
-        }
-    })
+    if sethconfig.dap then
+        cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+            sources = {
+                { name = "dap" },
+            }
+        })
+    end
 end
 
 return M

@@ -135,3 +135,12 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
         vim.cmd.set("path^=" .. vim.g.default_path)
     end
 })
+
+-- Force set to my filetype to run my treesitter parser
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    pattern = { "*.s" },
+    group = group_id,
+    callback = function()
+        vim.opt.filetype = "arm"
+    end
+})

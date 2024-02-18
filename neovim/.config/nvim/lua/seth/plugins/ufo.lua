@@ -1,8 +1,11 @@
+local sethconfig = require("seth.config")
+
 return {
     'kevinhwang91/nvim-ufo',
     dependencies = {
         'kevinhwang91/promise-async',
     },
+    enabled = sethconfig.ufo,
     event = "VeryLazy",
     keys = {
         { 'zR', function() require('ufo').openAllFolds() end },

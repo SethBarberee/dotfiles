@@ -10,9 +10,10 @@ vim.filetype.add({
             end
             return "c"
         end,
-        inc = 'asm', -- for PMD Red data files
+        inc = 'arm', -- for PMD Red data files
         pory = 'pory',
         jsonschema = 'json',
+        qml = 'qml',
     },
     pattern = {
         ["ld_script.txt"] = "ld",

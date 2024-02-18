@@ -1,3 +1,5 @@
+local sethconfig = require("seth.config")
+
 -- Taken from @pseudometapseudo on Reddit
 vim.api.nvim_create_user_command("LspCapabilities", function()
     local curBuf = vim.api.nvim_get_current_buf()
@@ -26,6 +28,7 @@ end, {})
 
 local M = {
     'neovim/nvim-lspconfig',
+    enabled = sethconfig.lsp,
     dependencies = {
         {
             'SmiteshP/nvim-navic',
@@ -34,12 +37,13 @@ local M = {
                 highlight = true
             }
         },
-        { "folke/neodev.nvim", config = true },
+        { "folke/neodev.nvim",                  config = true },
         {
             'SmiteshP/nvim-navbuddy',
             lazy = true,
         },
-        { "DNLHC/glance.nvim", config = true, lazy = true },
+        { "DNLHC/glance.nvim",                  config = true, lazy = true },
+        { "artemave/workspace-diagnostics.nvim" },
     },
     event = "BufReadPre",
     keys = {
@@ -145,6 +149,9 @@ function M.config()
                 end,
             })
         end
+
+        -- Populate workspace diagnostics
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 
         local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 

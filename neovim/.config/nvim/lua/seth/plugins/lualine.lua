@@ -1,3 +1,5 @@
+local sethconfig = require('seth.config')
+
 local M = {
     'nvim-lualine/lualine.nvim', -- statusline
     init = function()
@@ -13,14 +15,24 @@ local M = {
         vim.keymap.set('n', '0', [[<Cmd>LualineBuffersJump! 10 <CR>]], { noremap = true, silent = true })
     end,
     opts = function()
-        local navic = require("nvim-navic")
-        local gps = require("nvim-gps")
+        local navic = {}
+        local gps = {}
+        if sethconfig.lsp then
+            navic = require("nvim-navic")
+        end
+        -- if sethconfig.treesitter then
+        --     gps = require("nvim-gps")
+        -- end
 
         -- Format my lualine tag data
         local function lualine_tags()
-            if gps.is_available() then
-                -- TODO: format this with a pretty highlight so I can left align it?
-                return gps.get_location()
+            if sethconfig.treesitter then
+                -- if gps.is_available() then
+                --     -- TODO: format this with a pretty highlight so I can left align it?
+                --     return gps.get_location()
+                -- else
+                return vim.b.vista_nearest_or_function or ''
+                -- end
             else
                 return vim.b.vista_nearest_or_function or ''
             end

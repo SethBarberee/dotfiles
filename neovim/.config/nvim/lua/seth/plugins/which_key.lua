@@ -1,6 +1,9 @@
+local sethconfig = require('seth.config')
+
 return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
+    enabled = sethconfig.whichkey,
     opts = {
         window = {
             border = "rounded",
