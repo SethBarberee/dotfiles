@@ -105,11 +105,23 @@ return {
     'tpope/vim-fugitive',
 
     -- Snippets
+	{
+		'mireq/luasnip-snippets',
+		dependencies = {'L3MON4D3/LuaSnip'},
+		init = function()
+			-- Mandatory setup function
+			require('luasnip_snippets.common.snip_utils').setup()
+		end
+
+	},
     {
         'L3MON4D3/LuaSnip',
         event  = "InsertEnter",
         config = function()
-            require("luasnip").setup({})
+            require("luasnip").setup({
+				load_ft_func = require('luasnip_snippets.common.snip_utils').load_ft_func,
+				ft_func = require('luasnip_snippets.common.snip_utils').ft_func,
+            })
             require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
         end,
     },
