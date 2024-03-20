@@ -3,6 +3,7 @@ return {
     branch = "v3.x",
     dependencies = {
         'MunifTanjim/nui.nvim', -- for neotree
+        'nvim-lua/plenary.nvim'
     },
     cmd = "Neotree",
     keys = {

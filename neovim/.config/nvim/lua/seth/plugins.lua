@@ -23,6 +23,7 @@ return {
     'nvim-lua/plenary.nvim',
     { 'nvim-tree/nvim-web-devicons', lazy = true },
     'folke/lazy.nvim',
+    { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', config = true },
 
     -- Utils
     { 'notjedi/nvim-rooter.lua',     config = true }, -- auto cd to base dir of project
@@ -105,24 +106,24 @@ return {
     'tpope/vim-fugitive',
 
     -- Snippets
-	{
-		'mireq/luasnip-snippets',
-		dependencies = {'L3MON4D3/LuaSnip'},
-		init = function()
-			-- Mandatory setup function
-			require('luasnip_snippets.common.snip_utils').setup()
-		end
+    {
+        'mireq/luasnip-snippets',
+        dependencies = { 'L3MON4D3/LuaSnip' },
+        init = function()
+            -- Mandatory setup function
+            require('luasnip_snippets.common.snip_utils').setup()
+        end
 
-	},
+    },
     {
         'L3MON4D3/LuaSnip',
         event  = "InsertEnter",
         config = function()
             require("luasnip").setup({
-				load_ft_func = require('luasnip_snippets.common.snip_utils').load_ft_func,
-				ft_func = require('luasnip_snippets.common.snip_utils').ft_func,
+                load_ft_func = require('luasnip_snippets.common.snip_utils').load_ft_func,
+                ft_func = require('luasnip_snippets.common.snip_utils').ft_func,
             })
-            require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+            require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
         end,
     },
 

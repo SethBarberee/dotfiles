@@ -16,26 +16,13 @@ local M = {
     end,
     opts = function()
         local navic = {}
-        local gps = {}
         if sethconfig.lsp then
             navic = require("nvim-navic")
         end
-        -- if sethconfig.treesitter then
-        --     gps = require("nvim-gps")
-        -- end
 
         -- Format my lualine tag data
         local function lualine_tags()
-            if sethconfig.treesitter then
-                -- if gps.is_available() then
-                --     -- TODO: format this with a pretty highlight so I can left align it?
-                --     return gps.get_location()
-                -- else
-                return vim.b.vista_nearest_or_function or ''
-                -- end
-            else
-                return vim.b.vista_nearest_or_function or ''
-            end
+            return vim.b.vista_nearest_or_function or ''
         end
 
         -- Don't show gitInfo and filetype for these filetypes

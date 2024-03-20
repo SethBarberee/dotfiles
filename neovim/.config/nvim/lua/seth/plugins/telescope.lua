@@ -5,6 +5,7 @@ return {
     dependencies = {
         'nvim-telescope/telescope-ui-select.nvim',
         'benfowler/telescope-luasnip.nvim',
+        'nvim-lua/plenary.nvim'
     },
     event = "VeryLazy", -- NOTE: still need to load for ui-select.. can't lazyload on cmd/keys
     keys = {

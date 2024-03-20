@@ -28,6 +28,9 @@ local M = {
     dependencies = {
         {
             'mfussenegger/nvim-dap-python',
+            dependencies = {
+                'nvim-neotest/nvim-nio'
+            },
             config = function()
                 require("dap-python").setup(
                     "/usr/bin/python")
