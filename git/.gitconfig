@@ -1,0 +1,5 @@
+[user]
+	email = seth.barberee@gmail.com
+	name = Seth Barberee
+[core]
+	excludesFile = /home/seth/.gitignore
