@@ -1,5 +1,5 @@
 vim.opt.textwidth = 78
 
-if vim.fn.has('spell') and vim.opt.modifiable and not vim.opt.readonly then
+if vim.opt.modifiable then
     vim.opt.spell = true
 end

@@ -40,6 +40,8 @@ vim.opt.foldlevelstart = 99
 vim.opt.signcolumn = 'auto:1' -- only keep one column to make things nicier
 vim.opt.completeopt = "menu,menuone,noselect"
 
+vim.opt.spelllang = "en_us"
+
 -- Providers
 vim.g.python3_host_prog = '/usr/bin/python3'
 vim.g.loaded_perl_provider = 0
