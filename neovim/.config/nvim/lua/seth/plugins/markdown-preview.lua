@@ -4,5 +4,8 @@ vim.g.mkdp_browser = 'firefox'
 
 return {
     'iamcco/markdown-preview.nvim',
-    ft = "markdown"
+    ft = "markdown",
+    build = function()
+        vim.fn["mkdp#util#install"]()
+    end
 }

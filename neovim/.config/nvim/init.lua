@@ -42,6 +42,14 @@ vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.opt.spelllang = "en_us"
 
+-- Vim Grep
+-- NOTE: technially, we already have rg for telescope
+-- but still guard, just in case
+if vim.fn.executable('rg') then
+    vim.opt.grepprg = "rg --vimgrep --hidden"
+    vim.opt.grepformat = "%f:%l:%c:%m"
+end
+
 -- Providers
 vim.g.python3_host_prog = '/usr/bin/python3'
 vim.g.loaded_perl_provider = 0
@@ -68,8 +76,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 -- Line numbers
 -- List of filetypes to ignore my relativenumber/number settings
 local number_ftToIgnore = {
-    ['vista'] = true,
-    ['vista_kind'] = true,
     ['help'] = true,
     ['Glance'] = true,
     ['Navbuddy'] = true,
@@ -81,7 +87,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
     pattern = { "*" },
     group = group_id,
     callback = function()
-        if not number_ftToIgnore[vim.bo.filetype] then
+        -- NOTE: vista likes to use different filetype names so
+        -- we just check to see if it contains vista
+        if not number_ftToIgnore[vim.bo.filetype] and not string.find(vim.bo.filetype, 'vista') then
             vim.opt.relativenumber = true
         else
             vim.opt.number = false
