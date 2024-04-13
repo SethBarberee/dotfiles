@@ -13,6 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 
 require("lazy").setup("seth.plugins", {
+    change_detection = { notify = false },
     root = vim.fn.stdpath("data") .. "/plugged",
     install = { colorscheme = { "challenger-deep", "habamax" } },
     dev = {
@@ -22,4 +23,15 @@ require("lazy").setup("seth.plugins", {
     ui = {
         border = "rounded",
     },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                'gzip',
+                'tarPlugin',
+                'rplugin',
+                'tohtml',
+                'zipPlugin',
+            },
+        },
+    }
 })

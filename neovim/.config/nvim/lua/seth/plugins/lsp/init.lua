@@ -30,47 +30,26 @@ local M = {
     'neovim/nvim-lspconfig',
     enabled = sethconfig.lsp,
     dependencies = {
-        {
-            'SmiteshP/nvim-navic',
-            opts = {
-                icons = require('seth.util.icons'),
-                highlight = true
-            }
-        },
         { "folke/neodev.nvim", config = true },
-        {
-            'SmiteshP/nvim-navbuddy',
-            lazy = true,
-        },
-        { "DNLHC/glance.nvim", config = true, lazy = true },
     },
     event = "BufReadPre",
     keys = {
-        { '<leader>lc', vim.lsp.buf.code_action,            desc = 'lsp-code_action' },
-        { '<leader>lD', vim.lsp.buf.declaration,            desc = 'lsp-declaration' },
-        -- { '<leader>ld', vim.lsp.buf.definition,       desc = 'lsp-definition' },
-        { '<leader>ld', "<cmd>Glance definition<cr>",       desc = 'lsp-definition' },
+        { '<leader>lc', vim.lsp.buf.code_action,      desc = 'lsp-code_action' },
+        { '<leader>lD', vim.lsp.buf.declaration,      desc = 'lsp-declaration' },
 
         -- NOTE: disable these to force myself to use [d and ]d
         -- { '<leader>lj', vim.diagnostic.goto_next,           desc = 'lsp-diag-next' },
         -- { '<leader>lk', vim.diagnostic.goto_prev,           desc = 'lsp-diag-prev' },
 
-        { '<leader>lF', "<cmd>LspInfo<cr>",                 desc = 'lsp-info' },
-        { '<leader>lf', vim.lsp.buf.format,                 desc = 'lsp-formatting' },
-        { 'K',          vim.lsp.buf.hover,                  desc = 'lsp-hover' },
-        { '<leader>lI', "<cmd>LspCapabilities<cr>",         desc = 'lsp-capabilities' },
-        -- { '<leader>li', vim.lsp.buf.implementation,        desc = 'lsp-implemenation' },
-        { '<leader>li', "<cmd>Glance implementations<cr>",  desc = 'lsp-implemenation' },
-        { '<leader>ln', "<cmd>Navbuddy<cr>",                desc = 'lsp-nav' },
+        { '<leader>lF', "<cmd>LspInfo<cr>",           desc = 'lsp-info' },
+        { '<leader>lf', vim.lsp.buf.format,           desc = 'lsp-formatting' },
+        { 'K',          vim.lsp.buf.hover,            desc = 'lsp-hover' },
+        { '<leader>lI', "<cmd>LspCapabilities<cr>",   desc = 'lsp-capabilities' },
         -- { '<leader><c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'lsp-sighelp' },
-        -- { '<leader>lt', vim.lsp.buf.type_definition,  desc = 'lsp-typedef' },
-        { '<leader>lt', "<cmd>Glance type_definitions<cr>", desc = 'lsp-typedef' },
-        -- { '<leader>lr', vim.lsp.buf.references,       desc = 'lsp-references' },
-        { '<leader>lr', "<cmd>Glance references<cr>",       desc = 'lsp-references' },
-        { '<leader>lR', vim.lsp.buf.rename,                 desc = 'lsp-rename' },
-        { '<leader>l0', vim.lsp.buf.document_symbol,        desc = 'lsp-docsymbol' },
-        { '<leader>lW', vim.lsp.buf.workspace_symbol,       desc = 'lsp-workspacesymbol' },
-        { '<leader>ll', vim.lsp.codelens.run,               desc = 'lsp-codelens-run' },
+        { '<leader>lR', vim.lsp.buf.rename,           desc = 'lsp-rename' },
+        { '<leader>l0', vim.lsp.buf.document_symbol,  desc = 'lsp-docsymbol' },
+        { '<leader>lW', vim.lsp.buf.workspace_symbol, desc = 'lsp-workspacesymbol' },
+        { '<leader>ll', vim.lsp.codelens.run,         desc = 'lsp-codelens-run' },
     },
 }
 
