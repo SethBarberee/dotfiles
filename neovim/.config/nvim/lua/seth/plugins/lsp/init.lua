@@ -112,8 +112,7 @@ function M.config()
 
         -- Only enable inlay hints on 0.10
         if client.server_capabilities.inlayHintProvider and vim.fn.has('nvim-0.10') == 1 then
-            vim.g.inlay_hints_visible = true
-            vim.lsp.inlay_hint(bufnr, true)
+            vim.lsp.inlay_hint.enable()
         end
 
         if client.server_capabilities.documentSymbolProvider then
