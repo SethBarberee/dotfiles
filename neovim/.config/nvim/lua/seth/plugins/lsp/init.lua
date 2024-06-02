@@ -3,7 +3,7 @@ local sethconfig = require("seth.config")
 -- Taken from @pseudometapseudo on Reddit
 vim.api.nvim_create_user_command("LspCapabilities", function()
     local curBuf = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_active_clients { bufnr = curBuf }
+    local clients = vim.lsp.get_clients { bufnr = curBuf }
 
     for _, client in pairs(clients) do
         local capAsList = {}
@@ -18,7 +18,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function()
         vim.notify(msg, vim.log.levels.TRACE, {
             on_open = function(win)
                 local buf = vim.api.nvim_win_get_buf(win)
-                vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+                vim.api.nvim_set_option_value("tiletype", "markdown", { buf = buf })
             end,
             timeout = 14000,
         })
@@ -30,16 +30,12 @@ local M = {
     'neovim/nvim-lspconfig',
     enabled = sethconfig.lsp,
     dependencies = {
-        { "folke/neodev.nvim", config = true },
+        { "folke/lazydev.nvim", ft = "lua", config = true },
     },
     event = "BufReadPre",
     keys = {
         { '<leader>lc', vim.lsp.buf.code_action,      desc = 'lsp-code_action' },
         { '<leader>lD', vim.lsp.buf.declaration,      desc = 'lsp-declaration' },
-
-        -- NOTE: disable these to force myself to use [d and ]d
-        -- { '<leader>lj', vim.diagnostic.goto_next,           desc = 'lsp-diag-next' },
-        -- { '<leader>lk', vim.diagnostic.goto_prev,           desc = 'lsp-diag-prev' },
 
         { '<leader>lF', "<cmd>LspInfo<cr>",           desc = 'lsp-info' },
         { '<leader>lf', vim.lsp.buf.format,           desc = 'lsp-formatting' },
@@ -130,7 +126,7 @@ function M.config()
             })
         end
 
-        local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+        local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
         filetype_attach[filetype](client)
     end
@@ -214,7 +210,7 @@ function M.config()
                     },
                     workspace = {
                         -- Make the server aware of Neovim runtime files
-                        -- NOTE: neodev is handling this now
+                        -- NOTE: lazydev is handling this now
                         --library = vim.api.nvim_get_runtime_file('', true),
                         checkThirdParty = false,
                     },
