@@ -6,7 +6,8 @@ vim.g.vista_echo_cursor_strategy = 'both' -- floating_win and echo
 
 -- Fallback to ctags for asm and vim
 vim.g.vista_executive_for = {
-    ['asm'] = 'ctags'
+    ['asm'] = 'ctags',
+    ['arm'] = 'ctags'
 }
 
 -- Open if not opened and close if already opened

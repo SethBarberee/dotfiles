@@ -15,16 +15,6 @@ local M = {
         vim.keymap.set('n', '0', [[<Cmd>LualineBuffersJump! 10 <CR>]], { noremap = true, silent = true })
     end,
     opts = function()
-        local navic = {}
-        if sethconfig.lsp then
-            navic = require("nvim-navic")
-        end
-
-        -- Format my lualine tag data
-        local function lualine_tags()
-            return vim.b.vista_nearest_or_function or ''
-        end
-
         -- Don't show gitInfo and filetype for these filetypes
         local ftBlacklist = {
             ['help'] = true,
@@ -127,19 +117,15 @@ local M = {
                 lualine_y = { 'tabs' },
                 lualine_z = { "os.date('%H:%M')" }
             },
-            -- Use the c component so we have a normal BG and not the light blue background like the mode indicator
-            winbar = {
-                lualine_c = { { "navic" },
-                    {
-                        lualine_tags,
-                        cond = function()
-                            return not navic.is_available()
-                        end
-                    }
-                },
-            },
+            winbar = {},
             inactive_winbar = {
-                lualine_a = { { 'filename', fmt = lualine_filename } },
+                lualine_a = { {
+                    'filename',
+                    fmt = lualine_filename,
+                    cond = function()
+                        return not vim.api.nvim_get_option_value("diff", {})
+                    end
+                } },
                 lualine_b = { '' },
                 lualine_c = { '' },
                 lualine_x = { '' },

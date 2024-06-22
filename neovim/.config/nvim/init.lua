@@ -115,8 +115,9 @@ require('seth.mappings')
 require('seth.lazy')
 
 -- Better diff (https://vimways.org/2018/the-power-of-diff)
-vim.opt.diffopt:append('algorithm:patience')
+-- vim.opt.diffopt:append('algorithm:patience')
 vim.opt.diffopt:append('indent-heuristic')
+vim.opt.diffopt:append('linematch:60')
 
 -- Convenient command to see the difference between the current buffer and the
 -- file it was loaded from, thus the changes you made.

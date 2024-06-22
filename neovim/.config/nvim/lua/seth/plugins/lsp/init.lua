@@ -111,11 +111,6 @@ function M.config()
             vim.lsp.inlay_hint.enable()
         end
 
-        if client.server_capabilities.documentSymbolProvider then
-            require("nvim-navic").attach(client, bufnr)
-            require("nvim-navbuddy").attach(client, bufnr)
-        end
-
         -- Setup codelens for supported LSPs
         if client.server_capabilities.codeLensProvider then
             vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
@@ -162,6 +157,7 @@ function M.config()
         vimls = true,
         poryscript_lsp = true,
         jsonls = true,
+        zls = true,
         clangd = {
             cmd = {
                 "clangd",

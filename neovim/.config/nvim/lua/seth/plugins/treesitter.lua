@@ -19,7 +19,6 @@ return {
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            -- { 'lmburns/nvim-gps', config = true },
             "eckon/treesitter-current-functions",
             {
                 'nvim-treesitter/nvim-treesitter-context',
