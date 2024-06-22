@@ -1,6 +1,6 @@
 return {
     'rrethy/vim-illuminate',
-    event = "BufReadPost",
+    event = "VeryLazy",
     config = function()
         require('illuminate').configure({
             filetypes_denylist = {
