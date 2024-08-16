@@ -25,8 +25,6 @@ vim.opt.autoindent = true
 
 vim.opt.swapfile = false
 vim.opt.mouse = 'a'
-vim.opt.laststatus = 3 -- I've finally converted to global statusline
-vim.opt.showtabline = 2
 vim.opt.clipboard = "unnamedplus"
 vim.opt.splitbelow = true
 vim.opt.splitright = true

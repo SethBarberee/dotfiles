@@ -88,7 +88,7 @@ function M.config()
             local current_dir = vim.fn.getcwd(-1, -1)
             local basename = vim.fs.basename(current_dir)
             --print(basename)
-            if basename == "pmd-red" then
+            if basename == "pmd-red" or basename == "pmd-sky" then
                 vim.bo.tagfunc = ""
             end
 

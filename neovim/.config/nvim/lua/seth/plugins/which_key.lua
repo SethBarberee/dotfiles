@@ -5,7 +5,7 @@ return {
     event = 'VeryLazy',
     enabled = sethconfig.whichkey,
     opts = {
-        window = {
+        win = {
             border = "rounded",
         },
         disable = { filetypes = { "neo-tree" } },
@@ -13,6 +13,9 @@ return {
             spelling = {
                 enabled = true,
             },
+        },
+        icons = {
+            mappings = false -- disable icons for which-key
         }
     },
     config = function(_, opts)
@@ -20,43 +23,23 @@ return {
 
         wk.setup(opts)
 
-        wk.register({
-            b = {
-                name = "buffers",
-                l = { '<cmd>ls<cr>', "list-buffers" },
-                q = { '<cmd>bd<cr>', "quit-buffer" },
-            },
-            d = {
-                name = "dap",
-                b = {
-                    name = "breakpoints",
-                },
-                s = {
-                    name = "step",
-                },
-            },
-            g = {
-                name = "Git",
-                d = { '<cmd>Gdiffsplit<cr>', 'git-diff' },
-                s = { '<cmd>Git<cr>', 'git-status' },
-                b = { '<cmd>Git blame<cr>', 'git-blame' },
-            },
-            h = {
-                g = { '<cmd>Inspect<cr>', 'highlight-group' },
-            },
-            l = {
-                name = "lsp",
-            },
-            n = {
-                name = "Neotree",
-            },
-            s = {
-                name = "luasnip",
-                e    = { '<cmd>lua require("luasnip.loaders").edit_snippet_files()<cr>', 'luasnip-edit' },
-            },
-            t = {
-                name = "telescope",
-            },
-        }, { prefix = "<leader>" })
+        wk.add({
+            { "<leader>b",  group = "buffers" },
+            { "<leader>bl", '<cmd>ls<cr>',                                                  desc = "list-buffers" },
+            { "<leader>bd", '<cmd>bd<cr>',                                                  desc = "quit-buffer" },
+            { "<leader>d",  group = "dap" },
+            { "<leader>db", group = "breakpoints" },
+            { "<leader>ds", group = "step" },
+            { "<leader>g",  group = "Git" },
+            { "<leader>gs", '<cmd>Git<cr>',                                                 desc = "git-status" },
+            { "<leader>gb", '<cmd>Git blame<cr>',                                           desc = "git-blame" },
+            { "<leader>gd", '<cmd>Gdiffsplit<cr>',                                          desc = "git-diff" },
+            { "<leader>hg", '<cmd>Inspect<cr>',                                             desc = "highlight-group" },
+            { "<leader>l",  group = "lsp" },
+            { "<leader>n",  group = "Neotree" },
+            { "<leader>t",  group = "telescope" },
+            { "<leader>s",  group = "luasnip" },
+            { "<leader>se", '<cmd>lua require("luasnip.loaders").edit_snippet_files()<cr>', desc = "luasnip-edit" },
+        })
     end
 }

@@ -76,12 +76,14 @@ local M = {
             end
         end
 
+        vim.opt.showtabline = 2 -- enable tabline for lualine
+
         return {
             options = {
                 icons_enabled = true,
                 theme = 'auto',
                 component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
                 disabled_filetypes = {
                     statusline = {},
                     -- Neotree and dap-repl have custom winbar so make sure lualine doesn't override it
