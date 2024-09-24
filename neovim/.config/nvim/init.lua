@@ -78,7 +78,8 @@ local number_ftToIgnore = {
     ['Glance'] = true,
     ['Navbuddy'] = true,
     ['lazy'] = true,
-    ['neo-tree'] = true
+    ['neo-tree'] = true,
+    ['qf'] = true
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
@@ -153,3 +154,5 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
         vim.opt.filetype = "arm"
     end
 })
+
+vim.api.nvim_set_hl(0, "QuickFixLine", {})

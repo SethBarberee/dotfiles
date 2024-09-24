@@ -2,15 +2,14 @@
 return {
     {
         'JoosepAlviste/nvim-ts-context-commentstring',
-        enabled = vim.fn.has('nvim-0.10') == 0, -- disable once nvim 0.10 hits with core commentstring
     },
     {
         'numToStr/Comment.nvim',
-        enabled = vim.fn.has('nvim-0.10') == 0, -- disable once nvim 0.10 hits with built-in commenting
         config = function()
             require('Comment').setup {
                 pre_hook = function()
-                    return vim.bo.commentstring
+                    -- return vim.bo.commentstring
+                    require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
                 end
             }
         end,

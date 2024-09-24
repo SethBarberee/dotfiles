@@ -112,7 +112,7 @@ local M = {
                 lualine_z = {}
             },
             tabline = {
-                lualine_a = { { 'buffers' } },
+                lualine_a = { { 'buffers', mode = 2, use_mode_colors = true } },
                 lualine_b = { '' },
                 lualine_c = { '' },
                 lualine_x = {},

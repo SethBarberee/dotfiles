@@ -11,6 +11,7 @@ return {
     },
     { 'wadackel/vim-dogrun',   event = "VeryLazy" },
     { 'oxfist/night-owl.nvim', event = "VeryLazy" },
+    { 'stevearc/quicker.nvim', ft = 'qf',         config = true },
     {
         'm-demare/hlargs.nvim',
         opts = {

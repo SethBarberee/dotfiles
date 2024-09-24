@@ -58,6 +58,16 @@ return {
     },
     config = function()
         require("telescope").setup {
+
+            pickers = {
+                diagnostics = {
+                    theme = "ivy"
+                },
+                live_grep = {
+                    theme = "ivy"
+                },
+            },
+
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown {
