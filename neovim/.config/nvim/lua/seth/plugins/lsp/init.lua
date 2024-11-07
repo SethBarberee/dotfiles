@@ -155,7 +155,7 @@ function M.config()
         --jedi_language_server = true,
         rust_analyzer = true,
         vimls = true,
-        poryscript_lsp = true,
+        poryscript_pls = true,
         jsonls = true,
         zls = true,
         clangd = {
