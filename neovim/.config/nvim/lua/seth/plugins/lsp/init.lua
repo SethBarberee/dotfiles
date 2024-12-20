@@ -31,6 +31,7 @@ local M = {
     enabled = sethconfig.lsp,
     dependencies = {
         { "folke/lazydev.nvim", ft = "lua", config = true },
+        'saghen/blink.cmp'
     },
     event = "BufReadPre",
     keys = {
