@@ -22,6 +22,7 @@ local M = {
         }
     },
     event = "InsertEnter",
+    enabled = false
 }
 
 function M.config()

@@ -54,7 +54,9 @@ function M.config()
     local handlers = require "seth.plugins.lsp.handlers"
 
     -- Get capabilities from nvim-cmp
-    local updated_capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- local updated_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    local updated_capabilities = require('blink.cmp').get_lsp_capabilities()
 
     -- Tell the server the capability of foldingRange,
     -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
