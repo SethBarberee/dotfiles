@@ -33,7 +33,18 @@ return {
         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
         -- see the "default configuration" section below for full documentation on how to define
         -- your own keymap.
-        keymap = { preset = 'default', },
+        keymap = {
+            preset = 'super-tab',
+
+            -- Adding both Ctrl-Y and Enter keys because I can't decide on selection and
+            -- I like super tab for snippets/cmdline
+            ['<C-y>'] = { 'select_and_accept' },
+            ['<CR>'] = { 'accept', 'fallback' },
+
+            cmdline = {
+                preset = 'super-tab'
+            }
+        },
 
         appearance = {
             -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -48,19 +59,12 @@ return {
         -- default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
 
-        sources = { completion = { enabled_providers = { 'luasnip', 'lsp', 'path', 'buffer' } } },
-        -- sources = {
-        --     -- default = { 'lsp', 'path', 'luasnip', 'buffer', 'lazydev' },
-        --     default = { 'luasnip', 'lsp', 'path', 'buffer' },
-        --
-        --     -- optionally disable cmdline completions
-        --     -- cmdline = {},
-        --     providers = {
-        --         -- dont show LuaLS require statements when lazydev has items
-        --         -- lsp = { fallback_for = { 'lazydev' } },
-        --         -- lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
-        --     },
-        -- },
+        sources = {
+            providers = {
+                lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { "lsp" }, score_offset = 3000 },
+            },
+            default = { 'lazydev', 'luasnip', 'lsp', 'path', 'buffer' },
+        },
 
         -- experimental signature help support
         signature = {
@@ -97,5 +101,5 @@ return {
     },
     -- allows extending the providers array elsewhere in your config
     -- without having to redefine it
-    opts_extend = { "sources.completion.enabled_providers" }
+    opts_extend = { "sources.default" }
 }
