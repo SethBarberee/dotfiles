@@ -17,16 +17,8 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-        snippets = {
-            expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
-            active = function(filter)
-                if filter and filter.direction then
-                    return require('luasnip').jumpable(filter.direction)
-                end
-                return require('luasnip').in_snippet()
-            end,
-            jump = function(direction) require('luasnip').jump(direction) end,
-        },
+
+        snippets = { preset = 'luasnip' },
 
         -- 'default' for mappings similar to built-in completion
         -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -63,7 +55,7 @@ return {
             providers = {
                 lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { "lsp" }, score_offset = 3000 },
             },
-            default = { 'lazydev', 'luasnip', 'lsp', 'path', 'buffer' },
+            default = { 'lazydev', 'snippets', 'lsp', 'path', 'buffer' },
         },
 
         -- experimental signature help support
