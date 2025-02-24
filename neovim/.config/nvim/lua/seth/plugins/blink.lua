@@ -25,17 +25,19 @@ return {
         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
         -- see the "default configuration" section below for full documentation on how to define
         -- your own keymap.
+
+        cmdline = {
+            keymap = {
+                preset = "default"
+            }
+        },
+
         keymap = {
             preset = 'super-tab',
-
             -- Adding both Ctrl-Y and Enter keys because I can't decide on selection and
             -- I like super tab for snippets/cmdline
             ['<C-y>'] = { 'select_and_accept' },
             ['<CR>'] = { 'accept', 'fallback' },
-
-            cmdline = {
-                preset = 'super-tab'
-            }
         },
 
         appearance = {
@@ -52,6 +54,11 @@ return {
         -- elsewhere in your config, without redefining it, due to `opts_extend`
 
         sources = {
+            min_keyword_length = function(ctx)
+                -- only applies when typing a command, doesn't apply to arguments
+                if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 2 end
+                return 0
+            end,
             providers = {
                 lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { "lsp" }, score_offset = 3000 },
             },
@@ -73,6 +80,7 @@ return {
             menu = {
                 draw = {
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon" } },
+                    -- treesitter = { 'lsp' },
                     components = {
                         kind_icon = {
                             ellipsis = false,
