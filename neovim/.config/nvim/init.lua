@@ -15,6 +15,7 @@ vim.opt.smartcase = true
 vim.opt.showmode = false
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 100
+vim.opt.winborder = 'rounded'
 
 -- Indent
 vim.opt.tabstop = 4

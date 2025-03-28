@@ -1,8 +1,5 @@
 -- Add rounded borders to these handlers on every filetype
-local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
-}
+local handlers = {}
 
 -- Poryscript needs custom handlers so we do that here
 --if filetype == "pory" then

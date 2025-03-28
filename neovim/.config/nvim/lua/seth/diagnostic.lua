@@ -1,18 +1,30 @@
 -- Add diag signs in the gutter
-for type, icon in pairs(require('seth.util.icons').signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
--- Register Border handler for hover/signature help/diagnostics
+local diag_icons = require('seth.util.icons').signs
 
 -- Add in the border for diagnostics config
 local diag_config = {
-    float = {
-        border = 'rounded',
-    },
-    virtual_text = false,
     severity_sort = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = diag_icons[vim.diagnostic.severity.ERROR],
+            [vim.diagnostic.severity.WARN] = diag_icons[vim.diagnostic.severity.WARN],
+            [vim.diagnostic.severity.INFO] = diag_icons[vim.diagnostic.severity.INFO],
+            [vim.diagnostic.severity.HINT] = diag_icons[vim.diagnostic.severity.HINT],
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+            [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+        },
+        -- linehl = {
+        --     [vim.diagnostic.severity.ERROR] = '',
+        --     [vim.diagnostic.severity.WARN] = '',
+        --     [vim.diagnostic.severity.INFO] = '',
+        --     [vim.diagnostic.severity.HINT] = '',
+        -- },
+    }
 }
 
 vim.diagnostic.config(diag_config)

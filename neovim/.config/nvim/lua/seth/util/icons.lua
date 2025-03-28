@@ -46,12 +46,12 @@ local symbol_table = {
     --TypeParameter = "",
     TypeParameter = '  ',
 
-    -- For diags
+    -- For diags (using vim diagnostic indices to order the table
     signs = {
-        Error = " ",
-        Warn = " ",
-        Hint = " ",
-        Info = " "
+        [vim.diagnostic.severity.ERROR] = " ",
+        [vim.diagnostic.severity.WARN] = " ",
+        [vim.diagnostic.severity.INFO] = " ",
+        [vim.diagnostic.severity.HINT] = " ",
     }
 }
 return symbol_table
