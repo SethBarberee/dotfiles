@@ -6,6 +6,7 @@ return {
     dependencies = {
         { 'L3MON4D3/LuaSnip', version = 'v2.*' },
         'onsails/lspkind.nvim',
+        { "folke/lazydev.nvim", ft = "lua", config = true },
     },
 
     -- use a release tag to download pre-built binaries
@@ -62,7 +63,7 @@ return {
             providers = {
                 lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { "lsp" }, score_offset = 3000 },
             },
-            default = { 'lazydev', 'snippets', 'lsp', 'path', 'buffer' },
+            default = { 'lazydev','snippets', 'lsp', 'path', 'buffer' },
         },
 
         -- experimental signature help support

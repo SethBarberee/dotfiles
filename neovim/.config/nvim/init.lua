@@ -157,3 +157,114 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 })
 
 vim.api.nvim_set_hl(0, "QuickFixLine", {})
+
+-- WARNING: Nvim >= 0.11: LSP
+vim.lsp.enable({ 'clangd', 'rust_analyzer', 'pylsp', 'jsonls', 'lua_ls' })
+
+-- NOTE: Update lsp capabilities with blink
+
+local updated_capabilities = require('blink.cmp').get_lsp_capabilities()
+
+-- Tell the server the capability of foldingRange,
+-- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+updated_capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
+vim.lsp.config('*', {
+    capabilities = updated_capabilities
+})
+
+-- NOTE: setup autoformat
+local augroup_format = vim.api.nvim_create_augroup("Custom LSP Format", {}) -- defaults to clear = true
+
+local autocmd_format = function(async, filter)
+    vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = 0,
+        callback = function()
+            vim.lsp.buf.format { async = async, filter = filter }
+        end,
+    })
+end
+
+local filetype_attach = setmetatable({
+    python = function()
+        autocmd_format(false)
+    end,
+    lua = function()
+        autocmd_format(false)
+    end,
+    c = function()
+        -- I want to use Ctags over the LSP stuff for PMD decomp since I
+        -- also have assembly files with tags that are referenced.
+        local current_dir = vim.fn.getcwd(-1, -1)
+        local basename = vim.fs.basename(current_dir)
+        --print(basename)
+        if basename == "pmd-red" or basename == "pmd-sky" then
+            vim.bo.tagfunc = ""
+        end
+
+        -- Register this custom command we get from Clangd LSP
+        vim.keymap.set('n', '<leader>la', '<cmd>ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
+    end,
+}, {
+    __index = function()
+        return function()
+        end
+    end,
+})
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable()
+        end
+
+        -- Setup codelens for supported LSPs
+        if client.server_capabilities.codeLensProvider then
+            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                buffer = 0,
+                callback = function()
+                    vim.lsp.codelens.refresh()
+                end,
+            })
+        end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+
+        local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+        filetype_attach[filetype](client)
+    end
+})
+
+-- Taken from @pseudometapseudo on Reddit
+vim.api.nvim_create_user_command("LspCapabilities", function()
+    local curBuf = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients { bufnr = curBuf }
+
+    for _, client in pairs(clients) do
+        local capAsList = {}
+        for key, value in pairs(client.server_capabilities) do
+            if value and key:find("Provider") then
+                local capability = key:gsub("Provider$", "")
+                table.insert(capAsList, "- " .. capability)
+            end
+        end
+        table.sort(capAsList) -- sorts alphabetically
+        local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
+        vim.notify(msg, vim.log.levels.TRACE, {
+            on_open = function(win)
+                local buf = vim.api.nvim_win_get_buf(win)
+                vim.api.nvim_set_option_value("tiletype", "markdown", { buf = buf })
+            end,
+            timeout = 14000,
+        })
+        vim.fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
+    end
+end, {})

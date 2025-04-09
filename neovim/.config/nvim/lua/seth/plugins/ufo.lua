@@ -53,7 +53,7 @@ return {
         -- From the README to add a arrow with number of lines folded to the line
         local handler = function(virtText, lnum, endLnum, width, truncate)
             local newVirtText = {}
-            local suffix = ('  %d '):format(endLnum - lnum)
+            local suffix = (' ↙ %d'):format(endLnum - lnum)
             local sufWidth = vim.fn.strdisplaywidth(suffix)
             local targetWidth = width - sufWidth
             local curWidth = 0
