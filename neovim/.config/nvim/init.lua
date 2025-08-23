@@ -268,3 +268,12 @@ vim.api.nvim_create_user_command("LspCapabilities", function()
         vim.fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
     end
 end, {})
+
+-- Noob coding from yours truly on a hex to decimal to stop using the internet just to figure these out
+vim.api.nvim_create_user_command("HexCalc", function()
+    local input = vim.fn.input('Enter value in hex: ')
+    local new_s = string.gsub(input, "0x", "")
+    local num = tonumber(new_s, 16)
+    if num == nil then return end
+    vim.print(" = " .. num)
+end, {})
