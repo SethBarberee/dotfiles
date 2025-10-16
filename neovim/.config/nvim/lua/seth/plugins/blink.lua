@@ -4,9 +4,9 @@ return {
     -- optional: provides snippets for the snippet source
     -- dependencies = 'rafamadriz/friendly-snippets',
     dependencies = {
-        { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+        { 'L3MON4D3/LuaSnip',   version = 'v2.*' },
         'onsails/lspkind.nvim',
-        { "folke/lazydev.nvim", ft = "lua", config = true },
+        { "folke/lazydev.nvim", ft = "lua",      config = true },
     },
 
     -- use a release tag to download pre-built binaries
@@ -28,9 +28,16 @@ return {
         -- your own keymap.
 
         cmdline = {
-            keymap = {
-                preset = "default"
-            }
+            keymap = { preset = 'inherit' },
+            completion = {
+                menu = {
+                    auto_show = function(_)
+                        return vim.fn.getcmdtype() == ':'
+                        -- enable for inputs as well, with:
+                        -- or vim.fn.getcmdtype() == '@'
+                    end,
+                }
+            },
         },
 
         keymap = {
@@ -55,15 +62,17 @@ return {
         -- elsewhere in your config, without redefining it, due to `opts_extend`
 
         sources = {
-            min_keyword_length = function(ctx)
-                -- only applies when typing a command, doesn't apply to arguments
-                if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 2 end
-                return 0
-            end,
             providers = {
                 lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { "lsp" }, score_offset = 3000 },
+                cmdline = {
+                    min_keyword_length = function(ctx)
+                        -- only applies when typing a command, doesn't apply to arguments
+                        if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 2 end
+                        return 0
+                    end
+                }
             },
-            default = { 'lazydev','snippets', 'lsp', 'path', 'buffer' },
+            default = { 'lazydev', 'snippets', 'lsp', 'path', 'buffer' },
         },
 
         -- experimental signature help support
@@ -80,6 +89,7 @@ return {
             },
             menu = {
                 draw = {
+                    treesitter = { 'lsp', 'buffer' },
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon" } },
                     -- treesitter = { 'lsp' },
                     components = {
