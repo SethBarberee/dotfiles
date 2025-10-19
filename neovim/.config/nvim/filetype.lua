@@ -11,7 +11,7 @@ vim.filetype.add({
             return "c"
         end,
         inc = 'arm', -- for PMD Red data files
-        pory = 'pory',
+        pory = 'poryscript',
         jsonschema = 'json',
         qml = 'qml',
     },

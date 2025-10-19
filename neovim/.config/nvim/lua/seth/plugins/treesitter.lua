@@ -111,10 +111,10 @@ return {
                 }
                 parser_config.poryscript = {
                     install_info = {
-                        url = "https://github.com/V-FEXrt/tree-sitter-poryscript",
+                        url = "https://github.com/Elsie19/treesitter-poryscript",
                         files = { "src/parser.c" },
                         -- optional entries:
-                        branch = "main",                       -- default branch in case of git repo if different from master
+                        -- branch = "main",                       -- default branch in case of git repo if different from master
                         generate_requires_npm = false,         -- if stand-alone parser without npm dependencies
                         requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
                     },

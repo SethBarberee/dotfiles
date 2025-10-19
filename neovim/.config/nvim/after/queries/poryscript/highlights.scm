@@ -1,67 +1,92 @@
 ; highlights.scm
+; highlight.scm for poryscript
 
-; TODO: can this be under one thing/name?
-(text name: (IDENT) @constructor)
-(mart name: (IDENT) @constructor)
-(movement name: (IDENT) @constructor)
-(script name: (IDENT) @constructor)
+; Basic highlight groups
+(comment) @comment
+[("const") ("raw")] @modifier
+[
+ ("if") 
+ ("elif")
+ ("else")
+ ("switch")
+ ("case")
+ ("default")
+ ("poryswitch")
+] @keyword.conditional
 
-; const highlighting
-(const (IDENT) @constant)
-(const (TOKEN_P_PLUS) @operator)
+; This is for stuff in text like `ascii"hello"`
+(text_directive) @keyword.directive
 
-; movement highlighting
-(movement_value (TOKEN_P_ASTER) @operator)
-(movement_values (TOKEN_P_ASTER) @operator)
+[("while") ("do")] @keyword.repeat
 
-; poryswitch highlighting
+; Structure names
+[
+ ("script")
+ ("mart")
+ ("text")
+ ("movement")
+ ("mapscripts")
+] @keyword.function
 
-(poryswitch_case case: (IDENT) @property)
-; (poryswitch switch: (IDENT) @number)
+; Match the names
+(
+ [
+  (script)
+  (mart)
+  (text)
+  (movement)
+  (mapscripts)
+ ] name: (identifier) @function
+)
 
+; Highlight constants
+(const) @constant
+(const
+  const_name: (identifier) @constant)
 
+; Scope as well
+(scope_marker) @label
 
-(TOKEN_BI_FORMAT) @function.builtin
+(identifier) @variable
+(identifier) @constant
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z\\d_0-9]*$")) ; Make uppercase different "type"
 
-(TOKEN_KW_BREAK) @keyword
-(TOKEN_KW_CASE) @keyword
-(TOKEN_KW_CONST) @keyword
-(TOKEN_KW_CONTINUE) @keyword
-(TOKEN_KW_DEFAULT) @keyword
-(TOKEN_KW_DO) @keyword
-(TOKEN_KW_ELIF) @keyword
-(TOKEN_KW_ELSE) @keyword
-(TOKEN_KW_END) @keyword
-(TOKEN_KW_IF) @keyword
-(TOKEN_KW_LOCAL) @keyword
-(TOKEN_KW_GLOBAL) @keyword
-(TOKEN_KW_RETURN) @keyword
-(TOKEN_KW_SWITCH) @keyword
-(TOKEN_KW_WHILE) @keyword
+; Highlight functions and builtins
+(function_call function_name: (identifier) @function)
+(builtin_func) @function.builtin
+(builtin_control_flow) @keyword.return
+(label name: (identifier)) @label
 
-(TOKEN_KW_PORYSWITCH) @keyword
+; Basic types
+(number) @number
+(string) @string
+(boolean) @boolean
 
-(TOKEN_KW_MART) @keyword
-(TOKEN_KW_MOVEMENT) @keyword
-(TOKEN_KW_RAW) @keyword
-(TOKEN_KW_SCRIPT) @keyword
-(TOKEN_KW_TEXT) @keyword
+[
+  ("(")
+  (")")
+  ("{")
+  ("}")
+  ("[")
+  ("]")
+] @punctuation.bracket
 
-(HASH_COMMENT) @comment
-(SLASH_COMMENT) @comment
+; String related stuff
+(interpolation
+  "{" @punctuation.special
+  "}" @punctuation.special) @embedded
+(escape_sequence) @string.escape
+(",") @punctuation.delimiter
 
-(RAW_LIT) @string.special
-(STRING_LIT) @string
-(STRING_INTER_START) @string
-(STRING_INTER_MID) @string
-(STRING_INTER_END) @string
+; Operators and keywords
+[(operator) (additives) (logical_operator)] @operator
+(negate) @operator
 
-(INT_LIT) @number
-(HEX_LIT) @number
-(BIN_LIT) @number
+; Assembly 68k stuff
+((raw_inside) @injection.content
+  (#set! injection.language "asm"))
 
-(MOVEMENT_LIT) @function.builtin
-(SCRIPT_0_LIT) @function.builtin
-(SCRIPT_FN_LIT) @function.builtin
+; Set poryswitch underscore
+(default) @variable.parameter.builtin
 
-(IDENT) @variable
