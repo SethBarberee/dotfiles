@@ -277,3 +277,9 @@ vim.api.nvim_create_user_command("HexCalc", function()
     if num == nil then return end
     vim.print(" = " .. num)
 end, {})
+
+-- Enable treesitter
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c', 'lua', 'rust', 'query', 'bash', 'make', 'arm', 'pory', 'poryscript' },
+    callback = function() vim.treesitter.start() end,
+})
