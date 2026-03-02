@@ -280,6 +280,6 @@ end, {})
 
 -- Enable treesitter
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'c', 'lua', 'rust', 'query', 'bash', 'make', 'arm', 'pory', 'poryscript' },
+    pattern = { 'c', 'lua', 'rust', 'query', 'bash', 'make', 'arm', 'pory', 'poryscript', 'python' },
     callback = function() vim.treesitter.start() end,
 })

@@ -1,29 +1,21 @@
-return {
-    cmd = { 'lua-language-server' },
-    filetypes = { 'lua' },
-    root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+-- Use nvim-lspconfig and add some settings
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
+                -- Tell the language server how to find Lua modules same way as Neovim
+                -- (see `:h lua-module-load`)
+                path = {
+                    'lua/?.lua',
+                    'lua/?/init.lua',
+                },
             },
             diagnostics = {
                 globals = {
                     -- vim
                     "vim",
-
-                    -- Busted
-                    "describe",
-                    "it",
-                    "before_each",
-                    "after_each",
-                    "teardown",
-                    "pending",
-                    "clear",
-
-                    -- Custom
-                    "RELOAD",
                 },
             },
             completion = {
@@ -35,10 +27,10 @@ return {
                 --library = vim.api.nvim_get_runtime_file('', true),
                 checkThirdParty = false,
             },
+            codeLens = { enable = false }, -- NOTE: disable codelens.. I have different plugin that does this better
             hint = {
-                enable = vim.fn.has('nvim-0.10') == 1,
                 setType = true
             },
         }
     }
-}
+})

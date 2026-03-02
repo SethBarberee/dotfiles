@@ -1,4 +1,5 @@
-return {
+-- Use nvim-lspconfig and add some settings
+vim.lsp.config('clangd', {
     cmd = {
         "clangd",
         "--background-index",
@@ -11,9 +12,5 @@ return {
         "--limit-results=0",
         "--enable-config",
     },
-
-    filetypes = {'c', 'cpp'},
-    root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac' },
     init_options = { clangdFileStatus = true, },
-}
-
+})

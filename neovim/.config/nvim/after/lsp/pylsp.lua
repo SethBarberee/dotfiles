@@ -1,7 +1,5 @@
-return {
-    cmd =  {'pylsp'},
-    filetypes = {'python'},
-    root_markers = {'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile'},
+-- Use nvim-lspconfig and add some settings
+vim.lsp.config('pylsp', {
     settings = {
         pylsp = {
             plugins = {
@@ -11,5 +9,5 @@ return {
                 }
             }
         }
-    },
-}
+    }
+})

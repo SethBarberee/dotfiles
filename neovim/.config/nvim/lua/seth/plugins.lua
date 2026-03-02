@@ -155,4 +155,9 @@ return {
         'stevearc/stickybuf.nvim',
         config = true,
     },
+
+    -- LSP default configs
+    {
+        'neovim/nvim-lspconfig',
+    }
 }

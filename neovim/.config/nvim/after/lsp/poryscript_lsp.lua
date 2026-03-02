@@ -1,5 +1,5 @@
 return {
     cmd = { "poryscript-pls" },
     filetypes = { 'pory' },
-    root_markers = {'.git'},
+    root_markers = { '.git' },
 }
