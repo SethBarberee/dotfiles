@@ -38,6 +38,9 @@ export DEVKITARM=${DEVKITPRO}/devkitARM
 export DEVKITPPC=${DEVKITPRO}/devkitPPC
 export PATH=${DEVKITPRO}/tools/bin:$PATH
 
+# use nvim as pager
+export MANPAGER="nvim +Man!"
+export EDITOR="nvim"
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
