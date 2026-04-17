@@ -278,8 +278,12 @@ vim.api.nvim_create_user_command("HexCalc", function()
     vim.print(" = " .. num)
 end, {})
 
--- Enable treesitter
+--- Enable treesitter
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c', 'lua', 'rust', 'query', 'bash', 'make', 'arm', 'pory', 'poryscript', 'python' },
     callback = function() vim.treesitter.start() end,
 })
+
+
+-- NOTE: enable new UI for nvim 0.12
+require('vim._core.ui2').enable({})
